@@ -1,10 +1,15 @@
-<?php 
+<?php
+    require_once('start-session.php');
+    if(isset($_SESSION['username'])){
+        $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/profile-page.php';
+        header('Location:'.$url); 
+    }
     if(!isset($_POST['submit']))
-    require_once('signup.php')
+        require_once('signup.php')
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
