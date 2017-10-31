@@ -153,7 +153,7 @@
                             </div>
                             <div class="input-group form-group-no-border input-lg">
                                 <span class="input-group-addon">
-                                    <i class="now-ui-icons users_circle-08"></i>
+                                    <i class="now-ui-icons business_briefcase-24"></i>
                                 </span>
                                 <select id="Profession" style="height: 46px; color: #dfd3cf" class="form-control" name="Profession">
                                     <option value="student">Student</option>
