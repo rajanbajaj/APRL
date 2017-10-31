@@ -155,7 +155,7 @@
                                 <span class="input-group-addon">
                                     <i class="now-ui-icons users_circle-08"></i>
                                 </span>
-                                <select id="Profession" name="Profession">
+                                <select id="Profession" style="height: 46px; color: #dfd3cf" class="form-control" name="Profession">
                                     <option value="student">Student</option>
                                     <option value="faculty">Faculty</option>
                                 </select>
