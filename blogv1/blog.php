@@ -5,10 +5,11 @@ session_start();
 if(isset($_SESSION['username'])){
 
 	require_once('connect.php');
+    $blogId = 1;
+    $uname = $_SESSION['username'];
+
 	// $blogId = $_POST['blog_id'];
-	$blogId = 1;
-	$uname = $_SESSION['username'];
-	
+
 	$query = "SELECT * FROM blog WHERE blog_id ='$blogId'";
 	$result = mysqli_query($dbc,$query)
 	or die("Unable to request blog from database");
@@ -23,6 +24,15 @@ if(isset($_SESSION['username'])){
 	//likes,reads row added in database blog table
 	$likes = $rowBlog['likes']; 
 	$reads = $rowBlog['reads'];
+    echo $reads;
+    // $readr = $readr + 1;
+    // echo $readr;
+
+    // $queryr2 = "UPDATE blog SET reads = '$readr' WHERE blog_id = '$blogId'"; 
+    // if(mysqli_query($dbc,$queryr2)){}
+    // else{
+    //     echo "Unable to update read data";
+    // }
 	//comments table still to be added
 
 	$query2 = "SELECT studentinfo.image_url FROM studentinfo INNER JOIN userblog ON userblog.user_id = studentinfo.username WHERE userblog.blog_id = '$blogId'";
@@ -75,36 +85,43 @@ else{
 </head>
 
 <body class="profile-page sidebar-collapse">
+
 <script>
 
-function spamCount(){
+function likesCount(){
 
-	console.log(1500*1500);
-	var xmlhttp = new XMLHttpRequest();
+    console.log(1500*1500);
+    var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
         {
-            alert(xmlhttp.responseText);
+            // alert(xmlhttp.responseText);
+            document.getElementById('likesCountId').innerHTML = xmlhttp.responseText;
         }
     };
-    var id =1;
-    xmlhttp.open("GET", "spamIncr.php?id=" +id, true);
+    var id =2;
+    xmlhttp.open("GET", "likesIncr.php?id=" +id, true);
     xmlhttp.send();
 }
 
 
-function likesCount(){
-
+// var x =0;
+function spamCount(){
+    // x = x+1;
+    // if(x==2){
+    //     return ;
+    // }
 	console.log(1500*1500);
 	var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
         {
-            alert(xmlhttp.responseText);
+            // alert(xmlhttp.responseText);
+            document.getElementById('spamCountId').innerHTML = xmlhttp.responseText;
         }
     };
     var id =1;
-    xmlhttp.open("GET", "likesIncr.php?id=" +id, true);
+    xmlhttp.open("GET", "spamIncr.php?id=" +id, true);
     xmlhttp.send();
 }
 
@@ -163,7 +180,7 @@ function likesCount(){
                             <p>Reads</p>
                         </div>
                         <div class="social-description">
-                            <h2><?php echo $likes ?></h2>
+                            <h2 id="likesCountId"><?php echo $likes ?></h2>
                             <p>Likes</p>
                         </div>
                     </div>
@@ -221,9 +238,10 @@ function likesCount(){
                    </div>
                    <div class="col text-center">
                         <!-- <a href="#pablo" class="btn btn-primary btn-round btn-lg"</a>  -->
-                        <h5>Report As Spam</h5>
-                        <button class="btn btn-primary btn-round btn-lg" type="button" onclick="spamCount()">
-                            <i class="now-ui-icons ui-2_favourite-28"></i> <?php echo $spam ?>
+                        <br>
+                        <h8>Like</h8>
+                        <button class="btn btn-primary btn-round btn-lg" type="button" onclick="likesCount()" >
+                            <i class="now-ui-icons ui-2_favourite-28" ></i> 
                         </button>
                    </div>
 

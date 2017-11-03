@@ -12,15 +12,12 @@ session_start();
 	// $spamInc = 5;
 	$spamInc = $spam + 1;
 	// echo "This is echoooo " . $spam . "uhji";
-	echo "encho der dec oder";
-
+	// echo "encho der dec oder";
 	$query4 = "UPDATE blog SET spam = '$spamInc' WHERE blog_id = '$blogId'"; 
-	if(mysqli_query($dbc,$query4)){
-		echo "data updated";
-	}
+	if(mysqli_query($dbc,$query4)){}
 	else{
 		echo "Unable to update spam data";
 	}
-	echo $spamInc;
+	// echo $spamInc;
 	// mysqli_close($dbc);
 ?>

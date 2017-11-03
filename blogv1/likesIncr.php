@@ -1,4 +1,5 @@
 <?php 
+session_start();
 	require_once('connect.php');
 	$blogId = 1;
 	$query = "SELECT likes FROM blog WHERE blog_id ='$blogId'";
@@ -7,7 +8,7 @@
 	$row = mysqli_fetch_array($result);
 	$likes = $row['likes'];
 	$likesInc = $likes + 1;
-	echo "This is echoooo " . $likesInc . "hj";
+	echo $likesInc;
 	// echo $spam;
 
 	$query4 = "UPDATE blog SET likes = '$likesInc' WHERE blog_id = '$blogId'"; 
