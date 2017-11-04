@@ -17,7 +17,7 @@ if(!isset($_COOKIE['username'])) {
 				$_SESSION['username'] = $row['username'];
 				setcookie('username',$row['username'], time() + (60*60*24*30));
 				mysqli_close($dbc);
-				$url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/profile-page.html';
+				$url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/profile-page.php';
 				header('Location:'.$url);
 			}
 			else
@@ -26,7 +26,7 @@ if(!isset($_COOKIE['username'])) {
 		}
 }
 else{
-	$url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/profile-page.html';
+	$url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/profile-page.php';
 		header('Location:'.$url);
 }
 ?>

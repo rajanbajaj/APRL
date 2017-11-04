@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(!isset($_SESSION['username'])){
-        $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/login-page.php';
+        $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER[' PHP_SELF']).'/login-page.php';
         header('Location:'.$url);
     }
     else{
@@ -18,6 +18,7 @@
         $image = $row['image_url'];
         $description = $row['description'];
     }
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
