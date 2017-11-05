@@ -4,6 +4,20 @@
         $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/login-page.php';
         header('Location:'.$url);
     }
+    else{
+        $username = $_SESSION['username'];
+        require_once('connect.php');
+        $query = "SELECT * FROM studentinfo WHERE username = '$username'";
+        $result = mysqli_query($dbc, $query)
+        or die('Unable to query studentinfo' );
+        $row = mysqli_fetch_array($result);
+        $firstname = $row['firstname'];
+        $lastname = $row['lastname'];
+        $name =$row['firstname']." ".$row['lastname'];
+        $credential = $row['credential'];
+        $image = $row['image_url'];
+        $description = $row['description'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +55,7 @@
                     <a class="dropdown-item" href="#">Another action</a>
                     <a class="dropdown-item" href="#">Something else here</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
+                    <a class="dropdown-item" href="#pablo" data-toggle="modal" data-target="#myModal" >Edit Profile</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="logout.php">Logout</a>
                 </div>
@@ -64,15 +78,15 @@
     <!-- End Navbar -->
     <div class="wrapper">
         <div class="page-header page-header-small" filter-color="orange">
-            <div class="page-header-image" data-parallax="true" style="background-image: url('../assets/img/bg5.jpg');">
+            <div class="page-header-image" data-parallax="true" style="background-image: url('../assets/img/bg4.jpg');">
             </div>
             <div class="container">
                 <div class="content-center">
                     <div class="photo-container">
-                        <img src="../assets/img/ryan.jpg" alt="">
+                        <img src= <?php echo '"../assets/img/'.$image.'"'?> alt="">
                     </div>
-                    <h3 class="title">Ryan Scheinder</h3>
-                    <p class="category">Photographer</p>
+                    <h3 class="title"><?php echo $name?></h3>
+                    <p class="category"><?php echo $credential?></p>
                     
                 </div>
             </div>
@@ -81,7 +95,7 @@
             <div class="container">
                 
                 <h3 class="title">About me</h3>
-                <h5 class="description">An artist of considerable range, Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.</h5>
+                <h5 class="description"><?php echo $description ?></h5>
 
                 
                 <div class="row">
@@ -156,6 +170,75 @@
             </div>
         </footer>
     </div>
+
+    <div class="modal fade modal-primary" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header justify-content-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                        </button>
+                        <h4 class="title title-up">Edit Profile</h4>
+                    </div>
+                </div>
+                <div class="page-header page-header-small" filter-color="orange">
+                    <div class="page-header-image" data-parallax="true" style="background-image: url('../assets/img/bg4.jpg');">
+                    </div>
+                    <div class="container">
+                        <div class="content-center">
+                            <div class="photo-container">
+                                <img src= <?php echo '"../assets/img/'.$image.'"'?> alt="">
+                            </div>
+                            <h3 class="title"><?php echo $name?></h3>
+                            <p class="category"><?php echo $credential?></p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-content">
+                    <form method="post" action= "editprofile.php">
+                    <div class="modal-body">
+                        <div class="content">
+                            <br>
+                            <br>
+                            <div class="input-group form-group-no-border input-lg">
+                                <span class="input-group-addon">
+                                    <i class="now-ui-icons text_caps-small"></i>
+                                </span>
+                                <input type="text" placeholder="Firstname" class="form-control" value=<?php echo '"'.$firstname.'"'?> name="FirstName">
+                            </div>
+                            <div class="input-group form-group-no-border input-lg">
+                                <span class="input-group-addon">
+                                    <i class="now-ui-icons text_caps-small"></i>
+                                </span>
+                                <input type="text" placeholder="Lastname" class="form-control" value=<?php echo '"'.$lastname.'"'?> name="LastName">
+                            </div>
+                            <div class="input-group form-group-no-border input-lg">
+                                <span class="input-group-addon">
+                                    <i class="now-ui-icons business"></i>
+                                </span>
+                                <input type="text" placeholder="Credential" class="form-control" value=<?php echo '"'.$credential.'"'?> name="Credential">
+                            </div>
+                            <div class="input-group form-group-no-border input-lg">
+                                <span class="input-group-addon">
+                                    <i class="now-ui-icons text_caps-small"></i>
+                                </span>
+                                <input class="form-control" placeholder="Your Description goes here!" value=<?php echo '"'.$description.'"'?> name="Description"> </input>
+                            </div>
+                        </div>
+                        <div class="footer text-center">
+                            <input type="submit" href="#pablo" class="btn btn-primary btn-neutral btn-round btn-lg btn-block" value="Save">
+                        </div>
+                    </div>
+                    </form>
+                    <div class="modal-footer">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 </body>
 <!--   Core JS Files   -->
 <script src="../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
