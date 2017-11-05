@@ -12,13 +12,15 @@ function count_project($status){
     $dbc = mysqli_connect("localhost", "root", NULL, "aprl")
     or die("Unable to connect to database");
     
-    $query = "SELECT * FROM project where status = '$status'";
+    $query = "SELECT * FROM project WHERE status = '$status'";
     $result = mysqli_query($dbc, $query)
-    or die('Unable to query studentinfo' );
+    or die('Unable to query project' );
     $current_count = mysqli_num_rows($result);
+    
     mysqli_close($dbc);
     // echo "$status called = $current_count";
-    return $current_count;
+    echo $current_count;
+    //return $current_count;
 }
 
 ?>
