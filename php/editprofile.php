@@ -38,7 +38,7 @@
 				or die('Unable to query1');
 			}	
 		
-		$query = "UPDATE userlogin SET name = '$name'";
+		$query = "UPDATE userlogin SET name = '$name' WHERE username = '$username'";
 		mysqli_query($dbc, $query)
 		or die('Unable to query');
 		if($image!=''){

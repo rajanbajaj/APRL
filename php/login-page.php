@@ -81,17 +81,17 @@
                                         <span class="input-group-addon">
                                             <i class="now-ui-icons users_circle-08"></i>
                                         </span>
-                                        <input type="text" class="form-control" placeholder="Username" name="Username">
+                                        <input type="text" class="form-control" placeholder="Username" name="Username" required>
                                     </div>
                                     <div class="input-group form-group-no-border input-lg">
                                         <span class="input-group-addon">
                                             <i class="now-ui-icons objects_key-25"></i>
                                         </span>
-                                        <input type="password" placeholder="Password" class="form-control" name="Password" />
+                                        <input type="password" placeholder="Password" class="form-control" name="Password" required>
                                     </div>
                                 </div>
                                 <div class="footer text-center">
-                                    <input type="submit" class="btn btn-primary btn-round btn-lg btn-block" value="Login">
+                                    <input type="submit" class="btn btn-primary btn-round btn-lg btn-block" value="Login" required>
                                 </div>
                         </form>
                         <div class="pull-left">
@@ -143,13 +143,13 @@
                                 <span class="input-group-addon">
                                     <i class="now-ui-icons text_caps-small"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Name" name="Name">
+                                <input type="text" class="form-control" placeholder="Name" name="Name" required>
                             </div>
                             <div class="input-group form-group-no-border input-lg">
                                 <span class="input-group-addon">
                                     <i class="now-ui-icons users_circle-08"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Username" name="Username">
+                                <input type="text" class="form-control" placeholder="Username" name="Username" required>
                             </div>
                             <div class="input-group form-group-no-border input-lg">
                                 <span class="input-group-addon">
@@ -164,12 +164,12 @@
                                 <span class="input-group-addon">
                                     <i class="now-ui-icons objects_key-25"></i>
                                 </span>
-                                <input type="password" placeholder="Password" class="form-control" name="Password" />
+                                <input type="password" placeholder="Password" class="form-control" name="Password" required minlength="8" >
                             </div>
 
                         </div>
                         <div class="footer text-center">
-                            <input type="submit" href="#pablo" class="btn btn-primary btn-neutral btn-round btn-lg btn-block" value="Sign Up">
+                            <input type="submit" href="#pablo" class="btn btn-primary btn-neutral btn-round btn-lg btn-block" value="Sign Up" required>
                         </div>
                     </div>
                     </form>
