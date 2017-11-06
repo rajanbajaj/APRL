@@ -39,10 +39,11 @@ function display_project($status){
                    <!--     end extras --> 
                    <div class='col text-center'> 
                         <a onclick='showPage(\"$row[project_id]\")' class='btn btn-primary btn-round btn-lg'>Detail Description</a> 
-                        <button class='btn btn-primary btn-round btn-lg' type='button'>
+                        <button onclick='apply(\"$status\",\"apply$row[project_id]\")' class='btn btn-primary btn-round btn-lg' type='button'>
                             <i class='now-ui-icons ui-2_favourite-28'></i> Apply
                         </button>
-                   </div> 
+                   </div>
+                        <span id='apply$row[project_id]'></span>
               </div>
               ";
     }
