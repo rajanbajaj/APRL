@@ -113,7 +113,7 @@
             <div class="container">
                 <div class="content-center">
                     <div class="photo-container">
-                        <img class="photo-container" src= <?php echo '"../assets/img/'.$image.'"'?> alt="">
+                        <img src= <?php echo '"../assets/img/'.$image.'"'?> alt="">
                     </div>
                     <h3 class="title"><?php echo $name?></h3>
                     <p class="category"><?php echo $credential?></p>
@@ -211,7 +211,7 @@
                     <div class="container">
                         <div class="content-center">
                             <div class="photo-container">
-                                <img class="photo-container" src= <?php echo '"../assets/img/'.$image.'"'?> alt="">
+                                <img src= <?php echo '"../assets/img/'.$image.'"'?> alt="">
                             </div>
                             <h3 class="title"><?php echo $name?></h3>
                             <p class="category"><?php echo $credential?></p>
