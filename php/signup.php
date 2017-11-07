@@ -27,6 +27,16 @@ if(!empty($_POST['Username']) && !empty($_POST['Name']) && !empty($_POST['Passwo
 
 		$result = mysqli_query($dbc, $query)
 		or die('Unable to query studentinfo');
+		if($profession == 'student'){
+			$query = "INSERT INTO studentinfo VALUES('$username', '$name','','','fb_avatar_male.jpg','$profession','')";
+			$result = mysqli_query($dbc, $query)
+			or die('Unable to query studentinfo');
+		}
+		elseif ($profession == 'faculty') {
+			$query = "INSERT INTO facultyinfo VALUES('$username', '$name','','','fb_avatar_male.jpg','$profession','')";
+			$result = mysqli_query($dbc, $query)
+			or die('Unable to query studentinfo');
+		}
 		echo "Sign Up successfull!";
 	}
 	else{
