@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(!isset($_SESSION['username'])){
-        $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER[' PHP_SELF']).'/login-page.php';
+        $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/login-page.php';
         header('Location:'.$url);
     }
     else{
@@ -36,9 +36,7 @@
         or die('Unable to query studentinfo' );
 
         $row = mysqli_fetch_array($result);
-        $firstname = $row['firstname'];
-        $lastname = $row['lastname'];
-        $name =$row['firstname']." ".$row['lastname'];
+        $name = $row['name'];
         $credential = $row['credential'];
         $image = $row['image_url'];
         $description = $row['description'];
@@ -85,7 +83,7 @@
                     <a class="dropdown-item" href="#">Another action</a>
                     <?php if($profession=='faculty') echo '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">New Peoject</a>'; ?>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#pablo" data-toggle="modal" data-target="#myModal" >Edit Profile</a>
+                    <a class="dropdown-item" href="edit-profile.php" >Edit Profile</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="logout.php">Logout</a>
                 </div>
@@ -194,7 +192,7 @@
             </div>
         </footer>
     </div>
-
+<!--
     <div class="modal fade modal-primary" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -274,7 +272,7 @@
                 </div>
             </div>
         </div>
-
+-->
         <!-- //faculty modal -->
         <div class="modal fade modal-primary" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
