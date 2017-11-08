@@ -5,6 +5,7 @@ session_start();
 if(isset($_SESSION['username'])){
 
 	require_once('connect.php');
+    // require_once('likesIncr');
     $blogId = 1;
     $uname = $_SESSION['username'];
 
@@ -24,8 +25,8 @@ if(isset($_SESSION['username'])){
 	//likes,reads row added in database blog table
 	$likes = $rowBlog['likes']; 
 	$reads = $rowBlog['reads'];
-    echo $reads;
-    // $readr = $readr + 1;
+    // echo $reads;
+    // $readr = $reads + 1;
     // echo $readr;
 
     // $queryr2 = "UPDATE blog SET reads = '$readr' WHERE blog_id = '$blogId'"; 
@@ -39,22 +40,50 @@ if(isset($_SESSION['username'])){
 	$result2 = mysqli_query($dbc,$query2)
 	or die("Unable to request image url from database");
 	$imageUrl = $result2;
+        // echo $rowTag[0];
+        // echo $rowTag[0];
 
-
-	$query3 = "SELECT * FROM tag INNER JOIN blogtag ON blogtag.tag_id = tag.tag_id WHERE blogtag.blog_id = 
-	'$blogId' ";
-	$result3 = mysqli_query($dbc,$query3)
-	or die("Unable to request tags from database");
-	$rowTag = mysqli_fetch_array($result3);
-
-	//remember to close the connection
-
-
+            // echo $rowtag;
+            // echo "
+            // <span >
+            //     <button class="btn btn-primary btn-simple btn-round btn-sm" type="button">$rowTag['tagname']</button>
+            // </span>";
+            // return $rowTag['tagname'];
+            // echo "dooooo";
+        // }
 }
+
 else{
 	$url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/login-page.php';
     header('Location:'.$url);
 }
+
+
+function getTags(){
+        // require_once('connect.php');
+    // require_once('likesIncr');
+    $dbc = mysqli_connect('localhost', 'root', NULL, 'aprl_xv1')
+    or die('Unable to connect to database');
+    $blogId = 1;
+
+        $query3 = "SELECT tagname FROM tag INNER JOIN blogtag ON blogtag.tag_id = tag.tag_id WHERE blogtag.blog_id = 
+    '$blogId' ";
+        $result3 = mysqli_query($dbc,$query3)
+        or die("Unable to request tags from database");
+        // $rowTag = mysqli_fetch_assoc($result3);
+        // echo $rowTag['tagname'];
+        // $col = mysqli_fetch_array($rowTag);
+        while($rowTag = mysqli_fetch_assoc($result3)){
+            echo "<span>
+                <button class='btn btn-primary btn-simple btn-round btn-sm' type='button'>".$rowTag['tagname']."</button>
+            </span>";
+        }
+        // while($rowTag = mysqli_fetch_array($result3)){
+        // for($x=0;$x<count($rowTag);$x++){
+        //     echo $rowTag[$x]; 
+}
+
+//suggest tag function
 
 ?>
 
@@ -65,7 +94,7 @@ else{
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head >
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
@@ -80,13 +109,42 @@ else{
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../assets/css/now-ui-kit.css?v=1.1.0" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    
-    
-</head>
-
-<body class="profile-page sidebar-collapse">
-
 <script>
+
+// window.onload = function(){
+//     function updateRead(){
+
+//         console.log(20500*1700);
+//         var xmlhttp = new XMLHttpRequest();
+//         xmlhttp.onreadystatechange = function() {
+//             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+//             {
+//                 alert(xmlhttp.responseText);
+//                 // document.getElementById('readCountId').innerHTML = xmlhttp.responseText;
+//             }
+//         };
+//         var id =3;
+//         xmlhttp.open("GET", "readsIncr.php?id=" +id, true);
+//         xmlhttp.send();
+//     }
+// };
+window.onload = updateRead();
+function updateRead(){
+
+    console.log(20500*1700*-1);
+    var xmlhttp1 = new XMLHttpRequest();
+    xmlhttp1.onreadystatechange = function() {
+        if (xmlhttp1.readyState == 4 && xmlhttp1.status == 200) 
+        {
+                // alert(xmlhttp1.responseText);
+                document.getElementById('readsCountId').innerHTML = xmlhttp1.responseText;
+        }
+    };
+    var id =3;
+    xmlhttp1.open("GET", "readsIncr.php?id=" +id, true);
+    xmlhttp1.send();
+}
+
 
 function likesCount(){
 
@@ -111,8 +169,8 @@ function spamCount(){
     // if(x==2){
     //     return ;
     // }
-	console.log(1500*1500);
-	var xmlhttp = new XMLHttpRequest();
+    console.log(1500*1500);
+    var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
         {
@@ -125,7 +183,59 @@ function spamCount(){
     xmlhttp.send();
 }
 
+// function getTags(){
+//     // x = x+1;
+//     // if(x==2){
+//     //     return ;
+//     // }
+//     console.log(-1*1500);
+//     var xmlhttp = new XMLHttpRequest();
+//     xmlhttp.onreadystatechange = function() {
+//         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+//         {
+//             // alert(xmlhttp.responseText);
+//             document.getElementById('addTagsHere').innerHTML = xmlhttp.responseText;
+//         }
+//     };
+//     var id =1;
+//     xmlhttp.open("GET", "spamIncr.php?id=" +id, true);
+//     xmlhttp.send();
+// }
+
 </script>
+
+<!-- //newly added  -->
+<meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title> Blog Posts - Now UI Kit Pro by Creative Tim | Premium Bootstrap 4 UI Kit </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <!-- CSS Files -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/now-ui-kit3.css" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="../assets/css/demo.css" rel="stylesheet" />
+    <!-- Canonical SEO -->
+    <link rel="canonical" href="https://www.creative-tim.com/product/now-ui-kit-pro" />
+    <!--  Social tags      -->
+    <meta name="keywords" content="bootstrap 4, bootstrap 4 uit kit, bootstrap 4 kit, now ui, now ui kit pro, creative tim, html kit, html css template, web template, bootstrap, bootstrap 4, css3 template, frontend, responsive bootstrap template, bootstrap ui kit, responsive ui kit">
+    <meta name="description" content="Start your development with a beautiful Bootstrap 4 UI kit.">
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="Now UI Kit Pro by Creative Tim">
+    <meta itemprop="description" content="Start your development with a beautiful Bootstrap 4 UI kit.">
+    <meta itemprop="image" content="http://s3.amazonaws.com/creativetim_bucket/products/62/original/opt_nukp_thumbnail.jpg">
+
+
+    
+</head>
+
+<body class="profile-page sidebar-collapse" >
+
+
 	<!-- <script src="blogScript.js" ></script> -->
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
@@ -171,12 +281,11 @@ function spamCount(){
 
                 
                 <div class="content-center">
-                    
                     <h2 class="title"><?php echo $title ?></h3>
-                    <p class="category"><?php echo $uname ?>></p>
+                    <br>
                     <div class="content">
                         <div class="social-description">
-                            <h2><?php echo $reads ?></h2>
+                            <h2 id="readsCountId"><?php echo $reads ?></h2>
                             <p>Reads</p>
                         </div>
                         <div class="social-description">
@@ -194,34 +303,30 @@ function spamCount(){
                     <div class="photo-container">
                         <img src="../assets/img/ryan.jpg" alt="">
                     </div>
+
+                    <p class="category"><?php echo $uname ?></p>
+
                 </div>
 
-                
-                
-
-                
-                            
-                       
-                
                <div class="container tim-container" style="max-width:800px; padding-top:100px">
-
-
-                    
 
                    <!-- <h1 class="text-center">Awesome looking header <br> just for my friends</h1> -->
                    <h4 class="text-center"><?php $date ?></h4>
-                   <br>
-                   <span >
-
-                        <span >
-                            <button class="btn btn-primary btn-simple btn-round btn-sm" type="button">HTML</button>
+                   
+                   <span id = "addTagsHere">
+                    
+                    <?php getTags()?>
+                        <!-- span >
+                            <button class="btn btn-primary btn-simple btn-round btn-sm" type="button" >HTML</button>
                         </span>
+                
+                                            
                         <span >
                             <button class="btn btn-primary btn-simple btn-round btn-sm" type="button">CSS</button>
                         </span>
                         <span >
                             <button class="btn btn-primary btn-simple btn-round btn-sm" type="button">JavaScript</button>
-                        </span>
+                        </span> -->
                     </span>
                     <br>
                     <br>
@@ -230,12 +335,7 @@ function spamCount(){
                    <!--     end extras --> 
 
 
-                   <div class="col text-center"> 
-                        <a href="#pablo" class="btn btn-primary btn-round btn-lg">Comments</a> 
-                        <button class="btn btn-primary btn-round btn-lg" type="button">
-                            <i class="now-ui-icons ui-2_favourite-28"></i> 10
-                        </button>
-                   </div>
+                  
                    <div class="col text-center">
                         <!-- <a href="#pablo" class="btn btn-primary btn-round btn-lg"</a>  -->
                         <br>
@@ -244,15 +344,22 @@ function spamCount(){
                             <i class="now-ui-icons ui-2_favourite-28" ></i> 
                         </button>
                    </div>
+                   <br><br>
+                    <div class="col text-center"> 
+                        <a href="#pablo" class="btn btn-primary btn-round btn-lg">Comments</a> 
+                        <button class="btn btn-primary btn-round btn-lg" type="button">
+                            10
+                        </button>
+                   </div>
 
               </div>
+              <br><br><br><br>
 
-              
+              <!-- <iframe height="200px" width="100%" src="suggest_blog.htm" name="iframe_a"></iframe> -->
 
 
-    
 
-                
+   
             </div>
         </div>
         <footer class="footer footer-default">
