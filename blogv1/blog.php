@@ -4,27 +4,27 @@
 session_start();
 if(isset($_SESSION['username'])){
 
-	require_once('connect.php');
+    require_once('connect.php');
     // require_once('likesIncr');
     $blogId = 1;
     $uname = $_SESSION['username'];
 
-	// $blogId = $_POST['blog_id'];
+    // $blogId = $_POST['blog_id'];
 
-	$query = "SELECT * FROM blog WHERE blog_id ='$blogId'";
-	$result = mysqli_query($dbc,$query)
-	or die("Unable to request blog from database");
-	$rowBlog = mysqli_fetch_array($result);
-	$title = $rowBlog['title'];
-	// echo $title;
-	$description = $rowBlog['description'];
-	// echo $description;
-	$date = $rowBlog['date'];
-	$url = $rowBlog['url'];
-	$spam = $rowBlog['spam'];
-	//likes,reads row added in database blog table
-	$likes = $rowBlog['likes']; 
-	$reads = $rowBlog['reads'];
+    $query = "SELECT * FROM blog WHERE blog_id ='$blogId'";
+    $result = mysqli_query($dbc,$query)
+    or die("Unable to request blog from database");
+    $rowBlog = mysqli_fetch_array($result);
+    $title = $rowBlog['title'];
+    // echo $title;
+    $description = $rowBlog['description'];
+    // echo $description;
+    $date = $rowBlog['date'];
+    $url = $rowBlog['url'];
+    $spam = $rowBlog['spam'];
+    //likes,reads row added in database blog table
+    $likes = $rowBlog['likes']; 
+    $reads = $rowBlog['reads'];
     // echo $reads;
     // $readr = $reads + 1;
     // echo $readr;
@@ -34,12 +34,12 @@ if(isset($_SESSION['username'])){
     // else{
     //     echo "Unable to update read data";
     // }
-	//comments table still to be added
+    //comments table still to be added
 
-	$query2 = "SELECT studentinfo.image_url FROM studentinfo INNER JOIN userblog ON userblog.user_id = studentinfo.username WHERE userblog.blog_id = '$blogId'";
-	$result2 = mysqli_query($dbc,$query2)
-	or die("Unable to request image url from database");
-	$imageUrl = $result2;
+    $query2 = "SELECT studentinfo.image_url FROM studentinfo INNER JOIN userblog ON userblog.user_id = studentinfo.username WHERE userblog.blog_id = '$blogId'";
+    $result2 = mysqli_query($dbc,$query2)
+    or die("Unable to request image url from database");
+    $imageUrl = $result2;
         // echo $rowTag[0];
         // echo $rowTag[0];
 
@@ -54,7 +54,7 @@ if(isset($_SESSION['username'])){
 }
 
 else{
-	$url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/login-page.php';
+    $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/login-page.php';
     header('Location:'.$url);
 }
 
@@ -83,7 +83,24 @@ function getTags(){
         //     echo $rowTag[$x]; 
 }
 
-//suggest tag function
+function suggestTag(){
+    $dbc = mysqli_connect('localhost', 'root', NULL, 'aprl_xv1')
+    or die('Unable to connect to database');
+    $blogId = 1;
+
+    $query3 = "SELECT tagname FROM tag INNER JOIN blogtag ON blogtag.tag_id = tag.tag_id WHERE blogtag.blog_id = 
+    '$blogId' ";
+        $result3 = mysqli_query($dbc,$query3)
+        or die("Unable to request tags from database");
+        // $rowTag = mysqli_fetch_assoc($result3);
+        // echo $rowTag['tagname'];
+        // $col = mysqli_fetch_array($rowTag);
+        while($rowTag = mysqli_fetch_assoc($result3)){
+            echo "<span>
+                <button class='btn btn-primary btn-simple btn-round btn-sm' type='button'>".$rowTag[tagname]."</button>
+            </span>";
+        }
+}
 
 ?>
 
@@ -236,7 +253,7 @@ function spamCount(){
 <body class="profile-page sidebar-collapse" >
 
 
-	<!-- <script src="blogScript.js" ></script> -->
+    <!-- <script src="blogScript.js" ></script> -->
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
         <div class="container">
@@ -357,6 +374,75 @@ function spamCount(){
 
               <!-- <iframe height="200px" width="100%" src="suggest_blog.htm" name="iframe_a"></iframe> -->
 
+<div class="section">
+
+
+<?php 
+ $dbc = mysqli_connect('localhost', 'root', NULL, 'aprl_xv1')
+    or die('Unable to connect to database');
+    $blogId = 1;
+
+    $query3 = "SELECT tagname FROM tag INNER JOIN blogtag ON blogtag.tag_id = tag.tag_id WHERE blogtag.blog_id = 
+    '$blogId' ";
+        $result3 = mysqli_query($dbc,$query3)
+        or die("Unable to request tags from database");
+
+        echo "<h3 class="."title text-center".">You may also be interested in</h3>
+        <br />
+        <div class="."row".">" ;
+        
+        $rowTag1 = mysqli_fetch_assoc($result3);
+        $rowTag2 = mysqli_fetch_assoc($result3);
+        $rowTag3 = mysqli_fetch_assoc($result3);
+        // echo $rowTag1['tagname'];
+        // echo $rowTag2['tagname'];
+        // echo $rowTag3['tagname'];
+
+        $querya = "SELECT DISTINCT blog.title, blog.description FROM ((blogtag INNER JOIN tag ON 
+        tag.tag_id = blogtag.tag_id ) INNER JOIN blog ON blog.blog_id = blogtag.blog_id) 
+        WHERE tag.tagname = '$rowTag1[tagname]' OR 
+        tag.tagname = '$rowTag2[tagname]' OR tag.tagname = '$rowTag3[tagname]' AND (NOT blog.blog_id =
+         '1') ORDER BY blog.reads DESC";
+        
+
+        $resulta = mysqli_query($dbc,$querya);
+        if(!$resulta){
+            echo("Errorcode: " . mysqli_errno($dbc));
+        }
+        // or die("Unable to request tags from database");
+        $x = 0;
+        while($rowData = mysqli_fetch_assoc($resulta)){
+                        $x++;
+                       echo" <div class="."col-md-4".">
+                            <div class="."card card-plain card-blog".">
+                                <div class="."card-image". ">
+                                        <img class="."img rounded img-raised"." src="."../assets/img/bg5.jpg"." />
+                                    </a>
+                                </div>
+                                <div class="."card-body".">
+                                    <h6 class="."category text-info".">Blog</h6>
+                                    <h4 class="."card-title".">
+                                        <a >$rowData[title]</a>
+                                    </h4>
+                                    <p class="."card-description".">
+                                        ".substr($rowData['description'],0,100)."
+                                        <a >   .......      Read More </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>";
+                        if($x == 3){
+                            break;
+                        }
+        }
+        
+
+    echo "</div>";
+
+                   
+                        
+           
+?>
 
 
    
