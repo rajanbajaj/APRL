@@ -1,6 +1,7 @@
 <?php 
 session_start();
 	require_once('connect.php');
+	// echo "I'm insde hahahahah";
 	$blogId = 1;
 	$query = "SELECT likes FROM blog WHERE blog_id ='$blogId'";
 	$result = mysqli_query($dbc,$query)
