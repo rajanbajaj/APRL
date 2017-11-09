@@ -1,40 +1,15 @@
 <?php
     session_start();
     if(!isset($_SESSION['username'])){
-        $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER[' PHP_SELF']).'/login-page.php';
+        $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/login-page.php';
         header('Location:'.$url);
     }
     else{
-            if(!empty($_POST['Title']) && !empty($_POST['Description']) && !empty($_POST['LastDate']) && !empty($_POST['Incentive'])){
-                require('connect.php');
-                $title = $_POST['Title'];
-                $description = $_POST['Description'];
-                $lastdate = $_POST['LastDate'];
-                $incentive = $_POST['Incentive'];
-                $username = $_SESSION['username'];
-
-                $query = "INSERT INTO applyproject(title, description, lastdate, incentive, status, username, adddate) VALUES ('$title', '$description', '$lastdate', '$incentive', 'available', '$username', now())";
-                mysqli_query($dbc, $query)
-                or die('unable to query applyprojects');
-                echo 'Added successfully!';
-                mysqli_close($dbc);
-
-            }
         $username = $_SESSION['username'];
-        require('connect.php');
-        
-        $query = "SELECT profession FROM userlogin WHERE username = '$username'";
-        $result = mysqli_query($dbc, $query);
-        $row = mysqli_fetch_array($result);
-        $profession = $row['profession'];
-        if($row['profession']=='student')
-            $var = 'studentinfo';
-        if($row['profession']=='faculty')
-            $var = 'facultyinfo';
-        $query = "SELECT * FROM $var WHERE username = '$username'";
+        require_once('connect.php');
+        $query = "SELECT * FROM studentinfo WHERE username = '$username'";
         $result = mysqli_query($dbc, $query)
         or die('Unable to query studentinfo' );
-
         $row = mysqli_fetch_array($result);
         $firstname = $row['firstname'];
         $lastname = $row['lastname'];
@@ -42,12 +17,7 @@
         $credential = $row['credential'];
         $image = $row['image_url'];
         $description = $row['description'];
-        $email = $row['email'];
-        if($image!='fb_avatar_male.jpg')
-            $image = $username.'/'.$image;
-        mysqli_close($dbc);
-}
-    
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +27,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title><?= $name ?></title>
+    <title>Profile Page - Now Ui Kit by Creative Tim</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -83,7 +53,7 @@
                     <a class="dropdown-header">Dropdown header</a>
                     <a class="dropdown-item" href="#">Action</a>
                     <a class="dropdown-item" href="#">Another action</a>
-                    <?php if($profession=='faculty') echo '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">New Peoject</a>'; ?>
+                    <a class="dropdown-item" href="#">Something else here</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#pablo" data-toggle="modal" data-target="#myModal" >Edit Profile</a>
                     <div class="dropdown-divider"></div>
@@ -161,6 +131,12 @@
                                         </span>
                                         <input type="text" placeholder="Last Name..." class="form-control" />
                                     </div>
+                                    <div class="input-group form-group-no-border">
+                                        <span class="input-group-addon">
+                                            <i class="now-ui-icons ui-1_email-85"></i>
+                                        </span>
+                                        <input type="text" class="form-control" placeholder="Email...">
+                                    </div>
                                     <!-- If you want to add a checkbox to this form, uncomment this code -->
                                     <!-- <div class="checkbox">
                                     <input id="checkboxSignup" type="checkbox">
@@ -220,7 +196,7 @@
                     </div>
                 </div>
                 <div class="modal-content">
-                    <form enctype="multipart/form-data" method="post" action= "editprofile.php">
+                    <form method="post" action= "editprofile.php">
                     <div class="modal-body">
                         <div class="content">
                             <br>
@@ -229,39 +205,26 @@
                                 <span class="input-group-addon">
                                     <i class="now-ui-icons text_caps-small"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="firstname" value=<?php echo '"'.$firstname.'"'?> name="FirstName">
+                                <input type="text" placeholder="Firstname" class="form-control" value=<?php echo '"'.$firstname.'"'?> name="FirstName">
                             </div>
                             <div class="input-group form-group-no-border input-lg">
                                 <span class="input-group-addon">
                                     <i class="now-ui-icons text_caps-small"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="lastname" value=<?php echo '"'.$lastname.'"'?> name="LastName">
+                                <input type="text" placeholder="Lastname" class="form-control" value=<?php echo '"'.$lastname.'"'?> name="LastName">
                             </div>
                             <div class="input-group form-group-no-border input-lg">
                                 <span class="input-group-addon">
                                     <i class="now-ui-icons business"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Credential" value=<?php echo '"'.$credential.'"'?> name="Credential">
+                                <input type="text" placeholder="Credential" class="form-control" value=<?php echo '"'.$credential.'"'?> name="Credential">
                             </div>
                             <div class="input-group form-group-no-border input-lg">
                                 <span class="input-group-addon">
                                     <i class="now-ui-icons text_caps-small"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Email" value=<?php echo '"'.$email.'"'?> name="Email">
+                                <input class="form-control" placeholder="Your Description goes here!" value=<?php echo '"'.$description.'"'?> name="Description"> </input>
                             </div>
-                            <div class="input-group form-group-no-border input-lg">
-                                <span class="input-group-addon">
-                                    <i class="now-ui-icons text_caps-small"></i>
-                                </span>
-                                <input type="textarea" class="form-control" placeholder="Description" value=<?php echo '"'.$description.'"'?> name="Description">
-                            </div>
-                            <div class="input-group form-group-no-border input-lg">
-                                <span class="input-group-addon">
-                                    <i class="now-ui-icons text_caps-small"></i>
-                                </span>
-                                <input type="file" class="form-control" id="Image" name="Image" accept="image/*|.jpg|.png|.jpeg|.gif">
-                            </div>
-                            
                         </div>
                         <div class="footer text-center">
                             <input type="submit" href="#pablo" class="btn btn-primary btn-neutral btn-round btn-lg btn-block" value="Save">
@@ -274,74 +237,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- //faculty modal -->
-        <div class="modal fade modal-primary" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header justify-content-center">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                <i class="now-ui-icons ui-1_simple-remove"></i>
-                            </button>
-                            <h4 class="title title-up">Add Project Information </h4>
-                        </div>
-                    </div>
-                    <div class="page-header page-header-small" filter-color="orange">
-                        <div class="page-header-image" data-parallax="true" style="background-image: url('../assets/img/bg4.jpg');">
-                        </div>
-                        <div class="container">
-                            <div class="content-center">
-                                <div class="photo-container">
-                                    <img src="" alt="">
-                                </div>
-                                <h3 class="title"></h3>
-                                <p class="category"></p>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-content">
-                        <form method="post" action= "profile-page.php">
-                        <div class="modal-body">
-                            <div class="content">
-                                <br>
-                                <br>
-                                <div class="input-group form-group-no-border input-lg">
-                                    <span class="input-group-addon">
-                                        <i class="now-ui-icons business_bulb-63"></i>
-                                    </span>
-                                    <input type="text" placeholder="Title" class="form-control" value="" name="Title">
-                                </div>
-                                <div class="input-group form-group-no-border input-lg">
-                                    <span class="input-group-addon">
-                                        <i class="now-ui-icons text_align-left"></i>
-                                    </span>
-                                    <input type="text" placeholder="Description" class="form-control" value="" name="Description">
-                                </div>
-                                <div class="input-group form-group-no-border input-lg">
-                                    <span class="input-group-addon">
-                                        <i class="now-ui-icons ui-1_calendar-60"></i>
-                                    </span>
-                                    <input type="date" placeholder="Last Date" class="form-control" value="" name="LastDate">
-                                </div>
-                                <div class="input-group form-group-no-border input-lg">
-                                    <span class="input-group-addon">
-                                        <i class="now-ui-icons business_money-coins"></i>
-                                    </span>
-                                    <input type="number" class="form-control" placeholder="Incentive" value="" name="Incentive">
-                                </div>
-                            </div>
-                            <div class="footer text-center">
-                                <input type="submit" href="#pablo" class="btn btn-primary btn-neutral btn-round btn-lg btn-block" value="Save">
-                            </div>
-                        </div>
-                        </form>
-                        <div class="modal-footer">
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
 </body>

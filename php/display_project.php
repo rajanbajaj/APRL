@@ -50,3 +50,4 @@ function display_project($status){
     mysqli_close($dbc);
 }
 ?>
+
