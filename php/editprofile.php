@@ -28,6 +28,7 @@
 			mysqli_query($dbc, $query)
 			or die('Unable to query');
 			if($image!=''){
+				//echo "hello!!";
 				$query = "SELECT image_url FROM $var WHERE username = '$username'";
 				$result = mysqli_query($dbc, $query);
 				$row = mysqli_fetch_array($result);
@@ -42,6 +43,7 @@
 		mysqli_query($dbc, $query)
 		or die('Unable to query');
 		if($image!=''){
+			//echo "hello2";
 			$target = APRL_UPLOADPATH.$username.'/'.$image;
 			move_uploaded_file($_FILES['Image']['tmp_name'], $target);
 			if($old_image!='fb_avatar_male.jpg'){
