@@ -127,53 +127,129 @@
 
                 
                 <div class="row">
-                    <div class="col-md-6 ml-auto mr-auto">
-                        <h4 class="title text-center">Projects</h4>
-                        <div class="row">
-                        <div class="card card-signup" data-background-color="orange">
-                            <form class="form" method="" action="">
-                                <div class="header text-center">
-                                    <h4 class="title title-up">Sign Up</h4>
-                                    <div class="social-line">
-                                        <a href="#pablo" class="btn btn-neutral btn-facebook btn-icon btn-round">
-                                            <i class="fa fa-facebook-square"></i>
-                                        </a>
-                                        <a href="#pablo" class="btn btn-neutral btn-twitter btn-icon btn-lg btn-round">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                        <a href="#pablo" class="btn btn-neutral btn-google btn-icon btn-round">
-                                            <i class="fa fa-google-plus"></i>
-                                        </a>
+                    <div class="col-md-6 col-lg-6">
+                    <div class="card card-blog">
+                            <!--<div class="card-image">
+                                <img class="img rounded" src="../assets/img/project13.jpg">
+                            </div>-->
+                            <div class="card-body">
+                                <h6 class="category text-warning">
+                                    <i class="now-ui-icons media-1_album"></i> My Blogs
+                                </h6>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6">
+                                    <div class="card" data-background-color="red">
+                                        <div class="card-body">
+                                            <h6 class="category-social">
+                                                <i class="fa fa-fire"></i> Most Liked
+                                            </h6>
+                                            <p class="card-description">
+                                                "The supreme art of war is to subdue the enemy without fighting."
+                                            </p>
+                                            <div class="card-footer">
+                                                <div class="author">
+                                                    <img src="assets/img/julie.jpg" alt="..." class="avatar img-raised">
+                                                    <span>Susan B. Anthony</span>
+                                                </div>
+                                                <div class="stats stats-right">
+                                                    <i class="now-ui-icons ui-2_favourite-28"></i> 10.4K ·
+                                                    <i class="now-ui-icons files_single-copy-04"></i> 425
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6">
+                                    <div class="card" data-background-color="red">
+                                        <div class="card-body">
+                                            <h6 class="category-social">
+                                                <i class="fa fa-fire"></i> Most Liked
+                                            </h6>
+                                            <p class="card-description">
+                                                "The supreme art of war is to subdue the enemy without fighting."
+                                            </p>
+                                            <div class="card-footer">
+                                                <div class="author">
+                                                    <img src="assets/img/julie.jpg" alt="..." class="avatar img-raised">
+                                                    <span>Susan B. Anthony</span>
+                                                </div>
+                                                <div class="stats stats-right">
+                                                    <i class="now-ui-icons ui-2_favourite-28"></i> 10.4K ·
+                                                    <i class="now-ui-icons files_single-copy-04"></i> 425
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <div class="input-group form-group-no-border">
-                                        <span class="input-group-addon">
-                                            <i class="now-ui-icons users_circle-08"></i>
-                                        </span>
-                                        <input type="text" class="form-control" placeholder="First Name...">
-                                    </div>
-                                    <div class="input-group form-group-no-border">
-                                        <span class="input-group-addon">
-                                            <i class="now-ui-icons text_caps-small"></i>
-                                        </span>
-                                        <input type="text" placeholder="Last Name..." class="form-control" />
-                                    </div>
-                                    <!-- If you want to add a checkbox to this form, uncomment this code -->
-                                    <!-- <div class="checkbox">
-                                    <input id="checkboxSignup" type="checkbox">
-                                        <label for="checkboxSignup">
-                                        Unchecked
-                                        </label>
-                                    </div> -->
+                                <div class="card-footer text-center" style="background-color: white;">
+                                    <a href="#pablo" class="btn btn-default btn-round">All Blogs</a>
                                 </div>
-                                <div class="footer text-center">
-                                    <a href="#pablo" class="btn btn-neutral btn-round btn-lg">Get Started</a>
-                                </div>
-                            </form>
-                        </div>
+                            </div>
                     </div>
                     </div>
+                    <div class="col-md-6 col-lg-6">
+                    <div class="card card-blog">
+                           <!-- <div class="card-image">
+                                <img class="img rounded" src="../assets/img/project13.jpg">
+                            </div> -->
+                            <div class="card-body">
+                                <h6 class="category text-warning">
+                                    <i class="now-ui-icons education_atom"></i> My Projects
+                                </h6>
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-6">
+                                    <div class="card" data-background-color="red">
+                                        <div class="card-body">
+                                            <h6 class="category-social">
+                                                <i class="now-ui-icons ui-2_time-alarm"></i> Most Recent
+                                            </h6>
+                                            <p class="card-description">
+                                                "The supreme art of war is to subdue the enemy without fighting."
+                                            </p>
+                                            <div class="card-footer">
+                                                <div class="author">
+                                                    <img src="assets/img/julie.jpg" alt="..." class="avatar img-raised">
+                                                    <span>Susan B. Anthony</span>
+                                                </div>
+                                                <div class="stats stats-right">
+                                                    <i class="now-ui-icons ui-2_favourite-28"></i> 10.4K ·
+                                                    <i class="now-ui-icons files_single-copy-04"></i> 425
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6">
+                                    <div class="card" data-background-color="red">
+                                        <div class="card-body">
+                                            <h6 class="category-social">
+                                                <i class="now-ui-icons ui-2_time-alarm"></i> Most Recent
+                                            </h6>
+                                            <p class="card-description">
+                                                "The supreme art of war is to subdue the enemy without fighting."
+                                            </p>
+                                            <div class="card-footer">
+                                                <div class="author">
+                                                    <img src="assets/img/julie.jpg" alt="..." class="avatar img-raised">
+                                                    <span>Susan B. Anthony</span>
+                                                </div>
+                                                <div class="stats stats-right">
+                                                    <i class="now-ui-icons ui-2_favourite-28"></i> 10.4K ·
+                                                    <i class="now-ui-icons files_single-copy-04"></i> 425
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-center" style="background-color: white;">
+                                    <a href="#pablo" class="btn btn-default btn-round">All Projects</a>
+                                </div>
+                            </div>
+                    </div>
+                    </div>
+                </div>
                     <!-- Tab panes -->
                    
                 </div>
@@ -192,6 +268,7 @@
             </div>
         </footer>
     </div>
+
 <!--
     <div class="modal fade modal-primary" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
