@@ -11,7 +11,7 @@
 
   <!-- live search -->
 <script>
-    // var allTags = [];
+    var allTags = [];
 
   function showResult(str) {
     if (str.length==0) {
@@ -35,7 +35,22 @@
     xmlhttp.send();
   }
 
+  function tagPopulate(){
+    var x = document.getElementById("livesearch").textContent
 
+    if(allTags.indexOf(x) != -1 || x.length>19){
+      console.log("yo sexy bitch, i'm already here");
+      return ;
+    }else{
+      allTags.push(x);
+      var para = document.createElement("p");
+      var node = document.createTextNode(x);
+      para.appendChild(node);
+      para.setAttribute("class","btn btn-primary btn-simple btn-round btn-sm")
+      var element = document.getElementById("tagComesHere");
+      element.appendChild(para);
+    }
+  }
 
 
 </script>
@@ -50,8 +65,10 @@
 <h5>Tags</h5>
 
 <input type="text" size="30" onkeyup="showResult(this.value)">
-<div id="livesearch" ></div>
-
+<div id="livesearch" onclick="tagPopulate()"></div>
+<span id="tagComesHere" >
+  <!-- <button id=class='btn btn-primary btn-simple btn-round btn-sm' type='button'></button> -->
+</span>
 </form>
 
 
