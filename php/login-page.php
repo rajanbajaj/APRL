@@ -1,7 +1,7 @@
 <?php
     require_once('start-session.php');
     if(isset($_SESSION['username'])){
-        $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/profile-page.php';
+        $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/landing-page.php';
         header('Location:'.$url); 
     }
     if(!isset($_POST['submit']))
