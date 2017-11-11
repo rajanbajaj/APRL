@@ -135,6 +135,30 @@ function test_input($data) {
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
   }
 
+ $(document).ready(function(){
+  $("#submit_button").click(function(){
+    console.log("idhar hu main ");
+    formSubmit();
+    // var descripvar = $('#description_id').val();
+    //   console.log(titlevar);
+    if(check==1){
+      var titlevar = $('#title_id').val();
+      var descripvar = tinymce.get('description_id').getContent();
+      // console.log(titlevar);
+      console.log(descripvar);
+      $.ajax({
+           type: "POST",
+           url: "blog_data_insert.php",
+           data: {title: titlevar, description: descripvar, tags: allTags },
+           
+           success: function(data, status){
+              alert("Data: " + data + "\nStatus: " + status);
+           }
+      });
+    
+    }
+  });
+}); 
 
 
 </script>
