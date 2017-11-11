@@ -1,3 +1,34 @@
+<?php
+// define variables and set to empty values
+$titleErr = $descriptionErr = "";
+$title = $description = "";
+
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//   if (empty($_POST["title"])) {
+//     $titleErr = "Title is required";
+//   } else {
+//     $title = test_input($_POST["title"]);
+//   }
+
+//   if (empty($_POST["description"])) {
+//     $descriptionErr = "Description is required";
+//   } else {
+//     $description = test_input($_POST["description"]);
+//   }
+// }
+
+
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +39,14 @@
 
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 <script>tinymce.init({ selector:'textarea' });</script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 
+ <script src="jquery-3.2.1.min.js"></script>
   <!-- live search -->
+
 <script>
     var allTags = [];
+    var check =0;
 
   function showResult(str) {
     if (str.length==0) {
@@ -52,26 +87,128 @@
     }
   }
 
+  // function checkTitle(){
+  //   var c = document.getElementById("title_id").value;
+  //   if(c.length == 0){
+  //     var tt = "Title daal bhosdiwale";
+  //     showSnack(tt);
+  //   }
+  // }
+
+  // function checkDescription(){
+  //   var c = document.getElementById("description_id").value;
+  //   if(c.length == 0){
+  //     var tt = "Description kya tera baap dalega";
+  //     showSnack(tt);
+  //   }
+  // }
+
+
+  function formSubmit(){
+    check = 0;
+    var c = document.getElementById("title_id").value;
+    if(c.length == 0){
+      var tt = "Title daal bhosdiwale";
+      showSnack(tt);
+    }else{
+
+      if(!tinymce.get('description_id').getContent()){
+        var tt = "Description kya tera baap dalega";
+        showSnack(tt);
+      }
+      else{
+        if(allTags.length == 0){
+          var tt = "Tags add kr chutie";
+          showSnack(tt);
+        }else{
+          check = 1;
+        }
+    
+      }
+    }
+  }
+
+  function showSnack(message) {
+    var x = document.getElementById("snackbar")
+    x.innerHTML = message;
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  }
+
+
 
 </script>
+<style>
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
 
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+</style>
 </head>
 
 <body>
-<form>
-<h5> Title</h5>
-<h5> Description</h5>
-<textarea id="description_id"></textarea>
-<h5>Tags</h5>
 
+
+<!-- <form > -->
+<h5> Title</h5>
+<input id="title_id" type="text" size="100" ><br><br>
+<br><br>
+
+<h5> Description</h5>
+<textarea id="description_id" ></textarea><br><br>
+
+<h5>Tags</h5>
 <input type="text" size="30" onkeyup="showResult(this.value)">
 <div id="livesearch" onclick="tagPopulate()"></div>
-<span id="tagComesHere" >
-  <!-- <button id=class='btn btn-primary btn-simple btn-round btn-sm' type='button'></button> -->
-</span>
-</form>
+
+<span id="tagComesHere"></span>
+<br><br>
+
+<!-- <input type="submit" value="Submit" onclick="formSubmit()"> -->
+<!-- </form> -->
+<button id="submit_button" >Submit</button>
+<br>
+<br>
 
 
+<div id="snackbar"></div>
 
 
 </body>
