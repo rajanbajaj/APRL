@@ -105,6 +105,7 @@ html, body {
 
 
     </div>
+   
 
     <div class="row">
         <div class="col-md-8 ml-auto mr-auto">
@@ -116,16 +117,23 @@ html, body {
                             <p class="category">Category</p>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox">
+                                    <input class="form-check-input" id="check1" name = "group_check" type="checkbox" checked>
                                     <span class="form-check-sign"></span>
                                     Projects
                                 </label>
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" checked>
+                                    <input class="form-check-input" id="check2" type="checkbox" name = "group_check" >
                                     <span class="form-check-sign"></span>
                                     Blogs
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" id="check3" type="checkbox" name = "group_check" >
+                                    <span class="form-check-sign"></span>
+                                    Users
                                 </label>
                             </div>
                             
@@ -134,14 +142,21 @@ html, body {
                             <p class="category">Sort By</p>
                             <div class="form-check form-check-radio">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                    <input class="form-check-input" type="radio" id="radio1" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                    <span class="form-check-sign"></span>
+                                    Relevance
+                                </label>
+                            </div>
+                            <div class="form-check form-check-radio">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" id="radio2" name="exampleRadios" id="exampleRadios1" value="option1">
                                     <span class="form-check-sign"></span>
                                     Time
                                 </label>
                             </div>
                             <div class="form-check form-check-radio">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option2" checked>
+                                    <input class="form-check-input" type="radio" id="radio3" name="exampleRadios" id="exampleRadios1" value="option2" >
                                     <span class="form-check-sign"></span>
                                     Ratings
                                 </label>
@@ -337,30 +352,54 @@ html, body {
        return false;
     }
 
+    function generate_link(elem){
+
+        var id = $(elem).attr("id");
+        alert(id);
+
+    }
+
+
     function search(event) {
        var search_name=$('#search_field').val();
-       $.ajax({
-           type: "POST",
-           url: "search_algo_title.php",
-           data: "value="+search_name,
-           beforeSend: function() {
-              //$("#spinner_loader").show();
-           },
-           success: function(data) {
-                if(data.length == 1) {   
-                    return;
-                }
-                $("#result_display").html(data);
-           }
-      });
+       var check1 = 0;
+       var check2 = 0;
+       var check3 = 0;
+       var radio_button = 0;
+       if($("#check1").prop('checked') == true){
+            check1 = 1;
+       }
 
+        if($("#check2").prop('checked') == true){
+            check2 = 1;
+        }
+
+        if($("#check3").prop('checked') == true){
+            check3 = 1;
+        }
+
+        if($("#radio1").prop('checked') == true){
+            //console.log("yeah");
+            radio_button = 1;
+        }
+
+        if($("#radio2").prop('checked') == true){
+            //console.log("yeah2");
+            radio_button = 2;
+        }
+
+        if($("#radio3").prop('checked') == true){
+            //console.log("yeah3");
+            radio_button = 3;
+        }
+
+
+       
        $.ajax({
            type: "POST",
            url: "search_algo_offeredby.php",
-           data: "value="+search_name,
-           beforeSend: function() {
-             
-           },
+           data: {value: search_name, check1: check1, check2: check2, check3: check3, radio_button: radio_button},
+           
            success: function(data) {
                 if(data.length == 1) {
                     return;
@@ -375,6 +414,36 @@ html, body {
 
 
     $(document).ready(function() {
+
+        $("#check1").on('change', function() {
+            
+            if ($("[name=group_check]:checked").length > 0){
+                
+            }
+            else{
+                this.checked=true;
+            }
+        });
+
+        $("#check2").on('change', function() {
+           
+            if ($("[name=group_check]:checked").length > 0){
+                
+            }
+            else{
+                this.checked=true;
+            }
+        });
+
+        $("#check3").on('change', function() {
+            
+            if ($("[name=group_check]:checked").length > 0){
+                
+            }
+            else{
+                this.checked=true;
+            }
+        });
 
         initialize();
 
