@@ -372,7 +372,7 @@ $(window).on("scroll touchmove", function() {
                 $('body').css('background', $("#two").attr("data-color"))
         };
     });
-jackHarnerSig("light")
+jackHarnerSig("light");
 </script>
 
 <!-- Go to top button -->

@@ -59,7 +59,12 @@
             $query = "UPDATE userlogin SET name = '$name' WHERE username = '$username'";
             mysqli_query($dbc, $query)
             or die('Unable to query');
-            echo 'Update successful!';
+            //echo 'Update successful!';
+    
+            echo 'Update successfull. You will be automatically redirected to the other page.';
+            $url = "profile-page.php";
+
+            header ("Refresh: 3;URL='$url'");
         }
         $query = "SELECT * FROM $var WHERE username = '$username'";
         $result = mysqli_query($dbc, $query)
@@ -141,7 +146,7 @@
                     <a class="dropdown-header">Dropdown header</a>
                     <a class="dropdown-item" href="#">Action</a>
                     <a class="dropdown-item" href="#">Another action</a>
-                    <?php if($profession=='faculty') echo '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">New Peoject</a>'; ?>
+                    <?php if($profession=='faculty') echo '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">New Project</a>'; ?>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#pablo" data-toggle="modal" data-target="#myModal" >Edit Profile</a>
                     <div class="dropdown-divider"></div>
