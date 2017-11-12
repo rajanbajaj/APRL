@@ -63,7 +63,7 @@ else{
 function getTags(){
         // require_once('connect.php');
     // require_once('likesIncr');
-    $dbc = mysqli_connect('localhost', 'root', NULL, 'aprl_xv1')
+    $dbc = mysqli_connect('localhost', 'root', NULL, 'aprl')
     or die('Unable to connect to database');
     $blogId = $_GET['hidden_name'];
 
@@ -85,7 +85,7 @@ function getTags(){
 }
 
 function suggestTag(){
-    $dbc = mysqli_connect('localhost', 'root', NULL, 'aprl_xv1')
+    $dbc = mysqli_connect('localhost', 'root', NULL, 'aprl')
     or die('Unable to connect to database');
     $blogId = $_GET['hidden_name'];
 
@@ -211,7 +211,7 @@ function spamCount(){
 
 function clicksuggest(titleki){
 console.log("im inside suggest");
-    window.location = "http://localhost:1234/gitAPRL/blogv1/blog.php?hidden_name=" + titleki;
+    window.location = "http://localhost:1234/gitAPRL/php/blog.php?hidden_name=" + titleki;
 }
 
 // function getTags(){
@@ -268,7 +268,7 @@ console.log("im inside suggest");
 <body class="profile-page sidebar-collapse" >
 
 
-	<!-- <script src="blogScript.js" ></script> -->
+    <!-- <script src="blogScript.js" ></script> -->
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
         <div class="container">
@@ -337,6 +337,7 @@ console.log("im inside suggest");
                     </div>
 
                     <p class="category" id="titlekiid"><?php echo $offeredby ?></p>
+                    <p class="category" ><?php echo $date ?></p>
 
                 </div>
 
@@ -394,7 +395,7 @@ console.log("im inside suggest");
 
 
 <?php 
- $dbc = mysqli_connect('localhost', 'root', NULL, 'aprl_xv1')
+ $dbc = mysqli_connect('localhost', 'root', NULL, 'aprl')
     or die('Unable to connect to database');
     $blogId = $_GET['hidden_name'];;
 
@@ -425,10 +426,12 @@ console.log("im inside suggest");
         if(!$resulta){
             echo("Errorcode: " . mysqli_errno($dbc));
         }
+
         // or die("Unable to request tags from database");
         // $x = 0;
         $rowDataq = mysqli_fetch_assoc($resulta);
-        // while($rowData = mysqli_fetch_assoc($resulta)){
+        if($rowDataq!=NULL){
+           // while($rowData = mysqli_fetch_assoc($resulta)){
                         // $x++;
 
                        echo' <div class="col-md-4" onclick="clicksuggest('.$rowDataq['blog_id'].')">
@@ -452,10 +455,13 @@ console.log("im inside suggest");
                         // if($x == 3){
                         //     break;
                         // }
-        // }
+        // } 
+        }
+        
 
         $rowDatar = mysqli_fetch_assoc($resulta);
-        // while($rowData = mysqli_fetch_assoc($resulta)){
+        if($rowDatar!=NULL){
+            // while($rowData = mysqli_fetch_assoc($resulta)){
                         // $x++;
 
                        echo' <div class="col-md-4" onclick="clicksuggest('.$rowDatar['blog_id'].')">
@@ -480,9 +486,12 @@ console.log("im inside suggest");
                         //     break;
                         // }
         // }
+        }
+        
 
         $rowDatas = mysqli_fetch_assoc($resulta);
-        // while($rowData = mysqli_fetch_assoc($resulta)){
+        if($rowDatas!=NULL){
+// while($rowData = mysqli_fetch_assoc($resulta)){
                         // $x++;
 
                        echo' <div class="col-md-4" onclick="clicksuggest('.$rowDatas['blog_id'].')">
@@ -507,6 +516,112 @@ console.log("im inside suggest");
                         //     break;
                         // }
         // }
+        
+        }
+
+        if($rowDatas==NULL && $rowDatar==NULL && $rowDataq==NULL){
+
+        $querya1 = "SELECT DISTINCT blog.blog_id,blog.title, blog.description FROM blog WHERE 
+        (NOT blog.blog_id = '$blogId') ORDER BY blog.reads DESC";
+        
+
+        $resulta1 = mysqli_query($dbc,$querya1);
+        if(!$resulta1){
+            echo("Errorcode: " . mysqli_errno($dbc));
+        }
+
+        // or die("Unable to request tags from database");
+        // $x = 0;
+        $rowDataq1 = mysqli_fetch_assoc($resulta);
+        if($rowDataq1!=NULL){
+           // while($rowData = mysqli_fetch_assoc($resulta)){
+                        // $x++;
+
+                       echo' <div class="col-md-4" onclick="clicksuggest('.$rowDataq1['blog_id'].')">
+                            <div class="card card-plain card-blog">
+                                <div class="card-image">
+                                        <img class="img rounded img-raised" src="../assets/img/bg5.jpg" />
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="category text-info">Blog</h6>
+                                    <h4 class="card-title">
+                                        <a >'.$rowDataq1['title'].'</a>
+                                    </h4>
+                                    <p class="card-description">'.
+                                        substr($rowDataq1['description'],0,100).'
+                                        <a >   .......      Read More </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>';
+                        // if($x == 3){
+                        //     break;
+                        // }
+        // } 
+        }
+        
+
+        $rowDatar1 = mysqli_fetch_assoc($resulta);
+        if($rowDatar1!=NULL){
+            // while($rowData = mysqli_fetch_assoc($resulta)){
+                        // $x++;
+
+                       echo' <div class="col-md-4" onclick="clicksuggest('.$rowDatar1['blog_id'].')">
+                            <div class="card card-plain card-blog">
+                                <div class="card-image">
+                                        <img class="img rounded img-raised" src="../assets/img/bg5.jpg" />
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="category text-info">Blog</h6>
+                                    <h4 class="card-title">
+                                        <a >'.$rowDatar1['title'].'</a>
+                                    </h4>
+                                    <p class="card-description">'.
+                                        substr($rowDatar1['description'],0,100).'
+                                        <a >   .......      Read More </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>';
+                        // if($x == 3){
+                        //     break;
+                        // }
+        // }
+        }
+        
+
+        $rowDatas1 = mysqli_fetch_assoc($resulta);
+        if($rowDatas1!=NULL){
+// while($rowData = mysqli_fetch_assoc($resulta)){
+                        // $x++;
+
+                       echo' <div class="col-md-4" onclick="clicksuggest('.$rowDatas1['blog_id'].')">
+                            <div class="card card-plain card-blog">
+                                <div class="card-image">
+                                        <img class="img rounded img-raised" src="../assets/img/bg5.jpg" />
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="category text-info">Blog</h6>
+                                    <h4 class="card-title">
+                                        <a >'.$rowDatas1['title'].'</a>
+                                    </h4>
+                                    <p class="card-description">'.
+                                        substr($rowDatas1['description'],0,100).'
+                                        <a >   .......      Read More </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>';
+                        // if($x == 3){
+                        //     break;
+                        // }
+        // }
+        
+        }
+        }
         
 
     echo "</div>";

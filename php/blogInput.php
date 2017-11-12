@@ -110,17 +110,17 @@ function test_input($data) {
     check = 0;
     var c = document.getElementById("title_id").value;
     if(c.length == 0){
-      var tt = "Title daal bhosdiwale";
+      var tt = "Enter the Title";
       showSnack(tt);
     }else{
 
       if(!tinymce.get('description_id').getContent()){
-        var tt = "Description kya tera baap dalega";
+        var tt = "Enter the description";
         showSnack(tt);
       }
       else{
         if(allTags.length == 0){
-          var tt = "Tags add kr chutie";
+          var tt = "Enter the tags";
           showSnack(tt);
         }else{
           check = 1;
