@@ -6,14 +6,13 @@
     }
     if(!isset($_POST['submit']))
         require_once('signup.php')
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    
+    <link rel="icon" type="image/png" href="../assets/favicon/favicon-16x16.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Login Page </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -33,32 +32,12 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
         <div class="container">
-            <div class="dropdown button-dropdown">
-                <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
-                    <span class="button-bar"></span>
-                    <span class="button-bar"></span>
-                    <span class="button-bar"></span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-header">Dropdown header</a>
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">One more separated link</a>
-                </div>
-            </div>
+            
             <div class="navbar-translate">
-                <a class="navbar-brand" href="http://demos.creative-tim.com/now-ui-kit/index.html" rel="tooltip" title="Designed by Invision. Coded by Creative Tim" data-placement="bottom" target="_blank">
+                <a class="navbar-brand" href="#" rel="tooltip"  data-placement="bottom" >
                     APRl
                 </a>
-                <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-bar bar1"></span>
-                    <span class="navbar-toggler-bar bar2"></span>
-                    <span class="navbar-toggler-bar bar3"></span>
-                </button>
+                
             </div>
             <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="../assets/img/blurred-image-1.jpg">
             </div>
@@ -73,7 +52,7 @@
                     <form class="form" method="post" action="login.php">
                         <div class="header header-primary text-center">
                             <div class="logo-container">
-                                <img src="../assets/img/now-logo.png" alt="">
+                                <img src="../assets/favicon/invert.png" alt="">
                             </div>
                         </div>
                                 <div class="content">
@@ -99,11 +78,7 @@
                                 <a href="#pablo" class="link" data-toggle="modal" data-target="#myModal">Create Account</a>
                             </h6>
                         </div>
-                        <div class="pull-right">
-                            <h6>
-                                <a href="#pablo" class="link">Need Help?</a>
-                            </h6>
-                        </div>
+                        
                     </form>
                 </div>
             </div>
