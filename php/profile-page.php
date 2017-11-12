@@ -55,8 +55,8 @@ if(isset($_GET['username'])){
     $image = $row['image_url'];
     $description = $row['description'];
     $email = $row['email'];
-    if($image!='fb_avatar_male.jpg')
-        $image = $username.'/'.$image;
+    // if($image!='fb_avatar_male.jpg')
+    //     $image = $username.'/'.$image;
     mysqli_close($dbc);
 
 ?>
@@ -101,10 +101,10 @@ if(isset($_GET['username'])){
             </div>
             <div class="dropdown button-dropdown">
                 <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
-                    <img src="../assets/img/eva.jpg" alt="..." id="daddy_image">
+                    <img class="photo-container" src= <?php echo '"../assets/img/user/'.$image.'"'?> alt="Profile Picture" id="daddy_image">
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown" data-placement="left">
-                  
+                    <a class="dropdown-item" href="profile-page.php">Profile</a>
                     <a class="dropdown-item" href="blog.php">Blog</a>
                     <a class="dropdown-item" href="project.php">Project</a>
                     <?php if($profession=='faculty') echo '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">New Peoject</a>'; ?>
@@ -125,7 +125,7 @@ if(isset($_GET['username'])){
             <div class="container">
                 <div class="content-center">
                     <div class="photo-container">
-                        <img src= <?php echo '"../assets/img/'.$image.'"'?> alt="">
+                        <img class="photo-container" src= <?php echo '"../assets/img/user/'.$image.'"'?> alt="Profile Picture">
                     </div>
                     <h3 class="title"><?php echo ("$firstname $lastname");?></h3>
                     <p class="category"><?php echo $credential?></p>

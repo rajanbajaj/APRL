@@ -20,7 +20,7 @@
                         </a>
                     </div>
                     <div class="card-body">
-                        <h6 class="category text-primary">Features</h6>
+                        <h6 class="category text-primary">PROJECT</h6>
                         <h5 class="card-title">';
         echo $data["title"];
         echo '</h5>
@@ -31,7 +31,7 @@
         echo '</p>
                 <div class="card-footer">
                     <div class="author">
-                        <img src="../assets/img/julie.jpg" alt="..." class="avatar img-raised">
+                        
                         <span>';
         echo $data["offeredby"];           
         echo '</span>

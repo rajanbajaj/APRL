@@ -4,29 +4,33 @@
 session_start();
 if(isset($_SESSION['username'])){
 
-	require_once('connect.php');
+    require_once('connect.php');
     // require_once('likesIncr');
     // $blogId = 1;
     $blogId= $_GET['hidden_name'];
     $uname = $_SESSION['username'];
+    // echo $blogId;
+    // $blogId = $_POST['blog_id'];
 
-	// $blogId = $_POST['blog_id'];
-
-	$query = "SELECT * FROM blog WHERE blog_id ='$blogId'";
-	$result = mysqli_query($dbc,$query)
-	or die("Unable to request blog from database");
-	$rowBlog = mysqli_fetch_array($result);
-	$title = $rowBlog['title'];
-	// echo $title;
-	$description = $rowBlog['description'];
-	// echo $description;
-	$date = $rowBlog['date'];
-	$url = $rowBlog['url'];
-	$spam = $rowBlog['spam'];
-	//likes,reads row added in database blog table
-	$likes = $rowBlog['likes']; 
-	$reads = $rowBlog['reads'];
-    echo "<input type='hidden' id='hidden_input_blog' name='hidden_input' value='$blogId'>";
+    $query = "SELECT * FROM blog WHERE blog_id ='$blogId'";
+    $result = mysqli_query($dbc,$query)
+    or die("Unable to request blog from database");
+    $rowBlog = mysqli_fetch_array($result);
+    $title = $rowBlog['title'];
+    // echo $title;
+    $description = $rowBlog['description'];
+    // echo $description;
+    $date = $rowBlog['date'];
+    $url = $rowBlog['url'];
+    $spam = $rowBlog['spam'];
+    //likes,reads row added in database blog table
+    $likes = $rowBlog['likes']; 
+    $reads = $rowBlog['reads'];
+    // echo "error yahn hai ";
+    // echo $blogId;
+    echo "<input type='hidden' id='hidden_input_blog' name='hidden_input' value='$blogId'></input>";
+    // echo "error yah to ni hai ";
+    // echo $blogId;
     // echo $reads;
     // $readr = $reads + 1;
     // echo $readr;
@@ -36,12 +40,12 @@ if(isset($_SESSION['username'])){
     // else{
     //     echo "Unable to update read data";
     // }
-	//comments table still to be added
+    //comments table still to be added
 
-	// $query2 = "SELECT studentinfo.image_url FROM studentinfo INNER JOIN userblog ON userblog.user_id = studentinfo.username WHERE userblog.blog_id = '$blogId'";
-	// $result2 = mysqli_query($dbc,$query2)
-	// or die("Unable to request image url from database");
-	// $imageUrl = $result2;
+    // $query2 = "SELECT studentinfo.image_url FROM studentinfo INNER JOIN userblog ON userblog.user_id = studentinfo.username WHERE userblog.blog_id = '$blogId'";
+    // $result2 = mysqli_query($dbc,$query2)
+    // or die("Unable to request image url from database");
+    // $imageUrl = $result2;
         
     $query3 = "SELECT blog.offeredby FROM blog WHERE blog_id = '$blogId'";
     $result3 = mysqli_query($dbc,$query3)
@@ -51,7 +55,7 @@ if(isset($_SESSION['username'])){
 }
 
 else{
-	$url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/login-page.php';
+    $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/login-page.php';
     header('Location:'.$url);
 }
 
@@ -100,7 +104,6 @@ function suggestTag(){
 }
 
 ?>
-
 
 
 
@@ -202,6 +205,14 @@ function spamCount(){
         // ?> 
     }); 
 });
+   
+
+// }
+
+function clicksuggest(titleki){
+console.log("im inside suggest");
+    window.location = "http://localhost:1234/gitAPRL/php/blog.php?hidden_name=" + titleki;
+}
 
 // function getTags(){
 //     // x = x+1;
@@ -223,6 +234,7 @@ function spamCount(){
 // }
 
 </script>
+
 
 <!-- //newly added  -->
 <meta charset="utf-8" />
@@ -256,7 +268,7 @@ function spamCount(){
 <body class="profile-page sidebar-collapse" >
 
 
-	<!-- <script src="blogScript.js" ></script> -->
+    <!-- <script src="blogScript.js" ></script> -->
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
         <div class="container">
@@ -325,6 +337,7 @@ function spamCount(){
                     </div>
 
                     <p class="category" id="titlekiid"><?php echo $offeredby ?></p>
+                    <p class="category" ><?php echo $date ?></p>
 
                 </div>
 
@@ -402,42 +415,212 @@ function spamCount(){
         // echo $rowTag2['tagname'];
         // echo $rowTag3['tagname'];
 
-        $querya = "SELECT DISTINCT blog.title, blog.description FROM ((blogtag INNER JOIN tag ON 
+        $querya = "SELECT DISTINCT blog.blog_id,blog.title, blog.description FROM ((blogtag INNER JOIN tag ON 
         tag.tag_id = blogtag.tag_id ) INNER JOIN blog ON blog.blog_id = blogtag.blog_id) 
-        WHERE tag.tagname = '$rowTag1[tagname]' OR 
+        WHERE (tag.tagname = '$rowTag1[tagname]' AND 
         tag.tagname = '$rowTag2[tagname]' OR tag.tagname = '$rowTag3[tagname]' AND (NOT blog.blog_id =
-         '1') ORDER BY blog.reads DESC";
+         '$blogId') ) ORDER BY blog.reads DESC";
         
 
         $resulta = mysqli_query($dbc,$querya);
         if(!$resulta){
             echo("Errorcode: " . mysqli_errno($dbc));
         }
+
         // or die("Unable to request tags from database");
-        $x = 0;
-        while($rowData = mysqli_fetch_assoc($resulta)){
-                        $x++;
-                       echo" <div class="."col-md-4".">
-                            <div class="."card card-plain card-blog".">
-                                <div class="."card-image". ">
-                                        <img class="."img rounded img-raised"." src="."../assets/img/bg5.jpg"." />
+        // $x = 0;
+        $rowDataq = mysqli_fetch_assoc($resulta);
+        if($rowDataq!=NULL){
+           // while($rowData = mysqli_fetch_assoc($resulta)){
+                        // $x++;
+
+                       echo' <div class="col-md-4" onclick="clicksuggest('.$rowDataq['blog_id'].')">
+                            <div class="card card-plain card-blog">
+                                <div class="card-image">
+                                        <img class="img rounded img-raised" src="../assets/img/bg5.jpg" />
                                     </a>
                                 </div>
-                                <div class="."card-body".">
-                                    <h6 class="."category text-info".">Blog</h6>
-                                    <h4 class="."card-title".">
-                                        <a >$rowData[title]</a>
+                                <div class="card-body">
+                                    <h6 class="category text-info">Blog</h6>
+                                    <h4 class="card-title">
+                                        <a >'.$rowDataq['title'].'</a>
                                     </h4>
-                                    <p class="."card-description".">
-                                        ".substr($rowData['description'],0,100)."
+                                    <p class="card-description">'.
+                                        substr($rowDataq['description'],0,100).'
                                         <a >   .......      Read More </a>
                                     </p>
                                 </div>
                             </div>
-                        </div>";
-                        if($x == 3){
-                            break;
-                        }
+                        </div>';
+                        // if($x == 3){
+                        //     break;
+                        // }
+        // } 
+        }
+        
+
+        $rowDatar = mysqli_fetch_assoc($resulta);
+        if($rowDatar!=NULL){
+            // while($rowData = mysqli_fetch_assoc($resulta)){
+                        // $x++;
+
+                       echo' <div class="col-md-4" onclick="clicksuggest('.$rowDatar['blog_id'].')">
+                            <div class="card card-plain card-blog">
+                                <div class="card-image">
+                                        <img class="img rounded img-raised" src="../assets/img/bg5.jpg" />
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="category text-info">Blog</h6>
+                                    <h4 class="card-title">
+                                        <a >'.$rowDatar['title'].'</a>
+                                    </h4>
+                                    <p class="card-description">'.
+                                        substr($rowDatar['description'],0,100).'
+                                        <a >   .......      Read More </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>';
+                        // if($x == 3){
+                        //     break;
+                        // }
+        // }
+        }
+        
+
+        $rowDatas = mysqli_fetch_assoc($resulta);
+        if($rowDatas!=NULL){
+// while($rowData = mysqli_fetch_assoc($resulta)){
+                        // $x++;
+
+                       echo' <div class="col-md-4" onclick="clicksuggest('.$rowDatas['blog_id'].')">
+                            <div class="card card-plain card-blog">
+                                <div class="card-image">
+                                        <img class="img rounded img-raised" src="../assets/img/bg5.jpg" />
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="category text-info">Blog</h6>
+                                    <h4 class="card-title">
+                                        <a >'.$rowDatas['title'].'</a>
+                                    </h4>
+                                    <p class="card-description">'.
+                                        substr($rowDatas['description'],0,100).'
+                                        <a >   .......      Read More </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>';
+                        // if($x == 3){
+                        //     break;
+                        // }
+        // }
+        
+        }
+
+        if($rowDatas==NULL && $rowDatar==NULL && $rowDataq==NULL){
+
+        $querya1 = "SELECT DISTINCT blog.blog_id,blog.title, blog.description FROM blog WHERE 
+        (NOT blog.blog_id = '$blogId') ORDER BY blog.reads DESC";
+        
+
+        $resulta1 = mysqli_query($dbc,$querya1);
+        if(!$resulta1){
+            echo("Errorcode: " . mysqli_errno($dbc));
+        }
+
+        // or die("Unable to request tags from database");
+        // $x = 0;
+        $rowDataq1 = mysqli_fetch_assoc($resulta);
+        if($rowDataq1!=NULL){
+           // while($rowData = mysqli_fetch_assoc($resulta)){
+                        // $x++;
+
+                       echo' <div class="col-md-4" onclick="clicksuggest('.$rowDataq1['blog_id'].')">
+                            <div class="card card-plain card-blog">
+                                <div class="card-image">
+                                        <img class="img rounded img-raised" src="../assets/img/bg5.jpg" />
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="category text-info">Blog</h6>
+                                    <h4 class="card-title">
+                                        <a >'.$rowDataq1['title'].'</a>
+                                    </h4>
+                                    <p class="card-description">'.
+                                        substr($rowDataq1['description'],0,100).'
+                                        <a >   .......      Read More </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>';
+                        // if($x == 3){
+                        //     break;
+                        // }
+        // } 
+        }
+        
+
+        $rowDatar1 = mysqli_fetch_assoc($resulta);
+        if($rowDatar1!=NULL){
+            // while($rowData = mysqli_fetch_assoc($resulta)){
+                        // $x++;
+
+                       echo' <div class="col-md-4" onclick="clicksuggest('.$rowDatar1['blog_id'].')">
+                            <div class="card card-plain card-blog">
+                                <div class="card-image">
+                                        <img class="img rounded img-raised" src="../assets/img/bg5.jpg" />
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="category text-info">Blog</h6>
+                                    <h4 class="card-title">
+                                        <a >'.$rowDatar1['title'].'</a>
+                                    </h4>
+                                    <p class="card-description">'.
+                                        substr($rowDatar1['description'],0,100).'
+                                        <a >   .......      Read More </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>';
+                        // if($x == 3){
+                        //     break;
+                        // }
+        // }
+        }
+        
+
+        $rowDatas1 = mysqli_fetch_assoc($resulta);
+        if($rowDatas1!=NULL){
+// while($rowData = mysqli_fetch_assoc($resulta)){
+                        // $x++;
+
+                       echo' <div class="col-md-4" onclick="clicksuggest('.$rowDatas1['blog_id'].')">
+                            <div class="card card-plain card-blog">
+                                <div class="card-image">
+                                        <img class="img rounded img-raised" src="../assets/img/bg5.jpg" />
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="category text-info">Blog</h6>
+                                    <h4 class="card-title">
+                                        <a >'.$rowDatas1['title'].'</a>
+                                    </h4>
+                                    <p class="card-description">'.
+                                        substr($rowDatas1['description'],0,100).'
+                                        <a >   .......      Read More </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>';
+                        // if($x == 3){
+                        //     break;
+                        // }
+        // }
+        
+        }
         }
         
 
@@ -479,6 +662,8 @@ function spamCount(){
 <script src="../assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
 <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
 <script src="../assets/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
+
+
 <script type="text/javascript">
 $.fn.isInViewport = function() {
   var elementTop = $(this).offset().top;

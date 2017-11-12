@@ -2,10 +2,10 @@
 -- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 12, 2017 at 02:14 PM
--- Server version: 10.1.26-MariaDB
--- PHP Version: 7.1.9
+-- Host: localhost
+-- Generation Time: Nov 12, 2017 at 09:01 PM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 7.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -72,13 +72,16 @@ CREATE TABLE `blog` (
 --
 
 INSERT INTO `blog` (`blog_id`, `offeredby`, `description`, `date`, `url`, `spam`, `likes`, `reads`, `title`, `keywords`) VALUES
-(1, '', 'This will call the normal command found in our path, without using the aliased version.\r\n\r\nAssuming you did not unset it, the ll alias will be available throughout the current shell session, but when you open a new terminal window, this will not be available.\r\n\r\nTo make this persistent, we need to add this into one of the various files that is read when a shell session begins. Popular choices are ~/.bashrc and ~/.bash_profile. We just need to open the file and add the alias there:', '2017-11-12 10:53:48', 'no url', 3, 1921, 7114, 'Journey To End Of Earth', ''),
+(1, '2', 'This will call the normal command found in our path, without using the aliased version.\r\n\r\nAssuming you did not unset it, the ll alias will be available throughout the current shell session, but when you open a new terminal window, this will not be available.\r\n\r\nTo make this persistent, we need to add this into one of the various files that is read when a shell session begins. Popular choices are ~/.bashrc and ~/.bash_profile. We just need to open the file and add the alias there:', '2017-11-13 00:49:45', 'no url', 3, 1921, 7116, 'Journey To End Of Earth', ''),
 (2, '', ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu eros risus. Cras feugiat interdum magna, vulputate venenatis eros bibendum quis. Integer nisl lectus, tincidunt nec aliquam eget, blandit et arcu. Quisque dignissim quam risus, eu tincidunt diam varius et. Proin sollicitudin lacus leo, ut iaculis neque viverra eu. Cras sit amet mauris eget sem mollis sagittis id sed eros. Praesent eu nulla tortor. Curabitur efficitur feugiat massa id elementum. Integer at diam lectus. Integer tincidunt orci at magna dictum, vel gravida ex vulputate. Nullam congue molestie velit quis tincidunt.\r\n\r\nMorbi blandit blandit ultricies. Aliquam erat volutpat. Proin pulvinar orci et posuere maximus. Aliquam et efficitur purus, quis consectetur justo. Fusce non ex lacus. Etiam scelerisque, est quis feugiat luctus, enim felis tincidunt lectus, et imperdiet justo nunc sit amet dolor. Phasellus vestibulum in enim ut tristique. ', '2017-11-06 01:57:12', 'http://www.google.com', 45, 1200, 7004, 'The Dawn Of The World', ''),
 (3, '', ' Praesent sagittis arcu non justo mattis, ut rutrum odio sagittis. Donec nisl risus, tempus eget rutrum sit amet, ultrices nec ex. Suspendisse suscipit lectus in libero lobortis semper. Aenean a scelerisque justo, eget tempus lorem. Aliquam rhoncus nulla massa, nec fringilla est consequat nec. Duis vel est consectetur, bibendum erat ut, sagittis diam. In risus ante, pulvinar at malesuada vitae, interdum ac purus. Duis gravida commodo lectus, nec sagittis urna. Vestibulum condimentum nisl dolor, non maximus mauris tempus ut. Aenean sit amet lectus tempus, luctus mauris quis, vulputate orci. Mauris imperdiet nisl lacus, id interdum lectus imperdiet ut. Morbi accumsan sodales ex. Fusce eu mauris vel magna finibus consectetur. Morbi vel mauris eget augue consequat eleifend. Curabitur eleifend, arcu ut pulvinar interdum, nunc ex molestie sapien, eu convallis magna lectus eu eros. Nulla gravida lacinia blandit.\r\n\r\nVestibulum libero sapien, tempus eu suscipit et, placerat id diam. Donec bibendum eget mi ac lobortis. Nullam nisi urna, vestibulum quis felis ac, hendrerit aliquam urna. In hac habitasse platea dictumst. Pellentesque sed fringilla libero. Mauris varius mi non turpis rhoncus porttitor. Sed nec lectus tempus, mattis nulla ut, egestas justo. Nulla nec bibendum elit. ', '2017-11-06 01:58:12', 'http://www.yahoo.com', 6, 456, 9002, 'This is London Baby', ''),
 (4, '', 'Proin suscipit pharetra nisl, et bibendum lorem malesuada a. Cras vel quam et lectus tincidunt feugiat vitae eget arcu. Vestibulum sed diam in metus ultricies eleifend ut ut elit. Nunc placerat dui at laoreet tincidunt. Quisque non vestibulum justo. Pellentesque blandit laoreet volutpat. Nulla vestibulum sollicitudin accumsan. Phasellus quis urna dolor. Integer et hendrerit nulla. Fusce eget urna ante. Praesent ac nibh eu mi vestibulum ultrices vitae eu diam. Quisque luctus, quam ullamcorper posuere sagittis, justo nisl posuere lectus, in imperdiet leo elit eget augue. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin dignissim facilisis mauris sed sagittis. Fusce posuere at ipsum eget tempus. Quisque sem lectus, pharetra quis urna quis, pellentesque feugiat est. ', '2017-11-06 02:00:06', 'http://www.ask.me', 1, 520, 6423, 'Welcome To The Jungle', ''),
 (5, '', 'The Greek War of Independence, also known as the Greek Revolution (Greek: ???????? ??????????, Elliniki Epanastasi; Ottoman: ????? ?????? Yunan ?syan? Greek Uprising), was a successful war of independence waged by the Greek revolutionaries between 1821 and 1832 against the Ottoman Empire. The Greeks were later assisted by the Russian Empire, Great Britain, the Kingdom of France, and several other European powers, while the Ottomans were aided by their vassals, the eyalets of Egypt, Algeria, and Tripolitania, and the Beylik of Tunis.\r\n\r\nEven several decades before the fall of Constantinople to the Ottoman Empire in 1453, most of Greece had come under Ottoman rule.[3] During this time, there were several revolt attempts by Greeks to gain independence from Ottoman control.[4] In 1814, a secret organization called the Filiki Eteria was founded with the aim of liberating Greece. The Filiki Eteria planned to launch revolts in the Peloponnese, the Danubian Principalities, and in Constantinople and its surrounding areas. By late 1820, the insurrection had been planned for March 25 (Julian Calendar) 1821, on the Feast of the Annunciation for the Orthodox Christians. However, as the plans of Filiki Eteria had been discovered by the Ottoman authorities, the revolutionary action started earlier. The first of these revolts began on March 6/February 22, 1821 in the Danubian Principalities, but it was soon put down by the Ottomans.', '2017-11-06 02:02:09', 'http://www.wikipedia.com', 0, 458, 8500, 'The Greek War Of Independence', ''),
 (29, '', '<p>Once upon a time .......................................vaaki bkwaas baad mein</p>', '2017-11-12 10:18:38', '', 0, 0, 0, 'Ek Tha Tiger', ''),
-(30, '', '<p>Once upon a time .......................................vaaki bkwaas baad mein</p>', '2017-11-12 12:23:41', '', 0, 0, 0, 'Ek Tha Tiger', '');
+(30, '', '<p>Once upon a time .......................................vaaki bkwaas baad mein</p>', '2017-11-12 12:23:41', '', 0, 0, 0, 'Ek Tha Tiger', ''),
+(31, '2', '<p>sccass</p>', '2017-11-13 01:18:39', '', 0, 0, 0, 'cdascdcsx', ''),
+(38, '2', '<p>&nbsp;DVzxvdbxfv cb </p>', '2017-11-13 01:27:07', '', 0, 0, 0, 'cfgvhb', ''),
+(39, '2', '<p>&nbsp;DVzxvdbxfv cb </p>', '2017-11-13 01:27:30', '', 0, 0, 0, 'cfgvhb', '');
 
 -- --------------------------------------------------------
 
@@ -155,7 +158,7 @@ CREATE TABLE `facultyinfo` (
 --
 
 INSERT INTO `facultyinfo` (`username`, `firstname`, `lastname`, `email`, `image_url`, `credential`, `description`, `lastblog`) VALUES
-('2', 'Aditya', 'Nigam', '', '', NULL, NULL, NULL),
+('2', 'Aditya', 'Nigam', '', '', NULL, NULL, 413),
 ('Arti Kashyap', 'Arti', 'Kashyap', '', '', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -234,7 +237,7 @@ CREATE TABLE `studentinfo` (
   `image_url` text NOT NULL,
   `credential` varchar(255) DEFAULT NULL,
   `description` text,
-  `lastblog` int(11) DEFAULT NULL,
+  `lastblog` text,
   `cgpa` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -245,7 +248,7 @@ CREATE TABLE `studentinfo` (
 INSERT INTO `studentinfo` (`username`, `firstname`, `lastname`, `email`, `image_url`, `credential`, `description`, `lastblog`, `cgpa`) VALUES
 ('1', 'Prabhakar', 'Prasad', 'prabhakarpd7284@gmail.com', '', '1', NULL, NULL, '0'),
 ('bigboss', 'Big', 'Boss', 'bigboss7284@gmail.com', 'WIN_20170915_17_18_36_Pro.jpg', 'B.tech IIT Mandi', 'I am Big Boss. No one cross my path.', NULL, '9'),
-('hello', 'Hello', 'World', '', 'fb_avatar_male.jpg', '', '', 0, '0'),
+('hello', 'Hello', 'World', '', 'fb_avatar_male.jpg', '', '', '0', '0'),
 ('mohan', 'mohan', 'bhagwat', '', 'fb_avatar_male.jpg', '', '', NULL, '0');
 
 -- --------------------------------------------------------
@@ -385,6 +388,24 @@ ALTER TABLE `userlogin`
 --
 ALTER TABLE `applicant`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `blog`
+--
+ALTER TABLE `blog`
+  MODIFY `blog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `blogimage`
+--
+ALTER TABLE `blogimage`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `blogtag`
+--
+ALTER TABLE `blogtag`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `project`
