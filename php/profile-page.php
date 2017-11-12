@@ -77,6 +77,7 @@ if(isset($_GET['username'])){
     <link href="../assets/css/now-ui-kit.css?v=1.1.0" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="../assets/css/demo.css" rel="stylesheet" />
+    <link href="../assets/css/daddy.css" rel="stylesheet" />
 </head>
 
 <body class="profile-page sidebar-collapse">
@@ -102,8 +103,8 @@ if(isset($_GET['username'])){
                 <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
                     <img src="../assets/img/eva.jpg" alt="..." id="daddy_image">
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-header">Dropdown header</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" data-placement="left">
+                  
                     <a class="dropdown-item" href="blog.php">Blog</a>
                     <a class="dropdown-item" href="project.php">Project</a>
                     <?php if($profession=='faculty') echo '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">New Peoject</a>'; ?>
