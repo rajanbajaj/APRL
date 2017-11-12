@@ -1,8 +1,8 @@
 <?php
     
     define("DB_MSG_ERROR", 'Could not connect!<br />Please contact the site\'s administrator.');
-    $conn = mysql_connect("localhost", "root", NULL) or die(DB_MSG_ERROR);
-    $db = mysql_select_db('aprl') or die(DB_MSG_ERROR);
+    $conn = mysqli_connect("localhost", "root", NULL) or die(DB_MSG_ERROR);
+    $db = mysqli_select_db($conn,'aprl') or die(DB_MSG_ERROR);
 
     if($_POST['radio_button'] == 1){
 
@@ -19,7 +19,7 @@
 
     $value_search = $_POST['value'];
 
-    $query = mysql_query("
+    $query = mysqli_query($conn,"
       SELECT * 
       FROM project
       WHERE MATCH(offeredby) AGAINST('$value_search')
@@ -30,7 +30,7 @@
 
     ");
     
-    while ($data = mysql_fetch_array($query)) {
+    while ($data = mysqli_fetch_array($query)) {
 
 
       echo '<div class="col-md-4">'; 
@@ -68,13 +68,13 @@
         </div>';
     }
 
-    $query = mysql_query("
+    $query = mysqli_query($conn,"
       SELECT * 
       FROM project
       WHERE MATCH(title) AGAINST('".$_POST['value']."')
     ");
     
-    while ($data = mysql_fetch_array($query)) {
+    while ($data = mysqli_fetch_array($query)) {
       echo '<div class="col-md-4">
                 <div class="card card-blog">
                     <div class="card-image">

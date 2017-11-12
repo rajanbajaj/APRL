@@ -31,12 +31,13 @@
             if(!is_dir(APRL_UPLOADPATH.$username."/")) {
                 mkdir(APRL_UPLOADPATH.$username); 
             }
-            $var = $profession."info";
             if($profession == 'student'){
-                $query = "UPDATE $var SET firstname = '$firstname', lastname = '$lastname', credential = '$credential',description = '$description', email = '$email', cgpa = '$cgpa' WHERE username = '$username' "; 
+                $var = 'studentinfo';
+                $query = "UPDATE $var SET firstname = '$firstname',lastname = '$lastname', credential = '$credential',description = '$description', email = '$email', cgpa = '$cgpa' WHERE username = '$username' "; 
             }
             elseif($profession=='faculty'){
-                $query = "UPDATE $var SET firstname = '$firstname', lastname = '$lastname', credential = '$credential',description = '$description', email = '$email' WHERE username = '$username' "; 
+                $var = 'facultyinfo';
+                $query = "UPDATE $var SET firstname = '$firstname',lastname = '$lastname', credential = '$credential',description = '$description', email = '$email' WHERE username = '$username' "; 
             }
             
             mysqli_query($dbc, $query)
@@ -57,16 +58,11 @@
                 $target = APRL_UPLOADPATH.$username.'/'.$image;
                 move_uploaded_file($_FILES['Image']['tmp_name'], $target);
             }
-            //echo 'Update successful!';
-    
-            echo 'Update successfull. You will be automatically redirected to the other page.';
-            $url = "profile-page.php";
 
             // $query = "UPDATE userlogin SET name = '$name' WHERE username = '$username'";
             // mysqli_query($dbc, $query)
             // or die('Unable to query');
-            //echo 'Update successful!';
-            header ("Refresh: 3;URL='$url'");
+            echo 'Update successful!';
         }
         $query = "SELECT * FROM $var WHERE username = '$username'";
         $result = mysqli_query($dbc, $query)
@@ -75,7 +71,6 @@
         $row = mysqli_fetch_array($result);
         $firstname = $row['firstname'];
         $lastname = $row['lastname'];
-        $name = $firstname.' '.$lastname; 
         $credential = $row['credential'];
         $image = $row['image_url'];
         $description = $row['description'];
@@ -150,7 +145,7 @@
                     <a class="dropdown-header">Dropdown header</a>
                     <a class="dropdown-item" href="#">Action</a>
                     <a class="dropdown-item" href="#">Another action</a>
-                    <?php if($profession=='faculty') echo '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">New Project</a>'; ?>
+                    <?php if($profession=='faculty') echo '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">New Peoject</a>'; ?>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#pablo" data-toggle="modal" data-target="#myModal" >Edit Profile</a>
                     <div class="dropdown-divider"></div>
@@ -195,27 +190,27 @@
                 <form enctype="multipart/form-data" method="post" action= "edit-profile.php" >
                     <div class="row">
                         <div class="col-md-6">
-                            <label>Firstame</label>
+                            <label>Firstname</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Your firstname" name="FirstName" value=<?php echo '"'.$firstname.'"' ?> />
+                                <input type="text" class="form-control" placeholder="First Name" name="Firstname" value=<?php echo '"'.$firstname.'"' ?> />
                             </div>
                             
                         </div>
                         <div class="col-md-6">
                             <label>Lastname</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Your lastname" name="LastName" value=<?php echo '"'.$lastname.'"' ?> />
+                                <input type="text" class="form-control" placeholder="Last Name" name="Lastname" value=<?php echo '"'.$lastname.'"' ?> />
                             </div>
                             
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Email</label>
                                 <input type="email" class="form-control" placeholder="Your email" name="Email" value=<?php echo '"'.$email.'"' ?> />
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Credential</label>
@@ -224,16 +219,14 @@
                             </div>
 
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Description</label>
                                 <input type="text" class="form-control" placeholder="Your Bio" name="Description" value=<?php echo '"'.$description.'"' ?>/>
                             </div>
                         </div>
-                    
-                    
+                    </div>
+                    <div class="row">
                         <?php if($profession == 'student'){ ?>
                         <div class="col-md-6">
                             <div class="form-group">

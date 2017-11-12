@@ -4,29 +4,27 @@
 session_start();
 if(isset($_SESSION['username'])){
 
-	require_once('connect.php');
+    require_once('connect.php');
     // require_once('likesIncr');
-    // $blogId = 1;
-    $blogId= $_GET['hidden_name'];
+    $blogId = 1;
     $uname = $_SESSION['username'];
 
-	// $blogId = $_POST['blog_id'];
+    // $blogId = $_POST['blog_id'];
 
-	$query = "SELECT * FROM blog WHERE blog_id ='$blogId'";
-	$result = mysqli_query($dbc,$query)
-	or die("Unable to request blog from database");
-	$rowBlog = mysqli_fetch_array($result);
-	$title = $rowBlog['title'];
-	// echo $title;
-	$description = $rowBlog['description'];
-	// echo $description;
-	$date = $rowBlog['date'];
-	$url = $rowBlog['url'];
-	$spam = $rowBlog['spam'];
-	//likes,reads row added in database blog table
-	$likes = $rowBlog['likes']; 
-	$reads = $rowBlog['reads'];
-    echo "<input type='hidden' id='hidden_input_blog' name='hidden_input' value='$blogId'>";
+    $query = "SELECT * FROM blog WHERE blog_id ='$blogId'";
+    $result = mysqli_query($dbc,$query)
+    or die("Unable to request blog from database");
+    $rowBlog = mysqli_fetch_array($result);
+    $title = $rowBlog['title'];
+    // echo $title;
+    $description = $rowBlog['description'];
+    // echo $description;
+    $date = $rowBlog['date'];
+    $url = $rowBlog['url'];
+    $spam = $rowBlog['spam'];
+    //likes,reads row added in database blog table
+    $likes = $rowBlog['likes']; 
+    $reads = $rowBlog['reads'];
     // echo $reads;
     // $readr = $reads + 1;
     // echo $readr;
@@ -36,22 +34,27 @@ if(isset($_SESSION['username'])){
     // else{
     //     echo "Unable to update read data";
     // }
-	//comments table still to be added
+    //comments table still to be added
 
-	// $query2 = "SELECT studentinfo.image_url FROM studentinfo INNER JOIN userblog ON userblog.user_id = studentinfo.username WHERE userblog.blog_id = '$blogId'";
-	// $result2 = mysqli_query($dbc,$query2)
-	// or die("Unable to request image url from database");
-	// $imageUrl = $result2;
-        
-    $query3 = "SELECT blog.offeredby FROM blog WHERE blog_id = '$blogId'";
-    $result3 = mysqli_query($dbc,$query3)
+    $query2 = "SELECT studentinfo.image_url FROM studentinfo INNER JOIN userblog ON userblog.username = studentinfo.username WHERE userblog.blog_id = '$blogId'";
+    $result2 = mysqli_query($dbc,$query2)
     or die("Unable to request image url from database");
-    $offer = mysqli_fetch_assoc($result3);
-    $offeredby = $offer['offeredby'];
+    $imageUrl = $result2;
+        // echo $rowTag[0];
+        // echo $rowTag[0];
+
+            // echo $rowtag;
+            // echo "
+            // <span >
+            //     <button class="btn btn-primary btn-simple btn-round btn-sm" type="button">$rowTag['tagname']</button>
+            // </span>";
+            // return $rowTag['tagname'];
+            // echo "dooooo";
+        // }
 }
 
 else{
-	$url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/login-page.php';
+    $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/login-page.php';
     header('Location:'.$url);
 }
 
@@ -59,9 +62,9 @@ else{
 function getTags(){
         // require_once('connect.php');
     // require_once('likesIncr');
-    $dbc = mysqli_connect('localhost', 'root', NULL, 'aprl_xv1')
+    $dbc = mysqli_connect('localhost', 'root', NULL, 'aprl')
     or die('Unable to connect to database');
-    $blogId = $_GET['hidden_name'];
+    $blogId = 1;
 
         $query3 = "SELECT tagname FROM tag INNER JOIN blogtag ON blogtag.tag_id = tag.tag_id WHERE blogtag.blog_id = 
     '$blogId' ";
@@ -83,7 +86,7 @@ function getTags(){
 function suggestTag(){
     $dbc = mysqli_connect('localhost', 'root', NULL, 'aprl_xv1')
     or die('Unable to connect to database');
-    $blogId = $_GET['hidden_name'];
+    $blogId = 1;
 
     $query3 = "SELECT tagname FROM tag INNER JOIN blogtag ON blogtag.tag_id = tag.tag_id WHERE blogtag.blog_id = 
     '$blogId' ";
@@ -123,47 +126,55 @@ function suggestTag(){
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../assets/css/now-ui-kit.css?v=1.1.0" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
-     <script src="jquery-3.2.1.min.js"></script>
-
 <script>
 
-var blog_id;
+// window.onload = function(){
+//     function updateRead(){
 
+//         console.log(20500*1700);
+//         var xmlhttp = new XMLHttpRequest();
+//         xmlhttp.onreadystatechange = function() {
+//             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+//             {
+//                 alert(xmlhttp.responseText);
+//                 // document.getElementById('readCountId').innerHTML = xmlhttp.responseText;
+//             }
+//         };
+//         var id =3;
+//         xmlhttp.open("GET", "readsIncr.php?id=" +id, true);
+//         xmlhttp.send();
+//     }
+// };
 window.onload = updateRead();
 function updateRead(){
 
-  blog_id = $('#hidden_input_blog').val();
-  console.log("blog id is  " + blog_id);
-
-  var xmlhttp1 = new XMLHttpRequest();
-  xmlhttp1.onreadystatechange = function() {
-        if (xmlhttp1.readyState == 4 && xmlhttp1.status == 200) {
+    console.log(20500*1700*-1);
+    var xmlhttp1 = new XMLHttpRequest();
+    xmlhttp1.onreadystatechange = function() {
+        if (xmlhttp1.readyState == 4 && xmlhttp1.status == 200) 
+        {
                 // alert(xmlhttp1.responseText);
-                document.getElementById('readsCountId').innerHTML = xmlhttp1.responseText;;
-                // console.log("The response reads - ");
-                // console.log( xmlhttp1.responseText);
+                document.getElementById('readsCountId').innerHTML = xmlhttp1.responseText;
         }
     };
-        var id = blog_id;
-        // console.log("The value of id passed is - " + id);
-        xmlhttp1.open("GET", "readsIncr.php?id=" +id, true);
-        xmlhttp1.send();
+    var id =3;
+    xmlhttp1.open("GET", "readsIncr.php?id=" +id, true);
+    xmlhttp1.send();
 }
 
 
 function likesCount(){
 
-    // console.log(1500*1500);
+    console.log(1500*1500);
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
         {
             // alert(xmlhttp.responseText);
             document.getElementById('likesCountId').innerHTML = xmlhttp.responseText;
-            // console.log("likes response - " + xmlhttp.responseText);
         }
     };
-    var id = blog_id;
+    var id =2;
     xmlhttp.open("GET", "likesIncr.php?id=" +id, true);
     xmlhttp.send();
 }
@@ -184,7 +195,7 @@ function spamCount(){
             document.getElementById('spamCountId').innerHTML = xmlhttp.responseText;
         }
     };
-    var id = blog_id;
+    var id =1;
     xmlhttp.open("GET", "spamIncr.php?id=" +id, true);
     xmlhttp.send();
 }
@@ -242,7 +253,7 @@ function spamCount(){
 <body class="profile-page sidebar-collapse" >
 
 
-	<!-- <script src="blogScript.js" ></script> -->
+    <!-- <script src="blogScript.js" ></script> -->
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
         <div class="container">
@@ -286,7 +297,7 @@ function spamCount(){
             <div class="container">
 
                 
-                <div class="content-center" id="one">
+                <div class="content-center">
                     <h2 class="title"><?php echo $title ?></h3>
                     <br>
                     <div class="content">
@@ -310,7 +321,7 @@ function spamCount(){
                         <img src="../assets/img/ryan.jpg" alt="">
                     </div>
 
-                    <p class="category"><?php echo $offeredby ?></p>
+                    <p class="category"><?php echo $uname ?></p>
 
                 </div>
 
@@ -342,7 +353,7 @@ function spamCount(){
 
 
                   
-                   <div class="col text-center" id="two">
+                   <div class="col text-center">
                         <!-- <a href="#pablo" class="btn btn-primary btn-round btn-lg"</a>  -->
                         <br>
                         <h8>Like</h8>
@@ -361,16 +372,15 @@ function spamCount(){
               </div>
               <br><br><br><br>
 
-
               <!-- <iframe height="200px" width="100%" src="suggest_blog.htm" name="iframe_a"></iframe> -->
 
 <div class="section">
 
 
 <?php 
- $dbc = mysqli_connect('localhost', 'root', NULL, 'aprl_xv1')
+ $dbc = mysqli_connect('localhost', 'root', NULL, 'aprl')
     or die('Unable to connect to database');
-    $blogId = $_GET['hidden_name'];;
+    $blogId = 1;
 
     $query3 = "SELECT tagname FROM tag INNER JOIN blogtag ON blogtag.tag_id = tag.tag_id WHERE blogtag.blog_id = 
     '$blogId' ";
@@ -465,52 +475,5 @@ function spamCount(){
 <script src="../assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
 <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
 <script src="../assets/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
-<script type="text/javascript">
-$.fn.isInViewport = function() {
-  var elementTop = $(this).offset().top;
-  var elementBottom = elementTop + $(this).outerHeight();
-
-  var viewportTop = $(window).scrollTop();
-  var viewportBottom = viewportTop + $(window).height();
-
-  return elementBottom > viewportTop && elementTop < viewportBottom;
-};
-
-var count1 = 0,
-    count2 =0;
-  $(window).on('resize scroll', function() {
-    if ($('#one').isInViewport()) {
-        if(count1 == 0){
-        $.ajax({ 
-                   type: "POST",
-                    url: "blogStatus.php",
-                    data: {
-                        'blogid': <?php echo $blogId; ?>,
-                        'id': 'one'
-                    },
-                    success: function(data){
-                       // $('#one').html(data);
-                    }
-                });
-            count1++;
-    }
-    }
-    if ($('#two').isInViewport()) {
-        if (count2==0) {
-        $.ajax({ 
-                   type: "POST",
-                    url: "blogStatus.php",
-                    data: {
-                        'blogid': <?php echo $blogId; ?>,
-                        'id': 'two'
-                    },
-                    success: function(data){
-                        //$('#two').html(data);
-                    }
-                });
-    }
-    }
-});
-</script>
 
 </html>
