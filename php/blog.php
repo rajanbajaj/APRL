@@ -467,7 +467,7 @@ function spamCount(){
 <script src="../assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
 <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
 <script src="../assets/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 $.fn.isInViewport = function() {
   var elementTop = $(this).offset().top;
   var elementBottom = elementTop + $(this).outerHeight();
@@ -513,6 +513,6 @@ var count1 = 0,
     }
     }
 });
-</script> -->
+</script>
 
-</html>
+        </html>

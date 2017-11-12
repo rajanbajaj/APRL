@@ -48,9 +48,10 @@
     <link href="../assets/css/demo.css" rel="stylesheet" />
     <!-- Canonical SEO -->
     <link rel="canonical" href="https://www.creative-tim.com/product/now-ui-kit-pro" />
-    <link rel="stylesheet" type="text/css" href="..assets/css/weather-icons.css">
+    <!-- <link rel="stylesheet" type="text/css" href="..assets/css/weather-icons.css"> -->
     <!--  Social tags      -->
-    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 
 </head>
 
@@ -206,9 +207,11 @@ html, body {
                         <div class="row">
                             <?php 
                             /* SCRIPT FOR TRENDING BLOGS*/
-                            require('connect.php');
-                            $query = "SELECT * FROM blog ORDER BY blog.date DESC, blog.readers DESC LIMIT 2";
-                            $result = mysqli_query($dbc, $query) or die ('Unable to query');
+                            // require('connect.php');
+                            $dbc = mysqli_connect('localhost', 'root', NULL, 'aprl')
+                            or die('Unable to connect to database');
+                            $query = "SELECT * FROM blog ORDER BY blog.date DESC, blog.reads DESC LIMIT 2";
+                            $result = mysqli_query($dbc, $query) or die ('Unable to query trending blogs');
                             while($row = mysqli_fetch_array($result)){
                          ?>
                             <div class="col-md-6">
@@ -221,10 +224,10 @@ html, body {
                                             <i class="now-ui-icons business_bulb-63"></i> Focus
                                         </h6>
                                         <h5 class="card-title">
-                                            <a href="../blogv1/blog.php?id=<?= $row['blog_id'] ?>"><?= $row['title']; ?></a>
+                                            <a href="blog.php?hidden_name=<?= $row['blog_id'] ?>"><?= $row['title']; ?></a>
                                         </h5>
                                         <p class="card-description">
-                                            <?= $row['description']; ?>
+                                            <?php $short_desc = substr($row["description"], 0,450)." ...."; echo $short_desc ?>
                                         </p>
                                     </div>
                                 </div>
@@ -245,9 +248,11 @@ html, body {
                         <div class="row">
                             <?php 
                             /* SCRIPT FOR TRENDING BLOGS*/
-                            require('connect.php');
+                            // require('connect.php');
+                            $dbc = mysqli_connect('localhost', 'root', NULL, 'aprl')
+                            or die('Unable to connect to database');
                             $query = "SELECT lastblog FROM $var WHERE username = '$username'";
-                            $result = mysqli_query($dbc, $query) or die ('Unable to query');
+                            $result = mysqli_query($dbc, $query) or die ('Unable to query lastblog');
                             $row = mysqli_fetch_array($result);
                             $lastblog = $row['lastblog'];
                             $strlen = strlen($row['lastblog']);
@@ -272,7 +277,7 @@ html, body {
                                             <a href="#"><?= $row['title']; ?></a>
                                         </h5>
                                         <p class="card-description">
-                                            <?= $row['description']; ?>
+                                            <?php $short_desc = substr($row["description"], 0,450)." ...."; echo $short_desc ?>
                                         </p>
                                     </div>
                                 </div>
@@ -299,12 +304,15 @@ html, body {
                                 <a href="project.php?id=<?= $row['project_id'] ?>"><?= $row['title']; ?></a>
                             </h6>
                             <p>
-                            </i> <?= $row['description']; ?>
+                            </i> 
+                            <?php $short_desc = substr($row["description"], 0,350)." ...."; echo $short_desc ?>                            
                             </p>
                            <div class="card-footer">
                                 <div class="author">
                                    <!-- <img src="assets/img/james.jpg" alt="..." class="avatar img-raised"> -->
-                                    <span></i> <?= $row['offeredby']; ?></span>
+                                    <span></i>
+                                    <a href="profile-page.php?username=<?= $row['offeredby'] ?>"><?= $row['offeredby']; ?></a>
+                                     </span>
                                 </div>
                                 <div class="stats stats-right">
                                     <i class="now-ui-icons ui-2_favourite-28"></i> 2.4K ·
@@ -363,7 +371,7 @@ $(window).on("scroll touchmove", function() {
                 $('body').css('background', $("#two").attr("data-color"))
         };
     });
-jackHarnerSig("light");
+// jackHarnerSig("light");
 </script>
 
 <!-- Go to top button -->
