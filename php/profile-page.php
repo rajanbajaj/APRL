@@ -4,23 +4,33 @@ if(!isset($_SESSION['username'])){
     $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/login-page.php';
     header('Location:'.$url);
 }
-else{
-    if(!empty($_POST['Title']) && !empty($_POST['Description']) && !empty($_POST['LastDate']) && !empty($_POST['Incentive'])){
-        require('connect.php');
-        $title = $_POST['Title'];
-        $description = $_POST['Description'];
-        $lastdate = $_POST['LastDate'];
-        $incentive = $_POST['Incentive'];
-        $username = $_SESSION['username'];
+// else{
+//     if(!empty($_POST['Title']) && !empty($_POST['Description']) && !empty($_POST['LastDate']) && !empty($_POST['Incentive'])){
+//         require('connect.php');
+//         $title = $_POST['Title'];
+//         $description = $_POST['Description'];
+//         $lastdate = $_POST['LastDate'];
+//         $incentive = $_POST['Incentive'];
+//         $username = $_SESSION['username'];
 
-        $query = "INSERT INTO applyproject(title, description, lastdate, incentive, status, username, adddate) VALUES ('$title', '$description', '$lastdate', '$incentive', 'available', '$username', now())";
-        mysqli_query($dbc, $query)
-        or die('unable to query applyprojects');
-        echo 'Added successfully!';
-        mysqli_close($dbc);
+//         $query = "INSERT INTO applyproject(title, description, lastdate, incentive, status, username, adddate) VALUES ('$title', '$description', '$lastdate', '$incentive', 'available', '$username', now())";
+//         mysqli_query($dbc, $query)
+//         or die('unable to query applyprojects');
+//         echo 'Added successfully!';
+//         $row = mysqli_fetch_array($result);
+//         $firstname = $row['firstname'];
+//         $lastname = $row['lastname'];
+//         $name = $firstname.' '.$lastname;
+//         $credential = $row['credential'];
+//         $image = $row['image_url'];
+//         $description = $row['description'];
+//         $email = $row['email'];
+//         if($image!='fb_avatar_male.jpg')
+//             $image = $username.'/'.$image;
+//         mysqli_close($dbc);
 
-    }
-}
+//     }
+// }
 $username = $_SESSION['username'];
 if(isset($_GET['username'])){
     $username = $_GET['username'];
@@ -73,11 +83,24 @@ if(isset($_GET['username'])){
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
         <div class="container">
+            <div class="navbar-translate">
+                <a class="navbar-brand" href="http://demos.creative-tim.com/now-ui-kit/index.html"  data-placement="bottom" target="_blank">
+                    <img src="../assets/favicon/invert.png" id="logo_id">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="../assets/img/blurred-image-1.jpg">
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="input-group form-group-no-border ">
+                    <span class="input-group-addon">
+                        <i class="now-ui-icons ui-1_zoom-bold"></i>
+                    </span>
+                    <input type="text" class="form-control" id="search_bar" placeholder="Search..." name="search_bar">
+                </div>
+            </div>
             <div class="dropdown button-dropdown">
                 <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
-                    <span class="button-bar"></span>
-                    <span class="button-bar"></span>
-                    <span class="button-bar"></span>
+                    <img src="../assets/img/eva.jpg" alt="..." id="daddy_image">
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-header">Dropdown header</a>
@@ -90,19 +113,7 @@ if(isset($_GET['username'])){
                     <a class="dropdown-item" href="logout.php">Logout</a>
                 </div>
             </div>
-            <div class="navbar-translate">
-                <a class="navbar-brand" href="http://demos.creative-tim.com/now-ui-kit/index.html" rel="tooltip" title="Designed by Invision. Coded by Creative Tim" data-placement="bottom" target="_blank">
-                    APRL
-                </a>
-                <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-bar bar1"></span>
-                    <span class="navbar-toggler-bar bar2"></span>
-                    <span class="navbar-toggler-bar bar3"></span>
-                </button>
-            </div>
-            <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="../assets/img/blurred-image-1.jpg">
-                
-            </div>
+            
         </div>
     </nav>
     <!-- End Navbar -->

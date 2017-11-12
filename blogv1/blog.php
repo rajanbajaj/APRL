@@ -297,7 +297,7 @@ function spamCount(){
             <div class="container">
 
                 
-                <div class="content-center">
+                <div class="content-center" id="one">
                     <h2 class="title"><?php echo $title ?></h3>
                     <br>
                     <div class="content">
@@ -353,7 +353,7 @@ function spamCount(){
 
 
                   
-                   <div class="col text-center">
+                   <div class="col text-center" id="two">
                         <!-- <a href="#pablo" class="btn btn-primary btn-round btn-lg"</a>  -->
                         <br>
                         <h8>Like</h8>
@@ -475,5 +475,52 @@ function spamCount(){
 <script src="../assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
 <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
 <script src="../assets/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
+<script type="text/javascript">
+$.fn.isInViewport = function() {
+  var elementTop = $(this).offset().top;
+  var elementBottom = elementTop + $(this).outerHeight();
+
+  var viewportTop = $(window).scrollTop();
+  var viewportBottom = viewportTop + $(window).height();
+
+  return elementBottom > viewportTop && elementTop < viewportBottom;
+};
+
+var count1 = 0,
+    count2 =0;
+  $(window).on('resize scroll', function() {
+    if ($('#one').isInViewport()) {
+        if(count1 == 0){
+        $.ajax({ 
+                   type: "POST",
+                    url: "blogStatus.php",
+                    data: {
+                        'blogid': <?php echo $blogId; ?>,
+                        'id': 'one'
+                    },
+                    success: function(data){
+                       // $('#one').html(data);
+                    }
+                });
+            count1++;
+    }
+    }
+    if ($('#two').isInViewport()) {
+        if (count2==0) {
+        $.ajax({ 
+                   type: "POST",
+                    url: "blogStatus.php",
+                    data: {
+                        'blogid': <?php echo $blogId; ?>,
+                        'id': 'two'
+                    },
+                    success: function(data){
+                        //$('#two').html(data);
+                    }
+                });
+    }
+    }
+});
+</script>
 
 </html>

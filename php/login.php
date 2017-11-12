@@ -11,22 +11,23 @@ if(!isset($_COOKIE['username'])) {
 			$result = mysqli_query($dbc, $query)
 			or die("Unable to make query");
 
-			if (mysqli_num_rows($result) == 1) {
-				echo 'if statement';
+			if (mysqli_num_rows($result) == '1') {
+				//echo 'if statement';
 				$row = mysqli_fetch_array($result);
 				$_SESSION['username'] = $row['username'];
 				setcookie('username',$row['username'], time() + (60*60*24*30));
 				mysqli_close($dbc);
-				$url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/profile-page.php';
+				$url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/landing-page.php';
 				header('Location:'.$url);
 			}
-			else
+			else{
 				echo 'Invalid credentials';
 				require_once('login-page.php');
+			}
 		}
 }
 else{
-	$url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/profile-page.php';
+	$url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/landing-page.php';
 		header('Location:'.$url);
 }
 ?>

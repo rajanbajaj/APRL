@@ -1,78 +1,55 @@
-<!DOCTYPE html>
-<html>
-<head>
-   <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/css/now-ui-kit9f1e.css?v=1.1.0" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+<?php
+  session_start();
+  require_once('connect.php');
+    // echo "I'm inside hahaha";
+  $descripdata = $_POST['description'];
+  $titledata = $_POST['title'];
+  $arr = $_POST['tagsrr'];
+  // echo $arr[0];
+    // $data = json_decode(stripslashes($_POST['data']));
+
+   //  // here i would like use foreach:
 
 
-<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-<script>tinymce.init({ selector:'textarea' });</script>
+// $date = date('Y-m-d H:i:s');
+  $query = "INSERT INTO blog(blog.description,blog.date, blog.likes, blog.reads, blog.title) VALUES ('$descripdata',now(),'0','0','$titledata')";
 
-  <!-- live search -->
-<script>
-    var allTags = [];
+  $result = mysqli_query($dbc,$query);
+  if(!$result){
+    echo("Errorcode: in date query" . mysqli_errno($dbc));
+  }
 
-  function showResult(str) {
-    if (str.length==0) {
-      document.getElementById("livesearch").innerHTML="";
-      document.getElementById("livesearch").style.border="0px";
-      return;
-    }
-    if (window.XMLHttpRequest) {
-      // code for IE7+, Firefox, Chrome, Opera, Safari
-      xmlhttp=new XMLHttpRequest();
-    } else {  // code for IE6, IE5
-      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange=function() {
-      if (this.readyState==4 && this.status==200) {
-        document.getElementById("livesearch").innerHTML=this.responseText;
-        document.getElementById("livesearch").style.border="1px solid #A5ACB2";
+  $qb = "SELECT blog_id FROM blog WHERE blog.title = '$titledata'";
+  $result = mysqli_query($dbc,$qb)
+  or die("Unable to read blogid from database");
+  $blogidArr = mysqli_fetch_assoc($result);
+  // echo $blogidArr['blog_id'];
+
+
+    foreach($arr as $d){
+      $usr = json_decode($d);
+      // echo $d;
+      // $queer = "INSERT INTO tag(tagname) VALUES ('$d')";
+      // $restapi = mysqli_query($dbc,$queer);
+      // if(!$restapi){
+      //  echo("Errorcode: " . mysqli_errno($dbc));
+      // }
+      // echo $usr;
+      $teddy = "SELECT tag.tag_id FROM tag WHERE tag.tagname = '$d'";
+      $reddy = mysqli_query($dbc,$teddy)
+      or die("Unable to read blogid from database");
+      $tagiddy = mysqli_fetch_assoc($reddy);
+      // echo $tagiddy['tag_id'];
+
+
+      $beera = "INSERT INTO blogtag(blog_id,tag_id) VALUES ('$blogidArr[blog_id]','$tagiddy[tag_id]')";
+      $reera = mysqli_query($dbc,$beera);
+      if(!$reera){
+        echo("Errorcode: " . mysqli_errno($dbc));
       }
+      // echo $d;
     }
-    xmlhttp.open("GET","tagsearch.php?q="+str,true);
-    xmlhttp.send();
-  }
-
-  function tagPopulate(){
-    var x = document.getElementById("livesearch").textContent
-
-    if(allTags.indexOf(x) != -1 || x.length>19){
-      console.log("yo sexy bitch, i'm already here");
-      return ;
-    }else{
-      allTags.push(x);
-      var para = document.createElement("p");
-      var node = document.createTextNode(x);
-      para.appendChild(node);
-      para.setAttribute("class","btn btn-primary btn-simple btn-round btn-sm")
-      var element = document.getElementById("tagComesHere");
-      element.appendChild(para);
-    }
-  }
-
-
-</script>
-
-</head>
-
-<body>
-<form>
-<h5> Title</h5>
-<h5> Description</h5>
-<textarea id="description_id"></textarea>
-<h5>Tags</h5>
-
-<input type="text" size="30" onkeyup="showResult(this.value)">
-<div id="livesearch" onclick="tagPopulate()"></div>
-<span id="tagComesHere" >
-  <!-- <button id=class='btn btn-primary btn-simple btn-round btn-sm' type='button'></button> -->
-</span>
-</form>
 
 
 
-
-</body>
-</html>
+?>
