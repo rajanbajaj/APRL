@@ -5,8 +5,8 @@ if(!isset($_SESSION['username'])){
     header('Location:'.$url);
 }
 $username = $_COOKIE['username'];
-if(isset($_GET['username'])){
-            $username = $_GET['username'];
+if(isset($_GET['hidden_name'])){
+            $username = $_GET['hidden_name'];
         }
     // echo("$username");
 
@@ -23,7 +23,7 @@ $profession = $row['profession'];
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>My Projects</title>
+	<title>My Blogs</title>
 	<meta charset="utf-8" />
 	<link rel="icon" type="image/png" href="../assets/favicon/favicon-16x16.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -35,7 +35,7 @@ $profession = $row['profession'];
 	<!-- CSS Files -->
 	<link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="../assets/css/now-ui-kit.css?v=1.1.0" rel="stylesheet" />
-	<!-- CSS Just for demo purpose, don't include it in your project -->
+	<!-- CSS Just for demo purpose, don't include it in your blog -->
 	<!-- jquery library -->
 	<link href="../assets/css/daddy.css" rel="stylesheet" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -98,7 +98,7 @@ function applicant(id,username){
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown" data-placement="left">
                   
                     <a class="dropdown-item" href="blog.php">Blog</a>
-                    <a class="dropdown-item" href="project.php">Project</a>
+                    <a class="dropdown-item" href="blog.php">blog</a>
                     <?php if($profession=='faculty') echo '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">New Peoject</a>'; ?>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="edit-profile.php" >Edit Profile</a>
@@ -115,7 +115,7 @@ function applicant(id,username){
             <div class="container">
                 <div class="content-center">
 
-                    <h2 class="title">Project/Intern Opportunities</h2>
+                    <h2 class="title">blog/Intern Opportunities</h2>
                     <p class="category">For Researchers and learners</p>
                 </div>
             </div> -->
@@ -131,20 +131,14 @@ function applicant(id,username){
                 </div>
 	<div class="container tim-container" style="max-width:800px; padding-top:100px">
 
-                   <!-- <h1 class="text-center">Project/Intern Opportunities </h1> -->
+                   <!-- <h1 class="text-center">blog/Intern Opportunities </h1> -->
                </div>	
 	<?php
-if($row['profession']=='student'){
-	// echo $profession;
-		echo "<div id = \"applicant_table\"></div>";
-	echo"<script> applicant('','$username');</script>";
-	
-}
-if($row['profession']=='faculty'){
-	// echo $profession;
-	$query = "SELECT * FROM project where `offeredby`='$username' ORDER BY addedon DESC";
+
+    $query = "SELECT * FROM blog where `offeredby`='$username' ORDER BY date DESC";
+    // echo $query;
 	$result = mysqli_query($dbc, $query)
-	or die('Unable to query myproject' );
+	or die('Unable to query myblog' );
 	if(mysqli_num_rows($result)==0)
 		require_once "profile-page.php";
 	while($row = mysqli_fetch_assoc($result)){
@@ -153,13 +147,13 @@ if($row['profession']=='faculty'){
 
 		<h1 class='text-center'>$row[title]</h1>
 
-		<!--    Display Current Projects --> 
+		<!--    Display Current blogs --> 
 		<p>$short_desc</p>
 
 		<span >";
-		$query1 = "SELECT tag.tagname from project join projecttag on project.project_id = projecttag.project_id join tag on projecttag.tag_id=tag.tag_id where project.project_id=$row[project_id]" ;
+		$query1 = "SELECT tag.tagname from blog join blogtag on blog.blog_id = blogtag.blog_id join tag on blogtag.tag_id=tag.tag_id where blog.blog_id=$row[blog_id]" ;
 		$result_tag = mysqli_query($dbc, $query1)
-		or die('Unable to query project' );
+		or die('Unable to query blog' );
 		while($tag = mysqli_fetch_assoc($result_tag)){
 			echo    "<span >
 			<button class='btn btn-primary btn-simple btn-round btn-sm' type='button'>$tag[tagname]</button>
@@ -169,23 +163,17 @@ if($row['profession']=='faculty'){
 		" </span>
 		<!--     end extras --> 
 		<div class='col text-center'> 
-		 <a href='project.php?id=$row[project_id]' onclick='showPage(\"$row[project_id]\")' class='btn btn-primary btn-round btn-lg'>Detail Description</a> ";
+		 <a href='blog.php?hidden_name=$row[blog_id]' class='btn btn-primary btn-round btn-lg'>Detail Description</a> ";
 
-		 if($username == $_COOKIE['username']){         
-
-		echo"<script> applicant(\"$row[project_id]\",'$username');</script>"; 
-		 }
 		echo"
 		</div>
-		<div id = \"applicant_table$row[project_id]\"></div>
 		</div>
 		";
 	}
-}
 mysqli_close($dbc);
 
 ?>
-	<!-- <button type="button" id="myproject" onclick="applicant()" value="My Projects">My Project</button> -->
+	<!-- <button type="button" id="myblog" onclick="applicant()" value="My blogs">My blog</button> -->
 
 	<!-- <script>applicant("");</script> -->
 

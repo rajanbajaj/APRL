@@ -55,7 +55,7 @@ function count_project($status){
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Project Page</title>
+    <title>Project Page</title> 
     
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
@@ -80,22 +80,6 @@ function count_project($status){
                     }
                 };
                 xmlhttp.open("GET", "display_project.php?q=" + str, true);
-                xmlhttp.send();
-            }
-            // window.history.pushState("object","Title",str);
-        }
-        function showPage1(str) {
-            if (str.length == 0) { 
-                document.getElementById("project_overview").innerHTML = "";
-                return;
-            } else {
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("project_overview").innerHTML = this.responseText;
-                    }
-                };
-                xmlhttp.open("GET", "project_page.php?q=" + str, true);
                 xmlhttp.send();
             }
             // window.history.pushState("object","Title",str);
@@ -145,7 +129,18 @@ function count_project($status){
         });
         </script>
     <script>
-
+        function change_image(id){
+            $.ajax({
+                type: "POST",
+                url: "image.php",
+                data: {
+                    'id':id
+                },
+                success: function(data){
+                    $("#_image").html(data);
+                }
+            });
+        }
         function showPage(id) {
             $.ajax({
                 type: "POST",
@@ -155,6 +150,7 @@ function count_project($status){
                 },
                 success: function(data){
                     $("#project_overview").html(data);
+                    change_image(id);
                 }
             });
             // window.history.pushState("object","Title",str);
@@ -182,8 +178,10 @@ function count_project($status){
     <!-- End Navbar -->
     <div class="wrapper">
         <div class="page-header page-header-small">
-            <div class="page-header-image" data-parallax="true" style="background-image: url('../assets/img/bg3.jpg');">
-            </div>
+        <?php $image_url = "../assets/img/bg3.jpg"; echo '<span id = "_image"> 
+                <div class="page-header-image" data-parallax="true" style="background-image: url('.$image_url.');">
+                </span>
+            </div>'; ?>
             <div class="container">
                 <div class="content-center">
 
