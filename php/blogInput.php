@@ -32,16 +32,18 @@ function test_input($data) {
 <!DOCTYPE html>
 <html>
 <head>
-   <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/css/now-ui-kit9f1e.css?v=1.1.0" rel="stylesheet" />
+   <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/now-ui-kit9f1e.css?v=1.1.0" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
 
 
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 <script>tinymce.init({ selector:'textarea' });</script>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 
- <script src="jquery-3.2.1.min.js"></script>
+ <!-- <script src="jquery-3.2.1.min.js"></script> -->
   <!-- live search -->
 
 <script>
