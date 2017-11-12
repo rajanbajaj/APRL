@@ -25,8 +25,7 @@ $profession = $row['profession'];
 <head>
 	<title>Applicants</title>
 	<meta charset="utf-8" />
-	<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" href="../assets/img/favicon.png">
+	<link rel="icon" type="image/png" href="../assets/favicon/favicon-16x16.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -38,6 +37,7 @@ $profession = $row['profession'];
 	<link href="../assets/css/now-ui-kit.css?v=1.1.0" rel="stylesheet" />
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<!-- jquery library -->
+	<link href="../assets/css/daddy.css" rel="stylesheet" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script>
 
@@ -79,9 +79,35 @@ function applicant(id,username){
 </script>
 </head>
 <body class="profile-page sidebar-collapse" >
-	<!-- Navbar -->
-    <?php $nav_bar = include_once ("nav.php"); echo $nav_bar; ?>
-    <!-- End Navbar -->
+	<nav class="navbar navbar-expand-lg bg-primary">
+        <div class="container">
+            <div class="navbar-translate">
+                <a class="navbar-brand" href="landing-page.php"  data-placement="bottom" target="_blank">
+                    <img src="../assets/favicon/invert.png" id="logo_id">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar-primary" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar bar1"></span>
+                    <span class="navbar-toggler-bar bar2"></span>
+                    <span class="navbar-toggler-bar bar3"></span>
+                </button>
+            </div>
+            <div class="dropdown button-dropdown">
+                <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
+                    <img src="../assets/img/eva.jpg" alt="..." id="daddy_image">
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" data-placement="left">
+                  
+                    <a class="dropdown-item" href="blog.php">Blog</a>
+                    <a class="dropdown-item" href="project.php">Project</a>
+                    <?php if($profession=='faculty') echo '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">New Peoject</a>'; ?>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="edit-profile.php" >Edit Profile</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="logout.php">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 	<div class="wrapper">
 	<div class="page-header-city">
             <!-- <div class="page-header-image" data-parallax="true" style="background-image: url('../assets/img/bg3.jpg');">

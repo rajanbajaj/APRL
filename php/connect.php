@@ -1,4 +1,4 @@
 <?php
-	$dbc = mysqli_connect('localhost', 'root', 'passwordISNULL', 'aprl_v1')
+	$dbc = mysqli_connect('localhost', 'root', NULL, 'aprl')
 	or die('Unable to connect to database');
 ?>

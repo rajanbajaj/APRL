@@ -48,14 +48,14 @@
     <link href="../assets/css/demo.css" rel="stylesheet" />
     <!-- Canonical SEO -->
     <link rel="canonical" href="https://www.creative-tim.com/product/now-ui-kit-pro" />
-    <!-- <link rel="stylesheet" type="text/css" href="..assets/css/weather-icons.css"> -->
+    <link rel="stylesheet" type="text/css" href="..assets/css/weather-icons.css">
     <!--  Social tags      -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
+    
 
 </head>
 
 <style type="text/css">
+
 body{background:#f88f18; color: #fff; font-family: 'Roboto', sans-serif; margin:0; transition:all 400ms; will-change:background;}
 /* *{
     border: solid;
@@ -75,6 +75,7 @@ body{background:#f88f18; color: #fff; font-family: 'Roboto', sans-serif; margin:
   padding: 15px;
   border-radius: 10px;
 }
+
 #myBtn:hover {
   background-color: #555;
 }
@@ -99,19 +100,23 @@ html, body {
     margin-left: auto;
 }
 .spinner {
+
     display: none;
   width: 100px;
   height: 100px;
   background-color: #f96332;
+
   margin: 120px auto;
   -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
   animation: sk-rotateplane 1.2s infinite ease-in-out;
 }
+
 @-webkit-keyframes sk-rotateplane {
   0% { -webkit-transform: perspective(120px) }
   50% { -webkit-transform: perspective(120px) rotateY(180deg) }
   100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
 }
+
 @keyframes sk-rotateplane {
   0% { 
     transform: perspective(120px) rotateX(0deg) rotateY(0deg);
@@ -169,6 +174,7 @@ html, body {
         <div class="row">
         <?php
                 date_default_timezone_set("Asia/Kolkata");
+
                 $hour = date('H', time());
                 if( $hour > 6 && $hour <= 11) {
                   echo '<img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDYwLjAwMyA2MC4wMDMiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDYwLjAwMyA2MC4wMDM7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiPgo8cGF0aCBzdHlsZT0iZmlsbDojRjBDNDE5OyIgZD0iTTM2LjExNiwxNC4yMTNsLTAuOTU4LTEuNTg4Yy0zLjA3NC01LjA5Ni04LjQ0Ny04LjEzOS0xNC4zNzMtOC4xMzkgIGMtOS4yNiwwLTE2Ljc5Myw3LjUzMy0xNi43OTMsMTYuNzkzYzAsNS4yODQsMi41NDcsMTAuMzI0LDYuODE1LDEzLjQ4MWwwLjY1MSwwLjQ4MWwwLjgwNSwwLjA4OSAgYzAuNTI5LDAuMDU4LDEuMDMzLDAuMTYzLDEuNDk3LDAuMzEzbDQuOTcsMS41OTdsLTEuMTIzLTUuMDk4Yy0wLjI2Ny0xLjIxNCwwLjAyOS0yLjQ1NCwwLjgxMy0zLjQwNiAgYzAuNzYzLTAuOTI2LDEuODg5LTEuNDU3LDMuMDkxLTEuNDU3YzAuNDEyLDAsMC44MTgsMC4wNjMsMS4xNzcsMC4xNzdsMi42OSwwLjg5N2wxLjA0Ny0yLjYzNmMwLjQ4NS0xLjIyLDEuNTMyLTIuMTI3LDIuNzk5LTIuNDI1ICBjMC40NS0wLjEwNSwwLjkzMy0wLjEyOCwxLjM5Ni0wLjA3MWwzLjUsMC40MjJsLTAuMTQ0LTMuNTIzbC0wLjAyMS0wLjM0MWMwLTEuNDExLDAuNDAzLTIuNzk1LDEuMTY3LTMuOTk5TDM2LjExNiwxNC4yMTN6Ii8+CjxwYXRoIHN0eWxlPSJmaWxsOiNEMEU4Rjk7IiBkPSJNNTkuOTc5LDI2LjQ4NmgtMC4wODFjMC4wMzUsMC4zMDQsMC4wNTksMC42MTEsMC4wNTksMC45MjVjMCwwLjU1My0wLjQ0NywxLTEsMXMtMS0wLjQ0Ny0xLTEgIGMwLTMuMzA5LTIuNjkxLTYtNi02cy02LDIuNjkxLTYsNmMwLDAuNTUzLTAuNDQ3LDEtMSwxcy0xLTAuNDQ3LTEtMWMwLTQuMDY0LDMuMDQ5LTcuNDIzLDYuOTc4LTcuOTI3ICBjLTAuMjI2LTUuMDM5LTQuMzg0LTkuMDczLTkuNDc4LTkuMDczYy01LjExMSwwLTkuMjgxLDQuMDYtOS40ODEsOS4xMjNjMC44MjksMC4xOTYsMS42MzIsMC41MiwyLjM3OCwwLjk4MSAgYzEuODE2LDEuMTI1LDMuMDg2LDIuODksMy41NzYsNC45N2MwLjEyNiwwLjUzOC0wLjIwNywxLjA3Ni0wLjc0NCwxLjIwM2MtMC41MzgsMC4xMjEtMS4wNzYtMC4yMDctMS4yMDMtMC43NDQgIGMtMC43NTgtMy4yMjItMy45OTktNS4yMjYtNy4yMTQtNC40NjdjLTMuMjIxLDAuNzU4LTUuMjI1LDMuOTk0LTQuNDY3LDcuMjE1YzAuMTI2LDAuNTM3LTAuMjA3LDEuMDc1LTAuNzQ1LDEuMjAyICBjLTAuMDc2LDAuMDE4LTAuMTUzLDAuMDI2LTAuMjI5LDAuMDI2Yy0wLjQ1MywwLTAuODY0LTAuMzExLTAuOTczLTAuNzcxYy0wLjI5NC0xLjI1MS0wLjI2OC0yLjUwMiwwLjAxMi0zLjY3NCAgYy0yLjA1OC0wLjMwMS00LjEzNywwLjQ3Ni01LjQ5MywyLjEyMmMtMS4yNTgsMS41MjktMS42MjUsMy40OTgtMS4xNzUsNS4yODVjMC4wMDEsMC4wMTIsMC4wMDcsMC4wMjIsMC4wMDgsMC4wMzQgIGMwLjMwNiwxLjE4NiwwLjk3LDIuMjksMS45ODUsMy4xMjdjMC40MjYsMC4zNTIsMC40ODcsMC45ODEsMC4xMzcsMS40MDhjLTAuMTk4LDAuMjQtMC40ODQsMC4zNjQtMC43NzMsMC4zNjQgIGMtMC4yMjQsMC0wLjQ0OC0wLjA3NC0wLjYzNS0wLjIyOGMtMS4yMTctMS4wMDItMi4wODgtMi4zMTEtMi41NDYtMy43ODFjLTQuMDQzLTEuMDU0LTguMjk0LDAuNjQ3LTEwLjQ5LDQuMjYyICBjLTEuMzE3LDIuMTY4LTEuNzEyLDQuNzItMS4xMSw3LjE4NWMwLjYwMiwyLjQ2NiwyLjEyNyw0LjU0OSw0LjI5Niw1Ljg2N2MwLjQ3MiwwLjI4NywwLjYyMiwwLjkwMSwwLjMzNSwxLjM3NCAgYy0wLjE4OCwwLjMxLTAuNTE4LDAuNDgtMC44NTUsMC40OGMtMC4xMzMsMC0wLjI2NS0wLjAzNi0wLjM5Mi0wLjA5MWMxLjU4LDAuOTM2LDMuMzk5LDEuNTA5LDUuMzQ0LDEuNTkzbDguMjA5LDAuMDAzICBjNS4zMDctMC4wODUsOS44NTMtMy4zNiwxMS43OTEtNy45OTJjMS45NjMsNC42OTMsNi42MDMsOCwxMiw4YzkuMzc0LDAsMTctNy42MjYsMTctMTd2LTEwTDU5Ljk3OSwyNi40ODZ6Ii8+CjxnPgoJPHBhdGggc3R5bGU9ImZpbGw6I0FCQ0FERDsiIGQ9Ik01Mi45MzYsMTkuNTUyYy0wLjIzMS02LjEzOS01LjI4NC0xMS4wNjYtMTEuNDc4LTExLjA2NmMtNi4xNDIsMC0xMS4xNiw0Ljg0NC0xMS40NywxMC45MSAgIGMtMC41NTgsMC4wMTItMS4xMTksMC4wNzgtMS42NzYsMC4yMDljLTIuMzM2LDAuNTUtNC4xODUsMi4wODItNS4yMjksNC4wNTJjLTIuODgyLTAuNTg1LTUuODQ4LDAuNDMzLTcuNzUsMi43NDIgICBjLTEuMjUxLDEuNTItMS44NzksMy40MDgtMS44MSw1LjM1OWMtNC42My0wLjgzNC05LjM0LDEuMjI0LTExLjg0NCw1LjM0NGMtMS41OTYsMi42MjUtMi4wNzMsNS43MTQtMS4zNDUsOC42OTggICBzMi41NzUsNS41MDYsNS4yLDcuMTAyYzAuMTYyLDAuMDk5LDAuMzQyLDAuMTQ2LDAuNTE5LDAuMTQ2YzAuMzM4LDAsMC42NjctMC4xNzEsMC44NTUtMC40OGMwLjI4Ny0wLjQ3MywwLjEzNy0xLjA4Ny0wLjMzNS0xLjM3NCAgIGMtMi4xNjktMS4zMTgtMy42OTQtMy40MDEtNC4yOTYtNS44NjdjLTAuNjAyLTIuNDY1LTAuMjA3LTUuMDE3LDEuMTEtNy4xODVjMi4xOTYtMy42MTQsNi40NDctNS4zMTUsMTAuNDktNC4yNjIgICBjMC40NTgsMS40NzEsMS4zMywyLjc3OSwyLjU0NiwzLjc4MWMwLjE4NywwLjE1MywwLjQxMSwwLjIyOCwwLjYzNSwwLjIyOGMwLjI4OSwwLDAuNTc1LTAuMTI0LDAuNzczLTAuMzY0ICAgYzAuMzUxLTAuNDI3LDAuMjg5LTEuMDU3LTAuMTM3LTEuNDA4Yy0xLjAxNi0wLjgzNi0xLjY3OS0xLjk0MS0xLjk4NS0zLjEyN2MtMC4wMDEtMC4wMTItMC4wMDctMC4wMjItMC4wMDgtMC4wMzQgICBjLTAuNDUtMS43ODctMC4wODMtMy43NTYsMS4xNzUtNS4yODVjMS4zNTYtMS42NDYsMy40MzUtMi40MjMsNS40OTMtMi4xMjJjLTAuMjgsMS4xNzMtMC4zMDcsMi40MjMtMC4wMTIsMy42NzQgICBjMC4xMDgsMC40NjEsMC41MiwwLjc3MSwwLjk3MywwLjc3MWMwLjA3NiwwLDAuMTUzLTAuMDA5LDAuMjI5LTAuMDI2YzAuNTM4LTAuMTI3LDAuODcxLTAuNjY1LDAuNzQ1LTEuMjAyICAgYy0wLjc1OC0zLjIyMSwxLjI0Ni02LjQ1Nyw0LjQ2Ny03LjIxNWMzLjIxNS0wLjc1OSw2LjQ1NiwxLjI0NSw3LjIxNCw0LjQ2N2MwLjEyNywwLjUzNywwLjY2NSwwLjg2NSwxLjIwMywwLjc0NCAgIGMwLjUzNy0wLjEyNywwLjg3LTAuNjY1LDAuNzQ0LTEuMjAzYy0wLjQ5LTIuMDgtMS43Ni0zLjg0NS0zLjU3Ni00Ljk3Yy0wLjc0Ni0wLjQ2Mi0xLjU0OS0wLjc4NS0yLjM3OC0wLjk4MSAgIGMwLjItNS4wNjMsNC4zNy05LjEyMyw5LjQ4MS05LjEyM2M1LjA5NCwwLDkuMjUzLDQuMDMzLDkuNDc4LDkuMDczYy0zLjkyOSwwLjUwNC02Ljk3OCwzLjg2My02Ljk3OCw3LjkyN2MwLDAuNTUzLDAuNDQ3LDEsMSwxICAgczEtMC40NDcsMS0xYzAtMy4zMDksMi42OTEtNiw2LTZzNi4wNDYsMi42OTEsNi4wNDYsNmMwLDAuMDI4LDAsMS4zMjcsMCwzYzAsMC41NTIsMC40NDgsMSwxLDFzMS0wLjQ0OCwxLTF2LTMgICBDNjAuMDAzLDIzLjQwNyw1Ni44ODYsMjAuMDM3LDUyLjkzNiwxOS41NTJ6Ii8+CjwvZz4KPGxpbmUgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6I0ZGRkZGRjtzdHJva2Utd2lkdGg6MjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSI1My4wMDMiIHkxPSIzNi40ODYiIHgyPSI1My4wMDMiIHkyPSIzMS40ODYiLz4KPGxpbmUgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6I0ZGRkZGRjtzdHJva2Utd2lkdGg6MjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSI1My4wMDMiIHkxPSIzNi40ODYiIHgyPSI1My4wMDMiIHkyPSI0MS40ODYiLz4KPGxpbmUgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6I0ZGRkZGRjtzdHJva2Utd2lkdGg6MjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSI1My4wMDMiIHkxPSIzNi40ODYiIHgyPSI0OC42NzMiIHkyPSIzMy45ODYiLz4KPGxpbmUgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6I0ZGRkZGRjtzdHJva2Utd2lkdGg6MjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSI1My4wMDMiIHkxPSIzNi40ODYiIHgyPSI1Ny4zMzQiIHkyPSIzOC45ODYiLz4KPGxpbmUgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6I0ZGRkZGRjtzdHJva2Utd2lkdGg6MjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSI1My4wMDMiIHkxPSIzNi40ODYiIHgyPSI1Ny4zMzQiIHkyPSIzMy45ODYiLz4KPGxpbmUgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6I0ZGRkZGRjtzdHJva2Utd2lkdGg6MjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSI1My4wMDMiIHkxPSIzNi40ODYiIHgyPSI0OC42NzMiIHkyPSIzOC45ODYiLz4KPGxpbmUgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6I0ZGRkZGRjtzdHJva2Utd2lkdGg6MjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIzMi4wMDMiIHkxPSIzNi40ODYiIHgyPSIzMi4wMDMiIHkyPSIzMS40ODYiLz4KPGxpbmUgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6I0ZGRkZGRjtzdHJva2Utd2lkdGg6MjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIzMi4wMDMiIHkxPSIzNi40ODYiIHgyPSIzMi4wMDMiIHkyPSI0MS40ODYiLz4KPGxpbmUgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6I0ZGRkZGRjtzdHJva2Utd2lkdGg6MjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIzMi4wMDMiIHkxPSIzNi40ODYiIHgyPSIyNy42NzMiIHkyPSIzMy45ODYiLz4KPGxpbmUgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6I0ZGRkZGRjtzdHJva2Utd2lkdGg6MjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIzMi4wMDMiIHkxPSIzNi40ODYiIHgyPSIzNi4zMzQiIHkyPSIzOC45ODYiLz4KPGxpbmUgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6I0ZGRkZGRjtzdHJva2Utd2lkdGg6MjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIzMi4wMDMiIHkxPSIzNi40ODYiIHgyPSIzNi4zMzQiIHkyPSIzMy45ODYiLz4KPGxpbmUgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6I0ZGRkZGRjtzdHJva2Utd2lkdGg6MjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSIzMi4wMDMiIHkxPSIzNi40ODYiIHgyPSIyNy42NzMiIHkyPSIzOC45ODYiLz4KPGxpbmUgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6I0ZGRkZGRjtzdHJva2Utd2lkdGg6MjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSI0My4wMDMiIHkxPSI0OS41MTciIHgyPSI0My4wMDMiIHkyPSI0NC41MTciLz4KPGxpbmUgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6I0ZGRkZGRjtzdHJva2Utd2lkdGg6MjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSI0My4wMDMiIHkxPSI0OS41MTciIHgyPSI0My4wMDMiIHkyPSI1NC41MTciLz4KPGxpbmUgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6I0ZGRkZGRjtzdHJva2Utd2lkdGg6MjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSI0My4wMDMiIHkxPSI0OS41MTciIHgyPSIzOC42NzMiIHkyPSI0Ny4wMTciLz4KPGxpbmUgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6I0ZGRkZGRjtzdHJva2Utd2lkdGg6MjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSI0My4wMDMiIHkxPSI0OS41MTciIHgyPSI0Ny4zMzQiIHkyPSI1Mi4wMTciLz4KPGxpbmUgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6I0ZGRkZGRjtzdHJva2Utd2lkdGg6MjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSI0My4wMDMiIHkxPSI0OS41MTciIHgyPSI0Ny4zMzQiIHkyPSI0Ny4wMTciLz4KPGxpbmUgc3R5bGU9ImZpbGw6bm9uZTtzdHJva2U6I0ZGRkZGRjtzdHJva2Utd2lkdGg6MjtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDsiIHgxPSI0My4wMDMiIHkxPSI0OS41MTciIHgyPSIzOC42NzMiIHkyPSI1Mi4wMTciLz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" /> ';
@@ -207,11 +213,9 @@ html, body {
                         <div class="row">
                             <?php 
                             /* SCRIPT FOR TRENDING BLOGS*/
-                            // require('connect.php');
-                            $dbc = mysqli_connect('localhost', 'root', NULL, 'aprl')
-                            or die('Unable to connect to database');
-                            $query = "SELECT * FROM blog ORDER BY blog.date DESC, blog.reads DESC LIMIT 2";
-                            $result = mysqli_query($dbc, $query) or die ('Unable to query trending blogs');
+                            require('connect.php');
+                            $query = "SELECT * FROM blog ORDER BY blog.date DESC, blog.readers DESC LIMIT 2";
+                            $result = mysqli_query($dbc, $query) or die ('Unable to query');
                             while($row = mysqli_fetch_array($result)){
                          ?>
                             <div class="col-md-6">
@@ -224,10 +228,10 @@ html, body {
                                             <i class="now-ui-icons business_bulb-63"></i> Focus
                                         </h6>
                                         <h5 class="card-title">
-                                            <a href="blog.php?hidden_name=<?= $row['blog_id'] ?>"><?= $row['title']; ?></a>
+                                            <a href="../blogv1/blog.php?id=<?= $row['blog_id'] ?>"><?= $row['title']; ?></a>
                                         </h5>
                                         <p class="card-description">
-                                            <?php $short_desc = substr($row["description"], 0,450)." ...."; echo $short_desc ?>
+                                            <?= $row['description']; ?>
                                         </p>
                                     </div>
                                 </div>
@@ -248,11 +252,9 @@ html, body {
                         <div class="row">
                             <?php 
                             /* SCRIPT FOR TRENDING BLOGS*/
-                            // require('connect.php');
-                            $dbc = mysqli_connect('localhost', 'root', NULL, 'aprl')
-                            or die('Unable to connect to database');
+                            require('connect.php');
                             $query = "SELECT lastblog FROM $var WHERE username = '$username'";
-                            $result = mysqli_query($dbc, $query) or die ('Unable to query lastblog');
+                            $result = mysqli_query($dbc, $query) or die ('Unable to query');
                             $row = mysqli_fetch_array($result);
                             $lastblog = $row['lastblog'];
                             $strlen = strlen($row['lastblog']);
@@ -277,7 +279,7 @@ html, body {
                                             <a href="#"><?= $row['title']; ?></a>
                                         </h5>
                                         <p class="card-description">
-                                            <?php $short_desc = substr($row["description"], 0,450)." ...."; echo $short_desc ?>
+                                            <?= $row['description']; ?>
                                         </p>
                                     </div>
                                 </div>
@@ -304,15 +306,12 @@ html, body {
                                 <a href="project.php?id=<?= $row['project_id'] ?>"><?= $row['title']; ?></a>
                             </h6>
                             <p>
-                            </i> 
-                            <?php $short_desc = substr($row["description"], 0,350)." ...."; echo $short_desc ?>                            
+                            </i> <?= $row['description']; ?>
                             </p>
                            <div class="card-footer">
                                 <div class="author">
                                    <!-- <img src="assets/img/james.jpg" alt="..." class="avatar img-raised"> -->
-                                    <span></i>
-                                    <a href="profile-page.php?username=<?= $row['offeredby'] ?>"><?= $row['offeredby']; ?></a>
-                                     </span>
+                                    <span></i> <?= $row['offeredby']; ?></span>
                                 </div>
                                 <div class="stats stats-right">
                                     <i class="now-ui-icons ui-2_favourite-28"></i> 2.4K ·
@@ -366,12 +365,13 @@ html, body {
 $(window).on("scroll touchmove", function() {
         if ($(document).scrollTop() >= $("#one").position().top) {
                 $('body').css('background', $("#one").attr("data-color"));
+
         };
         if ($(document).scrollTop() > $("#two").position().top) {
                 $('body').css('background', $("#two").attr("data-color"))
         };
     });
-// jackHarnerSig("light");
+jackHarnerSig("light");
 </script>
 
 <!-- Go to top button -->
@@ -385,6 +385,7 @@ function scrollFunction() {
         document.getElementById("myBtn").style.display = "none";
     }
 }
+
 // When the user clicks on the button, scroll to the top of the document
 function topFunction() {
     document.body.scrollTop = 0;
