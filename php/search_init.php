@@ -14,8 +14,9 @@
       echo '<div class="col-md-4">
                 <div class="card card-blog">
                     <div class="card-image">
-                        <a href="#pablo">
-                            <img class="img rounded" src="../assets/img/card-blog2.jpg">
+                        <a href="project.php?id=';
+                        echo $data["project_id"];
+                            echo '"><img class="img rounded" src="../assets/img/bg3.jpg">
                         </a>
                     </div>
                     <div class="card-body">
@@ -25,7 +26,7 @@
         echo '</h5>
                 <p class="card-description">';
 
-        echo $data["description"];;
+        echo substr($data["description"],0,150)."...";
                     
         echo '</p>
                 <div class="card-footer">
@@ -35,9 +36,7 @@
         echo $data["offeredby"];           
         echo '</span>
                     </div>
-                    <div class="stats stats-right">
-                        <i class="now-ui-icons tech_watch-time"></i> 5 min read
-                    </div>
+                    
                 </div>
             </div>
             </div>
