@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 12, 2017 at 08:46 PM
+-- Generation Time: Nov 12, 2017 at 09:01 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.10
 
@@ -78,7 +78,10 @@ INSERT INTO `blog` (`blog_id`, `offeredby`, `description`, `date`, `url`, `spam`
 (4, '', 'Proin suscipit pharetra nisl, et bibendum lorem malesuada a. Cras vel quam et lectus tincidunt feugiat vitae eget arcu. Vestibulum sed diam in metus ultricies eleifend ut ut elit. Nunc placerat dui at laoreet tincidunt. Quisque non vestibulum justo. Pellentesque blandit laoreet volutpat. Nulla vestibulum sollicitudin accumsan. Phasellus quis urna dolor. Integer et hendrerit nulla. Fusce eget urna ante. Praesent ac nibh eu mi vestibulum ultrices vitae eu diam. Quisque luctus, quam ullamcorper posuere sagittis, justo nisl posuere lectus, in imperdiet leo elit eget augue. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin dignissim facilisis mauris sed sagittis. Fusce posuere at ipsum eget tempus. Quisque sem lectus, pharetra quis urna quis, pellentesque feugiat est. ', '2017-11-06 02:00:06', 'http://www.ask.me', 1, 520, 6423, 'Welcome To The Jungle', ''),
 (5, '', 'The Greek War of Independence, also known as the Greek Revolution (Greek: ???????? ??????????, Elliniki Epanastasi; Ottoman: ????? ?????? Yunan ?syan? Greek Uprising), was a successful war of independence waged by the Greek revolutionaries between 1821 and 1832 against the Ottoman Empire. The Greeks were later assisted by the Russian Empire, Great Britain, the Kingdom of France, and several other European powers, while the Ottomans were aided by their vassals, the eyalets of Egypt, Algeria, and Tripolitania, and the Beylik of Tunis.\r\n\r\nEven several decades before the fall of Constantinople to the Ottoman Empire in 1453, most of Greece had come under Ottoman rule.[3] During this time, there were several revolt attempts by Greeks to gain independence from Ottoman control.[4] In 1814, a secret organization called the Filiki Eteria was founded with the aim of liberating Greece. The Filiki Eteria planned to launch revolts in the Peloponnese, the Danubian Principalities, and in Constantinople and its surrounding areas. By late 1820, the insurrection had been planned for March 25 (Julian Calendar) 1821, on the Feast of the Annunciation for the Orthodox Christians. However, as the plans of Filiki Eteria had been discovered by the Ottoman authorities, the revolutionary action started earlier. The first of these revolts began on March 6/February 22, 1821 in the Danubian Principalities, but it was soon put down by the Ottomans.', '2017-11-06 02:02:09', 'http://www.wikipedia.com', 0, 458, 8500, 'The Greek War Of Independence', ''),
 (29, '', '<p>Once upon a time .......................................vaaki bkwaas baad mein</p>', '2017-11-12 10:18:38', '', 0, 0, 0, 'Ek Tha Tiger', ''),
-(30, '', '<p>Once upon a time .......................................vaaki bkwaas baad mein</p>', '2017-11-12 12:23:41', '', 0, 0, 0, 'Ek Tha Tiger', '');
+(30, '', '<p>Once upon a time .......................................vaaki bkwaas baad mein</p>', '2017-11-12 12:23:41', '', 0, 0, 0, 'Ek Tha Tiger', ''),
+(31, '2', '<p>sccass</p>', '2017-11-13 01:18:39', '', 0, 0, 0, 'cdascdcsx', ''),
+(38, '2', '<p>&nbsp;DVzxvdbxfv cb </p>', '2017-11-13 01:27:07', '', 0, 0, 0, 'cfgvhb', ''),
+(39, '2', '<p>&nbsp;DVzxvdbxfv cb </p>', '2017-11-13 01:27:30', '', 0, 0, 0, 'cfgvhb', '');
 
 -- --------------------------------------------------------
 
@@ -116,7 +119,6 @@ CREATE TABLE `blogtag` (
 --
 
 INSERT INTO `blogtag` (`id`, `tag_id`, `blog_id`) VALUES
-(0, 4, 0),
 (1, 1, 1),
 (2, 3, 1),
 (3, 5, 1),
@@ -391,7 +393,19 @@ ALTER TABLE `applicant`
 -- AUTO_INCREMENT for table `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `blog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `blog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `blogimage`
+--
+ALTER TABLE `blogimage`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `blogtag`
+--
+ALTER TABLE `blogtag`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `project`
