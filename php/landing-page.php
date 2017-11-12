@@ -8,8 +8,8 @@
         $username = $_SESSION['username'];
         require_once('connect.php');
          
-        $query = "SELECT profession FROM userlogin WHERE username = '$username'";
-        $result = mysqli_query($dbc, $query);
+        $query = "SELECT profession FROM userlogin WHERE username = '$username'"; 
+        $result = mysqli_query($dbc, $query) or die('cannnot query');
         $row = mysqli_fetch_array($result);
         $profession = $row['profession'];
         //echo $profession;

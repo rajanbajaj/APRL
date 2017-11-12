@@ -418,11 +418,25 @@ html, body {
     $(document).ready(function() {
 
         
+        $("#radio1").on('change', function() {
+
+            
+            
+            search();
+            
+        });   
+
+        $("#radio2").on('change', function() {
+
+        
+            search();
+            
+        });     
 
         $("#check1").on('change', function() {
             
             if ($("[name=group_check]:checked").length > 0){
-                
+                search();                
             }
             else{
                 this.checked=true;
@@ -432,7 +446,7 @@ html, body {
         $("#check2").on('change', function() {
            
             if ($("[name=group_check]:checked").length > 0){
-                
+                search();                
             }
             else{
                 this.checked=true;
@@ -442,6 +456,18 @@ html, body {
         $("#check3").on('change', function() {
             
             if ($("[name=group_check]:checked").length > 0){
+                search();
+                
+            }
+            else{
+                this.checked=true;
+            }
+        });
+
+        $("#check4").on('change', function() {
+            
+            if ($("[name=group_check]:checked").length > 0){
+                search();
                 
             }
             else{

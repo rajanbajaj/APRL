@@ -31,7 +31,7 @@
         echo '</p>
                 <div class="card-footer">
                     <div class="author">
-                        <img src="../assets/img/julie.jpg" alt="..." class="avatar img-raised">
+                        
                         <span>';
         echo $data["offeredby"];           
         echo '</span>

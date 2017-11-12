@@ -6,7 +6,7 @@
     $value_search = $_POST['value'];
     $radio = $_POST['radio_button'];
 
-    if($_POST['check1'] == 1){
+    if($_POST['check4'] == 1){
 
         $wow = "
           SELECT tag_id
@@ -68,7 +68,7 @@
                     echo '</p>
                             <div class="card-footer">
                                 <div class="author">
-                                    <img src="../assets/img/julie.jpg" alt="..." class="avatar img-raised">
+                                    
                                     <span>';
                     echo $sata["offeredby"];           
                     echo '</span>
@@ -127,7 +127,7 @@
                     echo '</p>
                             <div class="card-footer">
                                 <div class="author">
-                                    <img src="../assets/img/julie.jpg" alt="..." class="avatar img-raised">
+                                    
                                     <span>';
                     echo $sata["offeredby"];           
                     echo '</span>
@@ -183,7 +183,7 @@
                             </a>
                         </div>
                         <div class="card-body">
-                            <h6 class="category text-primary">FEATURES</h6>
+                            <h6 class="category text-primary">PROJECT</h6>
                             <h5 class="card-title" >';
             echo $data["title"];
             echo '</h5>
@@ -194,7 +194,7 @@
             echo '</p>
                     <div class="card-footer">
                         <div class="author">
-                            <img src="../assets/img/julie.jpg" alt="..." class="avatar img-raised">
+                            
                             <span>';
             echo $data["offeredby"];           
             echo '</span>
@@ -260,7 +260,7 @@
             echo '</p>
                     <div class="card-footer">
                         <div class="author">
-                            <img src="../assets/img/julie.jpg" alt="..." class="avatar img-raised">
+                            
                             <span>';
             echo $data["offeredby"];           
             echo '</span>
