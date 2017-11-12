@@ -6,7 +6,7 @@
     $query = mysqli_query($conn,"
         SELECT *
         FROM project
-        ORDER BY date DESC
+        ORDER BY addedon DESC
         LIMIT 5
     ");
     

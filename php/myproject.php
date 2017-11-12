@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(!isset($_SESSION['username'])){
+    $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/login-page.php';
+    header('Location:'.$url);
+}
 $username = $_COOKIE['username'];
 if(isset($_GET['username'])){
             $username = $_GET['username'];

@@ -20,15 +20,8 @@
 
         if(isset($_POST['submit'])){
             //echo "HELLo4";
-<<<<<<< HEAD
             $firstname = $_POST['Firstname'];
             $lastname = $_POST['Lastname'];
-||||||| merged common ancestors
-            $name = $_POST['Name'];
-=======
-            $firstname = $_POST['FirstName'];
-            $lastname = $_POST['LastName'];
->>>>>>> 2f3fd080a9296e10f0e713804ce2f8dd3a17dbda
             $credential = $_POST['Credential'];
             $description = $_POST['Description'];
             $email = $_POST['Email'];
@@ -38,25 +31,12 @@
             if(!is_dir(APRL_UPLOADPATH.$username."/")) {
                 mkdir(APRL_UPLOADPATH.$username); 
             }
+            $var = $profession."info";
             if($profession == 'student'){
-<<<<<<< HEAD
-                $var = 'studentinfo';
-                $query = "UPDATE $var SET firstname = '$firstname',lastname = '$lastname', credential = '$credential',description = '$description', email = '$email', cgpa = '$cgpa' WHERE username = '$username' "; 
-||||||| merged common ancestors
-                $query = "UPDATE $var SET name = '$name', credential = '$credential',description = '$description', email = '$email', cgpa = '$cgpa' WHERE username = '$username' "; 
-=======
                 $query = "UPDATE $var SET firstname = '$firstname', lastname = '$lastname', credential = '$credential',description = '$description', email = '$email', cgpa = '$cgpa' WHERE username = '$username' "; 
->>>>>>> 2f3fd080a9296e10f0e713804ce2f8dd3a17dbda
             }
             elseif($profession=='faculty'){
-<<<<<<< HEAD
-                $var = 'facultyinfo';
-                $query = "UPDATE $var SET firstname = '$firstname',lastname = '$lastname', credential = '$credential',description = '$description', email = '$email' WHERE username = '$username' "; 
-||||||| merged common ancestors
-                $query = "UPDATE $var SET name = '$name', credential = '$credential',description = '$description', email = '$email' WHERE username = '$username' "; 
-=======
                 $query = "UPDATE $var SET firstname = '$firstname', lastname = '$lastname', credential = '$credential',description = '$description', email = '$email' WHERE username = '$username' "; 
->>>>>>> 2f3fd080a9296e10f0e713804ce2f8dd3a17dbda
             }
             
             mysqli_query($dbc, $query)
@@ -82,35 +62,20 @@
             echo 'Update successfull. You will be automatically redirected to the other page.';
             $url = "profile-page.php";
 
-<<<<<<< HEAD
             // $query = "UPDATE userlogin SET name = '$name' WHERE username = '$username'";
             // mysqli_query($dbc, $query)
             // or die('Unable to query');
-            echo 'Update successful!';
-||||||| merged common ancestors
-            $query = "UPDATE userlogin SET name = '$name' WHERE username = '$username'";
-            mysqli_query($dbc, $query)
-            or die('Unable to query');
-            echo 'Update successful!';
-=======
+            //echo 'Update successful!';
             header ("Refresh: 3;URL='$url'");
->>>>>>> 2f3fd080a9296e10f0e713804ce2f8dd3a17dbda
         }
         $query = "SELECT * FROM $var WHERE username = '$username'";
         $result = mysqli_query($dbc, $query)
         or die('Unable to query studentinfo' );
 
         $row = mysqli_fetch_array($result);
-<<<<<<< HEAD
-        $firstname = $row['firstname'];
-        $lastname = $row['lastname'];
-||||||| merged common ancestors
-        $name = $row['name'];
-=======
         $firstname = $row['firstname'];
         $lastname = $row['lastname'];
         $name = $firstname.' '.$lastname; 
->>>>>>> 2f3fd080a9296e10f0e713804ce2f8dd3a17dbda
         $credential = $row['credential'];
         $image = $row['image_url'];
         $description = $row['description'];
@@ -230,33 +195,14 @@
                 <form enctype="multipart/form-data" method="post" action= "edit-profile.php" >
                     <div class="row">
                         <div class="col-md-6">
-<<<<<<< HEAD
-                            <label>Firstname</label>
+                            <label>Firstame</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="First Name" name="Firstname" value=<?php echo '"'.$firstname.'"' ?> />
+                                <input type="text" class="form-control" placeholder="Your firstname" name="FirstName" value=<?php echo '"'.$firstname.'"' ?> />
                             </div>
                             
                         </div>
                         <div class="col-md-6">
                             <label>Lastname</label>
-||||||| merged common ancestors
-                            <label>Name</label>
-=======
-                            <label>firstame</label>
->>>>>>> 2f3fd080a9296e10f0e713804ce2f8dd3a17dbda
-                            <div class="form-group">
-<<<<<<< HEAD
-                                <input type="text" class="form-control" placeholder="Last Name" name="Lastname" value=<?php echo '"'.$lastname.'"' ?> />
-||||||| merged common ancestors
-                                <input type="text" class="form-control" placeholder="Your Name" name="Name" value=<?php echo '"'.$name.'"' ?> />
-=======
-                                <input type="text" class="form-control" placeholder="Your firstname" name="FirstName" value=<?php echo '"'.$firstname.'"' ?> />
->>>>>>> 2f3fd080a9296e10f0e713804ce2f8dd3a17dbda
-                            </div>
-                            
-                        </div>
-                        <div class="col-md-6">
-                            <label>lastname</label>
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Your lastname" name="LastName" value=<?php echo '"'.$lastname.'"' ?> />
                             </div>

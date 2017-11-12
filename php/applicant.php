@@ -92,6 +92,7 @@ if($row['profession']=='faculty' and isset($_POST['id'])){
 			echo"
 		<button type='button' rel='tooltip' class=' btn-sm '>
 		Approved
+		</button>
 		";
 	}
 	if($row['approval'] == 'no'){
