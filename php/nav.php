@@ -12,10 +12,10 @@ return
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-header">Dropdown header</a>
                     <a class="dropdown-item" href="profile-page.php">Profile</a>
+                    <a class="dropdown-item" href="myproject.php">My Projects</a>
+                    <a class="dropdown-item" href="blog.php">Blogs</a>
                     <a class="dropdown-item" href="logout.php">Logout</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">One more separated link</a>
                 </div>

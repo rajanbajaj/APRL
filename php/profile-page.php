@@ -1,53 +1,53 @@
 <?php
-    session_start();
-    if(!isset($_SESSION['username'])){
-        $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/login-page.php';
-        header('Location:'.$url);
-    }
-    else{
-            if(!empty($_POST['Title']) && !empty($_POST['Description']) && !empty($_POST['LastDate']) && !empty($_POST['Incentive'])){
-                require('connect.php');
-                $title = $_POST['Title'];
-                $description = $_POST['Description'];
-                $lastdate = $_POST['LastDate'];
-                $incentive = $_POST['Incentive'];
-                $username = $_SESSION['username'];
-
-                $query = "INSERT INTO applyproject(title, description, lastdate, incentive, status, username, adddate) VALUES ('$title', '$description', '$lastdate', '$incentive', 'available', '$username', now())";
-                mysqli_query($dbc, $query)
-                or die('unable to query applyprojects');
-                echo 'Added successfully!';
-                mysqli_close($dbc);
-
-            }
-        $username = $_SESSION['username'];
-        require('connect.php');
-        
-        $query = "SELECT profession FROM userlogin WHERE username = '$username'";
-        $result = mysqli_query($dbc, $query);
-        $row = mysqli_fetch_array($result);
-        $profession = $row['profession'];
-        if($row['profession']=='student')
-            $var = 'studentinfo';
-        if($row['profession']=='faculty')
-            $var = 'facultyinfo';
-        $query = "SELECT * FROM $var WHERE username = '$username'";
-        $result = mysqli_query($dbc, $query)
-        or die('Unable to query studentinfo' );
-
-        $row = mysqli_fetch_array($result);
-        $firstname = $row['firstname'];
-        $lastname = $row['lastname'];
-        $name = $firstname.' '.$lastname;
-        $credential = $row['credential'];
-        $image = $row['image_url'];
-        $description = $row['description'];
-        $email = $row['email'];
-        if($image!='fb_avatar_male.jpg')
-            $image = $username.'/'.$image;
-        mysqli_close($dbc);
+session_start();
+if(!isset($_SESSION['username'])){
+    $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/login-page.php';
+    header('Location:'.$url);
 }
-    
+else{
+    if(!empty($_POST['Title']) && !empty($_POST['Description']) && !empty($_POST['LastDate']) && !empty($_POST['Incentive'])){
+        require('connect.php');
+        $title = $_POST['Title'];
+        $description = $_POST['Description'];
+        $lastdate = $_POST['LastDate'];
+        $incentive = $_POST['Incentive'];
+        $username = $_SESSION['username'];
+
+        $query = "INSERT INTO applyproject(title, description, lastdate, incentive, status, username, adddate) VALUES ('$title', '$description', '$lastdate', '$incentive', 'available', '$username', now())";
+        mysqli_query($dbc, $query)
+        or die('unable to query applyprojects');
+        echo 'Added successfully!';
+        mysqli_close($dbc);
+
+    }
+}
+$username = $_SESSION['username'];
+if(isset($_GET['username'])){
+    $username = $_GET['username'];
+}
+    // echo $username;
+    require('connect.php');
+
+    $query = "SELECT profession FROM userlogin WHERE username = '$username'";
+    $result = mysqli_query($dbc, $query);
+    $row = mysqli_fetch_array($result);
+    $profession = $row['profession'];
+    $var=$profession."info";
+    $query = "SELECT * FROM $var WHERE username = '$username'";
+    $result = mysqli_query($dbc, $query)
+    or die('Unable to query studentinfo' );
+
+    $row = mysqli_fetch_array($result);
+    $firstname = $row['firstname'];
+    $lastname = $row['lastname'];
+    $credential = $row['credential'];
+    $image = $row['image_url'];
+    $description = $row['description'];
+    $email = $row['email'];
+    if($image!='fb_avatar_male.jpg')
+        $image = $username.'/'.$image;
+    mysqli_close($dbc);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +57,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title><?= $name ?></title>
+    <title><?= $firstname." ".$lastname ?></title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -73,26 +73,16 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
         <div class="container">
-            <div class="navbar-translate">
-                <a class="navbar-brand" href="http://demos.creative-tim.com/now-ui-kit/index.html"  data-placement="bottom" target="_blank">
-                    <img src="../assets/favicon/invert.png" id="logo_id">
-                </a>
-            </div>
-            <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="../assets/img/blurred-image-1.jpg">
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="input-group form-group-no-border ">
-                    <span class="input-group-addon">
-                        <i class="now-ui-icons ui-1_zoom-bold"></i>
-                    </span>
-                    <input type="text" class="form-control" id="search_bar" placeholder="Search..." name="search_bar">
-                </div>
-            </div>
             <div class="dropdown button-dropdown">
                 <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
-                    <img src="../assets/img/eva.jpg" alt="..." id="daddy_image">
+                    <span class="button-bar"></span>
+                    <span class="button-bar"></span>
+                    <span class="button-bar"></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-header">Dropdown header</a>
+                    <a class="dropdown-item" href="blog.php">Blog</a>
+                    <a class="dropdown-item" href="project.php">Project</a>
                     <?php if($profession=='faculty') echo '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">New Peoject</a>'; ?>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="edit-profile.php" >Edit Profile</a>
@@ -100,7 +90,19 @@
                     <a class="dropdown-item" href="logout.php">Logout</a>
                 </div>
             </div>
-            
+            <div class="navbar-translate">
+                <a class="navbar-brand" href="http://demos.creative-tim.com/now-ui-kit/index.html" rel="tooltip" title="Designed by Invision. Coded by Creative Tim" data-placement="bottom" target="_blank">
+                    APRL
+                </a>
+                <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar bar1"></span>
+                    <span class="navbar-toggler-bar bar2"></span>
+                    <span class="navbar-toggler-bar bar3"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="../assets/img/blurred-image-1.jpg">
+                
+            </div>
         </div>
     </nav>
     <!-- End Navbar -->
@@ -113,7 +115,7 @@
                     <div class="photo-container">
                         <img src= <?php echo '"../assets/img/'.$image.'"'?> alt="">
                     </div>
-                    <h3 class="title"><?php echo $name?></h3>
+                    <h3 class="title"><?php echo ("$firstname $lastname");?></h3>
                     <p class="category"><?php echo $credential?></p>
                     
                 </div>
@@ -244,7 +246,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer text-center" style="background-color: white;">
-                                    <a href="#pablo" class="btn btn-default btn-round">All Projects</a>
+                                    <a href="myproject.php?username=<?php echo $username; ?>" class="btn btn-default btn-round">My all Projects</a>
                                 </div>
                             </div>
                     </div>

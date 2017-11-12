@@ -1,7 +1,7 @@
 <?php
     require_once('start-session.php');
     if(isset($_SESSION['username'])){
-        $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/landing-page.php';
+        $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/profile-page.php';
         header('Location:'.$url); 
     }
     if(!isset($_POST['submit']))
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <!-- CSS Files -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../assets/css/now-ui-kit.css3" rel="stylesheet" />
+    <link href="../assets/css/now-ui-kit.css?v=1.1.0" rel="stylesheet" />
     <link rel="stylesheet" href="css/uikit.min.css" />
         <script src="js/uikit.min.js"></script>
     <!-- CSS Just for demo purpose, don't include it in your project -->
@@ -143,7 +143,13 @@
                                 <span class="input-group-addon">
                                     <i class="now-ui-icons text_caps-small"></i>
                                 </span>
-                                <input type="text" class="form-control" placeholder="Name" name="Name">
+                                <input type="text" class="form-control" placeholder="Firstname" name="Firstname">
+                            </div>
+                            <div class="input-group form-group-no-border input-lg">
+                                <span class="input-group-addon">
+                                    <i class="now-ui-icons text_caps-small"></i>
+                                </span>
+                                <input type="text" class="form-control" placeholder="Lastname" name="Lastname">
                             </div>
                             <div class="input-group form-group-no-border input-lg">
                                 <span class="input-group-addon">
