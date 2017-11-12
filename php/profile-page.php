@@ -64,8 +64,7 @@ if(isset($_GET['username'])){
 
 <head>
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="../assets/favicon/favicon-16x16.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title><?= $firstname." ".$lastname ?></title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -85,7 +84,7 @@ if(isset($_GET['username'])){
     <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
         <div class="container">
             <div class="navbar-translate">
-                <a class="navbar-brand" href="http://demos.creative-tim.com/now-ui-kit/index.html"  data-placement="bottom" target="_blank">
+                <a class="navbar-brand" href="landing-page.php"  data-placement="bottom" target="_blank">
                     <img src="../assets/favicon/invert.png" id="logo_id">
                 </a>
             </div>
@@ -446,5 +445,21 @@ if(isset($_GET['username'])){
 <script src="../assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
 <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
 <script src="../assets/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('#search_bar').keyup(function(e) {
+            if(e.which==13){
+                var parameter_search=$('#search_bar').val();
+                window.open("search.php?id="+parameter_search);
+
+            }
+        });
+        
+
+    });
+    
+</script>
 
 </html>
