@@ -11,7 +11,7 @@
 		$email = $_POST['Email'];
 		$image = $_FILES['Image']['name'];
 		if(!is_dir(APRL_UPLOADPATH.$username."/")) {
-        	mkdir(APRL_UPLOADPATH.$username); 
+        	mkdir(APRL_UPLOADPATH.$username,777,true); 
     	}
 		//echo $email." ".$image;
 
