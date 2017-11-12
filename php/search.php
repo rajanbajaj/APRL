@@ -421,6 +421,8 @@ html, body {
 
     $(document).ready(function() {
 
+        
+
         $("#check1").on('change', function() {
             
             if ($("[name=group_check]:checked").length > 0){
@@ -452,6 +454,12 @@ html, body {
         });
 
         initialize();
+        var url = window.location + '';
+        var link = url.split('?')[1];
+        if(link){
+            $('#search_field').val(link.split('=')[1]);
+            search();
+        }
 
         $('#search_field').keyup(function(e) {
             clearTimeout($.data(this, 'timer'));
@@ -459,6 +467,7 @@ html, body {
         });
 
        $("#search_form").submit(function( event ) {  
+
             event.preventDefault();
             search();
         });
