@@ -64,11 +64,7 @@ html, body {
                 <a class="navbar-brand" href="landing-page.php"  data-placement="bottom" target="_blank">
                     <img src="../assets/favicon/invert.png" id="logo_id">
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar-primary" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-bar bar1"></span>
-                    <span class="navbar-toggler-bar bar2"></span>
-                    <span class="navbar-toggler-bar bar3"></span>
-                </button>
+                
             </div>
             <div class="dropdown button-dropdown">
                 <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
@@ -123,6 +119,13 @@ html, body {
                             <p class="category">Category</p>
                             <div class="form-check">
                                 <label class="form-check-label">
+                                    <input class="form-check-input" id="check4" name = "group_check" type="checkbox" checked>
+                                    <span class="form-check-sign"></span>
+                                    Tags
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
                                     <input class="form-check-input" id="check1" name = "group_check" type="checkbox" checked>
                                     <span class="form-check-sign"></span>
                                     Projects
@@ -130,14 +133,14 @@ html, body {
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" id="check2" type="checkbox" name = "group_check" >
+                                    <input class="form-check-input" id="check2" type="checkbox" name = "group_check" checked>
                                     <span class="form-check-sign"></span>
                                     Blogs
                                 </label>
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" id="check3" type="checkbox" name = "group_check" >
+                                    <input class="form-check-input" id="check3" type="checkbox" name = "group_check" checked>
                                     <span class="form-check-sign"></span>
                                     Users
                                 </label>
@@ -160,14 +163,7 @@ html, body {
                                     Time
                                 </label>
                             </div>
-                            <div class="form-check form-check-radio">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" id="radio3" name="exampleRadios" id="exampleRadios1" value="option2" >
-                                    <span class="form-check-sign"></span>
-                                    Ratings
-                                </label>
-                            </div>
-                           
+                                   
                         </div>
 
 
@@ -371,10 +367,12 @@ html, body {
        var check1 = 0;
        var check2 = 0;
        var check3 = 0;
+       var check4 = 0;
        var radio_button = 0;
        if($("#check1").prop('checked') == true){
             check1 = 1;
        }
+
 
         if($("#check2").prop('checked') == true){
             check2 = 1;
@@ -383,6 +381,10 @@ html, body {
         if($("#check3").prop('checked') == true){
             check3 = 1;
         }
+
+        if($("#check4").prop('checked') == true){
+            check4 = 1;
+       }
 
         if($("#radio1").prop('checked') == true){
             //console.log("yeah");
@@ -394,17 +396,11 @@ html, body {
             radio_button = 2;
         }
 
-        if($("#radio3").prop('checked') == true){
-            //console.log("yeah3");
-            radio_button = 3;
-        }
-
-
        
        $.ajax({
            type: "POST",
            url: "search_algo_offeredby.php",
-           data: {value: search_name, check1: check1, check2: check2, check3: check3, radio_button: radio_button},
+           data: {value: search_name, check1: check1, check2: check2, check3: check3, check4: check4, radio_button: radio_button},
            
            success: function(data) {
                 if(data.length == 1) {
