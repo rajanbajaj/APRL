@@ -17,9 +17,37 @@
 	        elseif($row['profession'] == "student")
 	          $var = "studentinfo";
 
-	      	$query = "SELECT lastblog FROM $var WHERE username = '$username' AND lastblog LIKE '%$blogid/%'";
+	      		$query = "SELECT lastblog FROM $var WHERE username = '$username'";
+	      		$result = mysqli_query($dbc, $query);
+	      		$row = mysqli_fetch_array($result);
+	      		if ($row['lastblog'] == NULL || $row['lastblog'] == "") {
+	        		if($_POST['id'] == 'one'){
+	        			$blogid1 = $blogid.'/';
+	      				$query = "UPDATE $var SET lastblog = '$blogid1' WHERE username = '$username'";
+	      				mysqli_query($dbc, $query);
+		      		}
+		      	}
+		      	else {
+		      		$query = "SELECT lastblog FROM $var WHERE username = '$username'";
+		        	$result = mysqli_query($dbc, $query);
+		        	$row = mysqli_fetch_array($result);
+		        	$lastblog = $row['lastblog'];
+		        	if($_POST['id']=='one'){
+		        		if (strpos($lastblog, $blogid) == false) {
+		        			$lastblognew = $lastblog.$blogid.'/';
+		        			$query = "UPDATE $var SET lastblog = '$lastblognew' WHERE username = '$username'";
+	      					mysqli_query($dbc, $query);
+	      				}
+					}
+					elseif ($_POST['id']=='two') {
+		        		$lastblognew = str_replace($blogid.'/', '', $lastblog);
+		        		$query = "UPDATE $var SET lastblog = '$lastblognew' WHERE username = '$username'";
+	      				mysqli_query($dbc, $query);
+					}
+		      	}
+	    /*  	$query = "SELECT lastblog FROM $var WHERE username = '$username' AND lastblog LIKE '%$blogid/%'";
 	        $result = mysqli_query($dbc, $query);
-	/*        if(mysqli_num_rows($result)==0){
+	        if(mysqli_num_rows($result)==0){
 	        	$query = "SELECT lastblog FROM $var WHERE username = '$username'";
 	        	$result = mysqli_query($dbc, $query);
 	        	$row = mysqli_fetch_array($result);
@@ -55,9 +83,9 @@
 	        		$query = "UPDATE $var SET lastblog = '$lastblognew' WHERE username = '$username'";
 	      			mysqli_query($dbc, $query);
 	        	}
-			}
+			}*/
 	       
-	   /*  */ 	if($_POST['id'] == 'one'){
+	   /*   	if($_POST['id'] == 'one'){
 	      			$query = "UPDATE $var SET lastblog = '$blogid' WHERE username = '$username'";
 	      			mysqli_query($dbc, $query);
 	      	}
@@ -65,7 +93,7 @@
 	      		$query = "UPDATE $var SET lastblog = NULL WHERE username = '$username'";
 	      			mysqli_query($dbc, $query);
 	      	}
-	      	mysqli_close($dbc);
+	 */     	mysqli_close($dbc);
 	      //	return $blogid;
 		}
 ?>
