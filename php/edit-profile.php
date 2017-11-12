@@ -13,10 +13,7 @@
         $result = mysqli_query($dbc, $query);
         $row = mysqli_fetch_array($result);
         $profession = $row['profession'];
-        if($row['profession']=='student')
-            $var = 'studentinfo';
-        if($row['profession']=='faculty')
-            $var = 'facultyinfo';
+        $var = $profession."info";
 
         if(isset($_POST['submit'])){
             //echo "HELLo4";
@@ -31,7 +28,7 @@
             if(!is_dir(APRL_UPLOADPATH.$username."/")) {
                 mkdir(APRL_UPLOADPATH.$username); 
             }
-            $var = $profession."info";
+           
             if($profession == 'student'){
                 $query = "UPDATE $var SET firstname = '$firstname', lastname = '$lastname', credential = '$credential',description = '$description', email = '$email', cgpa = '$cgpa' WHERE username = '$username' "; 
             }
@@ -40,7 +37,7 @@
             }
             
             mysqli_query($dbc, $query)
-            or die('Unable to query');
+            or die('Unable to update profile');
 
             if($image!=''){
                 $query = "SELECT image_url FROM $var WHERE username = '$username'";
@@ -197,14 +194,14 @@
                         <div class="col-md-6">
                             <label>Firstame</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Your firstname" name="FirstName" value=<?php echo '"'.$firstname.'"' ?> />
+                                <input type="text" class="form-control" placeholder="Your firstname" name="Firstname" value=<?php echo $firstname; ?> />
                             </div>
                             
                         </div>
                         <div class="col-md-6">
                             <label>Lastname</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Your lastname" name="LastName" value=<?php echo '"'.$lastname.'"' ?> />
+                                <input type="text" class="form-control" placeholder="Your lastname" name="Lastname" value=<?php echo $lastname; ?> />
                             </div>
                             
                         </div>
@@ -213,13 +210,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" class="form-control" placeholder="Your email" name="Email" value=<?php echo '"'.$email.'"' ?> />
+                                <input type="email" class="form-control" placeholder="Your email" name="Email" value=<?php echo $email; ?> />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Credential</label>
-                                <input type="text" class="form-control" placeholder="Your Credential" name="Credential" value=<?php echo '"'.$credential.'"' ?>/>
+                                <input type="text" class="form-control" placeholder="Your Credential" name="Credential" value=<?php echo $credential; ?>/>
                                
                             </div>
 
@@ -229,7 +226,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Description</label>
-                                <input type="text" class="form-control" placeholder="Your Bio" name="Description" value=<?php echo '"'.$description.'"' ?>/>
+                                <input type="text" class="form-control" placeholder="Your Bio" name="Description" value=<?php echo $description; ?>/>
                             </div>
                         </div>
                     
@@ -238,7 +235,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>CGPA</label>
-                                <input type="number" step="0.01" class="form-control" min="0" max="10" placeholder="Your CGPA" name="CGPA" value=<?php echo '"'.$cgpa.'"' ?> />
+                                <input type="number" step="0.01" class="form-control" min="0" max="10" placeholder="Your CGPA" name="CGPA" value=<?php echo $cgpa; ?> />
                                 
                             </div>
                         </div>
