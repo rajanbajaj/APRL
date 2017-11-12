@@ -22,6 +22,7 @@
         $row = mysqli_fetch_array($result);
         $firstname = $row['firstname'];
         $lastname = $row['lastname'];
+        $name = $firstname.' '.$lastname;
         mysqli_close($dbc);
     }
 ?>
@@ -252,9 +253,18 @@ html, body {
                             <?php 
                             /* SCRIPT FOR TRENDING BLOGS*/
                             require('connect.php');
-                            $query = "SELECT * FROM blog ORDER BY blog.date DESC, blog.readers DESC LIMIT 2";
+                            $query = "SELECT lastblog FROM $var WHERE username = '$username'";
                             $result = mysqli_query($dbc, $query) or die ('Unable to query');
-                            while($row = mysqli_fetch_array($result)){
+                            $row = mysqli_fetch_array($result);
+                            $lastblog = $row['lastblog'];
+                            $strlen = strlen($row['lastblog']);
+                            //if ($row['lastblog']!=NULL || $row['lastblog']!="") {
+                            for($i=0; $i<$strlen; $i=$i+2){
+                              $tempblogid = substr($lastblog, $i, 1 );
+                             // echo '<div style="color:white">'.$tempblogid.'</div>';
+                              $query = "SELECT * FROM blog WHERE blog_id = '$tempblogid'";
+                            $result = mysqli_query($dbc, $query) or die ('Unable to query');
+                            $row = mysqli_fetch_array($result);
                          ?>
                             <div class="col-md-6">
                                 <div class="card card-blog">
@@ -275,7 +285,7 @@ html, body {
                                 </div>
                             </div>
                           <?php 
-                              }
+                              }//}
                               mysqli_close($dbc); 
                           ?>
                         </div>
