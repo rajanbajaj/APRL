@@ -13,7 +13,7 @@ if(isset($_POST["id"])){
 }
 
 function show_project($id){
-$username = $_SESSION['username'];
+
  $dbc = mysqli_connect("localhost", "root", NULL, "aprl")
  or die("Unable to connect to database");
 $query = "SELECT profession FROM userlogin WHERE username = '$username'";
@@ -40,8 +40,8 @@ $profession = $row['profession'];
    <br> Posted on - $row[addedon]
    </h6>";
    if($row['status'] == "available" and $profession!='faculty'){
-            echo"
-                <!--collapse -->
+echo"
+    <!--                 collapse -->
                             <div id='collapse'>
                                 <div class='row'>
                                     <div class='col-md-12'>
@@ -56,13 +56,13 @@ $profession = $row['profession'];
                                                 <div id='collapseOne' class='collapse ' role='tabpanel' aria-labelledby='headingOne'>
                                                     <div class='card-body'>
                                                        <input hidden id='p_id' value='$row[project_id]'><p><b>Why are you interested in this project?</b></p>
-                                                            <textarea class='form-control' id='interested'></textarea>
-                                                            <div class='col text-left'> 
-                                                                <button id = 'apply_form' class='btn btn-primary ' type='button'>
-                                                                <i class='now-ui-icons ui-2_favourite-28'></i> Apply
-                                                                </button>
-                                                            </div>
-                                                            <span id='apply$row[project_id]'></span>
+    <textarea class='form-control' id='interested'></textarea>
+    <div class='col text-left'> 
+    <button id = 'apply_form' class='btn btn-primary ' type='button'>
+    <i class='now-ui-icons ui-2_favourite-28'></i> Apply
+    </button>
+    </div>
+    <span id='apply$row[project_id]'></span>
                                                     </div>
                                                 </div>
                                             </div>

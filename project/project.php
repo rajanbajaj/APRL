@@ -15,16 +15,16 @@ if (isset($_POST['interested'])) {
     $dbc = mysqli_connect("localhost", "root", NULL, "aprl")
     or die("Unable to connect to database");
     
-    $duplicate = "SELECT count(id) FROM `applicant` WHERE `username`='$user' and `project_id` = $m";
+    $duplicate = "SELECT count(`id`) FROM `applicant` WHERE `username`='$user' and `project_id` = $m";
     $check = mysqli_query($dbc,$duplicate)
     or die('Unable to check duplicate entry apply project');
 
-    $row =  mysqli_fetch_array($check);
-    if(!$row['count(id)']){
+    $row =  mysqli_fetch_assoc($check);
+    if(!$row['count(`id`)']){
         $query = "INSERT INTO `applicant`(`username`, `project_id`, `interest`) VALUES ('$user','$m','$motive')";
-        echo "Successfully applied for the project";
         $result = mysqli_query($dbc, $query)
         or die('Unable to insert applicant');
+        echo "Successfully applied for the project";
     }
     else{
         echo "Already applied for this project";
@@ -34,17 +34,17 @@ function count_project($status){
     $dbc = mysqli_connect("localhost", "root", NULL, "aprl")
     or die("Unable to connect to database");
     
-    $query = "SELECT * FROM project where status = '$status'";
+    $query = "SELECT * FROM project WHERE status = '$status'";
     $result = mysqli_query($dbc, $query)
-    or die('Unable to query studentinfo' );
+    or die('Unable to query project' );
     $current_count = mysqli_num_rows($result);
+    
     mysqli_close($dbc);
     // echo "$status called = $current_count";
-    return $current_count;
+    echo $current_count;
+    //return $current_count;
 }
-function apply_project(){
-    echo "HEllo";
-}
+
 
 ?>
 <!DOCTYPE html>
@@ -55,7 +55,7 @@ function apply_project(){
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Blog Page</title>
+    <title>Project Page</title>
     
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
@@ -65,6 +65,8 @@ function apply_project(){
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../assets/css/now-ui-kit.css?v=1.1.0" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
+    <!-- jquery library -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script>
         function showHint(str) {
             if (str.length == 0) { 
@@ -80,8 +82,9 @@ function apply_project(){
                 xmlhttp.open("GET", "display_project.php?q=" + str, true);
                 xmlhttp.send();
             }
+            // window.history.pushState("object","Title",str);
         }
-        function showPage(str) {
+        function showPage1(str) {
             if (str.length == 0) { 
                 document.getElementById("project_overview").innerHTML = "";
                 return;
@@ -95,34 +98,80 @@ function apply_project(){
                 xmlhttp.open("GET", "project_page.php?q=" + str, true);
                 xmlhttp.send();
             }
+            // window.history.pushState("object","Title",str);
         }
-    </script>
-    <script>
-        $("#apply").submit(function(event){
-            event.preventDefault();
-        });
-    </script>
-    <script>
+
         function apply(str,apply_id) {
             var a_id = apply_id.slice(5,apply_id.length);
             console.log (`${a_id}`);
             if (str.length == 0) { 
                 document.getElementById(apply_id).innerHTML = "";
                 return;
-            } else {
+            } 
+            else {
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
                         $valid="";
                         $apply_form="\
-                        <form method='POST' id = "+a_id+" action=''><input hidden name='id' value="+a_id+"><p><b>Why are you interested in this project?</b></p><textarea name='interested'></textarea><br><button type='submit' value='Submit'>Submit</button></form>";
-                        if(str!="available")$apply_form="";
+                        <form method='POST' id = "+a_id+" action=''><input hidden name='id' value="+a_id+"><p><b>Why are you interested in this project?</b></p><textarea name='interested'></textarea><button type='submit' value='Submit'>Submit</button></form>";
+                        if(str!="available")$apply_form="<b>Please select from Available projects</b>";
                         document.getElementById(apply_id).innerHTML = $apply_form;
                     }
                 };
                 xmlhttp.open("GET", "apply.php?q=" + str, true);
                 xmlhttp.send();
             }
+        }
+    </script>
+        <script>
+    $(document).ready(function(){
+            $(document).on('click','#apply_form',function(){
+                console.log('HELLO');
+                var interest = $('#interested').val();
+                var pid = $('#p_id').val();
+                $.ajax({
+                    type : 'POST',
+                    url : 'apply.php',
+                    data :{
+                        'id' : pid,
+                        'interested' : interest
+                    },
+                    success : function(data){
+                        $('#apply'+pid).html(data);
+                    }
+                });
+            });
+        });
+        </script>
+    <script>
+
+        function showPage(id) {
+            $.ajax({
+                type: "POST",
+                url: "project_page.php",
+                data: {
+                    'id':id
+                },
+                success: function(data){
+                    $("#project_overview").html(data);
+                }
+            });
+            // window.history.pushState("object","Title",str);
+        }
+        function page_navigate(start,end){
+            $.ajax({
+                type: "POST",
+                url: "display_project.php",
+                data: {
+                    'start':start,
+                    'end' : end,
+                    'status' : "all"
+                },
+                success: function(data){
+                    $("#project_overview").html(data);
+                }
+            });
         }
     </script>
 </head>
@@ -138,59 +187,79 @@ function apply_project(){
             <div class="container">
                 <div class="content-center">
 
-                    <h2 class="title">Project/Intern Opportunities</h3>
-                        <p class="category">For Researchers and learners</p>
-                        <div class="content">
-                            <div class="social-description">
-                                <h2><?=count_project("available"); ?></h2>
-                                <p onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#00F'"  onclick='showHint("available")' <p>Available</p>
-                            </div>
-                            <div class="social-description">
-                                <h2><?= count_project("current"); ?></h2>
-                                <p onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#00F'"  onclick='showHint("current")'>Current</p>
-                            </div>
-                            <div class="social-description">
-                                <h2><?php echo count_project("finished"); ?></h2>
-                                <a  onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#00F'" onclick='showHint("finished")'>Finished</a>
-                            </div>
+                    <h2 class="title">Project/Intern Opportunities</h2>
+                    <p class="category">For Researchers and learners</p>
+                    <div class="content">
+                        <div class="social-description">
+                            <h2><?=count_project("available"); ?></h2>
+                            <p onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#00F'"  onclick='showHint("available")' <p>Available</p>
+                        </div>
+                        <div class="social-description">
+                            <h2><?= count_project("current"); ?></h2>
+                            <p onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#00F'"  onclick='showHint("current")'>Current</p>
+                        </div>
+                        <div class="social-description">
+                            <h2><?php echo count_project("finished"); ?></h2>
+                            <a  onMouseOver="this.style.color='#0F0'" onMouseOut="this.style.color='#00F'" onclick='showHint("finished")'>Finished</a>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="section">
-                <div class="container">
-               <!--  <div class="button-container">
-
-                    <div class="photo-container">
-                        <img src="../assets/img/ryan.jpg" alt="">
-                    </div>
-                </div> -->
-                
-               <!-- <div class="container tim-container" style="max-width:800px; padding-top:100px">
-
-                   <h1 class="text-center">Project/Intern Opportunities </h1>
-               </div> -->
-           </div>
-       </div>
-       <!-- Display project overview -->
-       <script>showHint("current");</script>
-       <span id="project_overview"></span>
-
-
-       <footer class="footer footer-default">
-        <div class="container">
-
-            <div class="copyright">
-                &copy;
-                <script>
-                    document.write(new Date().getFullYear())
-                </script>, View Code at
-                <a href="http://www.github.com/SerChirag/APRL" target="_blank">GitHub</a>
-            </div>
         </div>
-    </footer>
-</div>
+
+        <div class="section">
+            <div class="container">
+                <div class="button-container">
+
+                    <!-- <div class="photo-container">
+                        <img src="../assets/img/ryan.jpg" alt="">
+                    </div> -->
+                </div>
+                
+                <div class="container tim-container" style="max-width:800px; padding-top:100px">
+
+                   <!-- <h1 class="text-center">Project/Intern Opportunities </h1> -->
+               </div>
+           </div>
+
+
+           <!-- Display project overview -->
+           <!-- <script>showHint("all");</script> -->
+         <?php if(isset($_GET["id"])){
+            echo "<script>showPage($_GET[id]);</script>";
+        }
+        ?>
+        <div id="project_overview"></div>
+
+        <!-- <input hidden id='p_id' value='2'>
+        <p><b>Why are you interested in this project?</b></p>
+        <textarea class='form-control' id='interested'></textarea>
+        <div class='col text-left'> 
+            <button id = 'apply_form' class='btn btn-primary btn-round btn-lg' type='submit'>
+                <i class='now-ui-icons ui-2_favourite-28'></i> Apply
+            </button>
+        </div>
+    <span id='apply2'></span> -->
+        <!-- <script>apply_form("2");</script>
+            <div id="apply2"></div> -->
+       <!-- <script>page_navigate("0","2");</script>
+           <div id="page_navigate"></div> -->
+
+
+
+           <footer class="footer footer-default">
+            <div class="container">
+
+                <div class="copyright">
+                    &copy;
+                    <script>
+                        document.write(new Date().getFullYear())
+                    </script>, View Code at
+                    <a href="http://www.github.com/SerChirag/APRL" target="_blank">GitHub</a>
+                </div>
+            </div>
+        </footer>
+    </div>
 </body>
 <!--   Core JS Files   -->
 

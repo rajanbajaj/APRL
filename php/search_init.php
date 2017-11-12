@@ -1,16 +1,16 @@
 <?php
     
     define("DB_MSG_ERROR", 'Could not connect!<br />Please contact the site\'s administrator.');
-    $conn = mysql_connect("localhost", "root", NULL) or die(DB_MSG_ERROR);
-    $db = mysql_select_db('aprl') or die(DB_MSG_ERROR);
-    $query = mysql_query("
+    $conn = mysqli_connect("localhost", "root", NULL) or die(DB_MSG_ERROR);
+    $db = mysqli_select_db($conn,'aprl') or die(DB_MSG_ERROR);
+    $query = mysqli_query($conn,"
         SELECT *
         FROM project
         ORDER BY date DESC
         LIMIT 5
     ");
     
-    while ($data = mysql_fetch_array($query)) {
+    while ($data = mysqli_fetch_array($query)) {
       echo '<div class="col-md-4">
                 <div class="card card-blog">
                     <div class="card-image">
