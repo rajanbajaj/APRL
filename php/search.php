@@ -1,3 +1,25 @@
+<?php
+session_start();
+if(!isset($_SESSION['username'])){
+    $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/login-page.php';
+    header('Location:'.$url);
+}
+$username = $_COOKIE['username'];
+if(isset($_GET['username'])){
+            $username = $_GET['username'];
+        }
+    // echo("$username");
+
+$dbc = mysqli_connect("localhost", "root", NULL, "aprl")
+or die("Unable to connect to database");
+
+$query = "SELECT profession FROM userlogin WHERE username = '$username'";
+$result = mysqli_query($dbc, $query);
+$row = mysqli_fetch_array($result);
+$profession = $row['profession'];
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +40,7 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="../assets/css/demo.css" rel="stylesheet" />
     <!-- Canonical SEO -->
-    <link rel="canonical" href="https://www.creative-tim.com/product/now-ui-kit-pro" />
+    <link href="../assets/css/daddy.css" rel="stylesheet" />
     <!--  Social tags      -->
     
 
@@ -31,36 +53,7 @@ html, body {
     overflow-x: hidden;
 }
 
-.spinner {
 
-    display: none;
-  width: 100px;
-  height: 100px;
-  background-color: #f96332;
-
-  margin: 120px auto;
-  -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
-  animation: sk-rotateplane 1.2s infinite ease-in-out;
-}
-
-@-webkit-keyframes sk-rotateplane {
-  0% { -webkit-transform: perspective(120px) }
-  50% { -webkit-transform: perspective(120px) rotateY(180deg) }
-  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
-}
-
-@keyframes sk-rotateplane {
-  0% { 
-    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
-  } 50% { 
-    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
-  } 100% { 
-    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-  }
-}
 
 </style>
 
@@ -68,15 +61,29 @@ html, body {
     <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container">
             <div class="navbar-translate">
-                <a class="navbar-brand" href="#pablo">Primary color</a>
+                <a class="navbar-brand" href="landing-page.php"  data-placement="bottom" target="_blank">
+                    <img src="../assets/favicon/invert.png" id="logo_id">
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar-primary" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-bar bar1"></span>
                     <span class="navbar-toggler-bar bar2"></span>
                     <span class="navbar-toggler-bar bar3"></span>
                 </button>
             </div>
-            <div class="collapse navbar-collapse" id="example-navbar-primary">
-                
+            <div class="dropdown button-dropdown">
+                <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
+                    <img src="../assets/img/eva.jpg" alt="..." id="daddy_image">
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" data-placement="left">
+                  
+                    <a class="dropdown-item" href="blog.php">Blog</a>
+                    <a class="dropdown-item" href="project.php">Project</a>
+                    <?php if($profession=='faculty') echo '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">New Peoject</a>'; ?>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="edit-profile.php" >Edit Profile</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="logout.php">Logout</a>
+                </div>
             </div>
         </div>
     </nav>
