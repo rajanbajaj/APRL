@@ -189,6 +189,19 @@ function spamCount(){
     xmlhttp.send();
 }
 
+// function gotoprofile(){
+    $(document).ready(function(){
+    $("#titlekiid").click(function(){
+        console.log("i have clicked");
+        window.location = "http://localhost:1234/gitAPRL/blogv1/profile-page.php?username=" + <?php echo $offeredby ?>;
+        // <?php
+        // session_start();
+        // $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/profile-page.php?username='.$title;
+        // header('Location:'.$url);
+        // ?> 
+    }); 
+});
+
 // function getTags(){
 //     // x = x+1;
 //     // if(x==2){
@@ -310,7 +323,7 @@ function spamCount(){
                         <img src="../assets/img/ryan.jpg" alt="">
                     </div>
 
-                    <p class="category"><?php echo $offeredby ?></p>
+                    <p class="category" id="titlekiid"><?php echo $offeredby ?></p>
 
                 </div>
 
