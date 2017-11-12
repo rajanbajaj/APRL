@@ -8,12 +8,21 @@
         $username = $_SESSION['username'];
         require_once('connect.php');
          
-        $query = "SELECT name, profession FROM userlogin WHERE username = '$username'";
+        $query = "SELECT profession FROM userlogin WHERE username = '$username'";
         $result = mysqli_query($dbc, $query);
         $row = mysqli_fetch_array($result);
         $profession = $row['profession'];
-        $name = $row['name'];
-        
+        //echo $profession;
+        if($profession == "faculty")
+          $var = "facultyinfo";
+        elseif($profession == "student")
+          $var = "studentinfo";
+        $query = "SELECT * FROM $var WHERE username = '$username'";
+        $result = mysqli_query($dbc, $query) or die ('Unable to query');
+        $row = mysqli_fetch_array($result);
+        $firstname = $row['firstname'];
+        $lastname = $row['lastname'];
+        mysqli_close($dbc);
     }
 ?>
 <!DOCTYPE html>
@@ -184,7 +193,7 @@ html, body {
                 else {
                     echo '<div class="col-md-6"><img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MTIuMDAxIDUxMi4wMDEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMi4wMDEgNTEyLjAwMTsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxwYXRoIHN0eWxlPSJmaWxsOiNGMjlGMjY7IiBkPSJNMzUwLjAxMiwxNTAuNzg5Yy0yNC40MywwLTQ0LjMwNC0xOS44NzYtNDQuMzA0LTQ0LjMwNWMwLTEuNTM4LTEuMjQ2LTIuNzg0LTIuNzg0LTIuNzg0ICBjLTEuNTM4LDAtMi43ODQsMS4yNDYtMi43ODQsMi43ODRjMCwyNC40MzEtMTkuODc2LDQ0LjMwNS00NC4zMDUsNDQuMzA1Yy0xLjUzOCwwLTIuNzg0LDEuMjQ2LTIuNzg0LDIuNzg0ICBjMCwxLjUzOCwxLjI0NiwyLjc4NCwyLjc4NCwyLjc4NGMyNC40MywwLDQ0LjMwNSwxOS44NzYsNDQuMzA1LDQ0LjMwNGMwLDEuNTM4LDEuMjQ2LDIuNzg0LDIuNzg0LDIuNzg0ICBjMS41MzgsMCwyLjc4NC0xLjI0NiwyLjc4NC0yLjc4NGMwLTI0LjQzLDE5Ljg3Ni00NC4zMDQsNDQuMzA0LTQ0LjMwNGMxLjUzOCwwLDIuNzg0LTEuMjQ2LDIuNzg0LTIuNzg0ICBDMzUyLjc5NywxNTIuMDM1LDM1MS41NDksMTUwLjc4OSwzNTAuMDEyLDE1MC43ODl6Ii8+CjxwYXRoIHN0eWxlPSJmaWxsOiNFRjgyMjk7IiBkPSJNMjk3LjkyMiwxNTMuNTcyYzcuMDgzLTYuMTg3LDEyLjE5Ny0xNC41NzMsMTQuMjMtMjQuMDk5Yy00LjA4Ny02LjcwNi02LjQ0NS0xNC41NzgtNi40NDUtMjIuOTkxICBjMC0xLjUzOC0xLjI0Ni0yLjc4NC0yLjc4NC0yLjc4NGMtMS41MzgsMC0yLjc4NCwxLjI0Ni0yLjc4NCwyLjc4NGMwLDE1Ljc0Ny04LjI2NiwyOS41OTMtMjAuNjgsMzcuNDUxICBjLTEuNjc3LDEuMDYxLTMuNDMxLDIuMDEzLTUuMjUsMi44NDdjLTAuMDY3LDAuMDMtMC4xMzQsMC4wNi0wLjIsMC4wOTFjLTEuNzgyLDAuODA2LTMuNjI2LDEuNDk3LTUuNTIzLDIuMDY1ICBjLTAuMTMxLDAuMDM5LTAuMjY0LDAuMDc1LTAuMzk1LDAuMTEyYy0wLjgwNCwwLjIzMy0xLjYxOCwwLjQ0MS0yLjQ0MSwwLjYyOGMtMC4xNjUsMC4wMzgtMC4zMjksMC4wNzktMC40OTMsMC4xMTUgIGMtMC45MjQsMC4xOTktMS44NTgsMC4zNzEtMi44MDIsMC41MTFjLTAuMTYzLDAuMDIzLTAuMzI3LDAuMDQtMC40OSwwLjA2MmMtMC43NzcsMC4xMDctMS41NjMsMC4xOTItMi4zNTIsMC4yNTYgIGMtMC4yNzEsMC4wMjItMC41NDIsMC4wNDUtMC44MTQsMC4wNjJjLTAuOTEyLDAuMDU5LTEuODMxLDAuMDk4LTIuNzU4LDAuMWMtMC4wMzYsMC0wLjA3MSwwLjAwMi0wLjEwNywwLjAwMiAgYy0xLjUzOCwwLTIuNzg0LDEuMjQ2LTIuNzg0LDIuNzg0bDAsMGwwLDBjMCwxLjUzOCwxLjI0NiwyLjc4NCwyLjc4NCwyLjc4NGMwLjAzNiwwLDAuMDcxLDAuMDAyLDAuMTA3LDAuMDAyICBjMC45MjcsMC4wMDIsMS44NDQsMC4wNDEsMi43NTgsMC4xYzAuMjcyLDAuMDE4LDAuNTQ0LDAuMDQsMC44MTQsMC4wNjJjMC43OSwwLjA2NiwxLjU3NSwwLjE1LDIuMzUyLDAuMjU2ICBjMC4xNjMsMC4wMjIsMC4zMjcsMC4wMzksMC40OSwwLjA2MmMwLjk0NCwwLjE0LDEuODc4LDAuMzEyLDIuODAyLDAuNTExYzAuMTY2LDAuMDM2LDAuMzI5LDAuMDc3LDAuNDkzLDAuMTE1ICBjMC44MjIsMC4xODcsMS42MzUsMC4zOTUsMi40MzksMC42MjhjMC4xMzMsMC4wMzgsMC4yNjcsMC4wNzQsMC4zOTksMC4xMTRjMS44OTcsMC41NjgsMy43NCwxLjI1OSw1LjUyMiwyLjA2NSAgYzAuMDY3LDAuMDMsMC4xMzQsMC4wNiwwLjIsMC4wOWMxLjgxOSwwLjgzNCwzLjU3MywxLjc4NCw1LjI1LDIuODQ3YzEyLjQxNCw3Ljg2LDIwLjY4LDIxLjcwNCwyMC42OCwzNy40NTEgIGMwLDEuNTM4LDEuMjQ2LDIuNzg0LDIuNzg0LDIuNzg0YzEuNTM4LDAsMi43ODQtMS4yNDYsMi43ODQtMi43ODRjMC04LjQxMywyLjM1OC0xNi4yODQsNi40NDUtMjIuOTkxICBDMzEwLjEyLDE2OC4xNDYsMzA1LjAwNiwxNTkuNzU5LDI5Ny45MjIsMTUzLjU3MnoiLz4KPGc+Cgk8Y2lyY2xlIHN0eWxlPSJmaWxsOiNGMjlGMjY7IiBjeD0iMzgxLjk0IiBjeT0iMjQ5LjM0MSIgcj0iMTguODA3Ii8+Cgk8Y2lyY2xlIHN0eWxlPSJmaWxsOiNGMjlGMjY7IiBjeD0iNDEuMTU1IiBjeT0iNDY3LjYzMSIgcj0iMTguODA3Ii8+CjwvZz4KPHBhdGggc3R5bGU9ImZpbGw6I0VERTIxQjsiIGQ9Ik0yOTIuMTQsMzY4LjE4M2MtODUuNzk4LTI4LjM4LTE0Ny44NzYtMTA5LjM0My0xNDcuODc2LTIwNC41M2MwLTQ3LjY0OCwxNS4yNTgtOTIuODA5LDQ0LjEyLTEzMC41OTMgIGMzLjc3Ny00Ljk0NSwzLjcwMi0xMS44MjMtMC4xNzktMTYuNjg3Yy0zLjg4MS00Ljg2My0xMC41NzQtNi40NjItMTYuMjMxLTMuODdjLTQzLjk0OSwyMC4xLTgxLjIxNCw1Mi4xNDUtMTA3Ljc2NSw5Mi42NjYgIGMtMjcuMjU3LDQxLjU5OC00MS42NjIsODkuOTgtNDEuNjYyLDEzOS45MThjMCwxNDAuOTYsMTE0LjY4LDI1NS42NCwyNTUuNjQsMjU1LjY0YzQ5LjkzOSwwLDk4LjMyMS0xNC40MDcsMTM5LjkxOS00MS42NjIgIGM0MC41MjEtMjYuNTUxLDcyLjU2NS02My44MTYsOTIuNjY2LTEwNy43NjZjMi41ODgtNS42NTksMC45OTItMTIuMzUxLTMuODctMTYuMjMzYy00Ljg2My0zLjg4LTExLjc0My0zLjk1NC0xNi42ODctMC4xNzggIGMtMzcuNzg0LDI4Ljg2NC04Mi45NDMsNDQuMTItMTMwLjU5Myw0NC4xMmMtMTMuMTgxLDAtMjYuMDkxLTEuMTkxLTM4LjYyNy0zLjQ2OCIvPgo8cGF0aCBzdHlsZT0iZmlsbDojRUFDNzFDOyIgZD0iTTQ0MS40NjcsNDM1LjgyNGMtNDEuNTk5LDI3LjI1Ni04OS45OCw0MS42NjItMTM5LjkxOSw0MS42NjJjLTE0MC45NiwwLTI1NS42NC0xMTQuNjgtMjU1LjY0LTI1NS42NCAgYzAtNDkuOTM4LDE0LjQwNi05OC4zMjEsNDEuNjYyLTEzOS45MThjNi43ODctMTAuMzU4LDE0LjI3Ny0yMC4xNTcsMjIuMzk2LTI5LjM0OUM5Mi40OTksNjcuODUzLDc3LjA4OSw4NS41MSw2NC4yMDcsMTA1LjE3MSAgYy0yNy4yNTcsNDEuNTk4LTQxLjY2Miw4OS45OC00MS42NjIsMTM5LjkxOGMwLDE0MC45NiwxMTQuNjgsMjU1LjY0LDI1NS42NCwyNTUuNjRjNDkuOTM5LDAsOTguMzIxLTE0LjQwNywxMzkuOTE5LTQxLjY2MiAgYzE5LjI4OS0xMi42NCwzNi42NTMtMjcuNzExLDUxLjcyNi00NC43NzFDNDYwLjkyNCw0MjIuMDgxLDQ1MS40NTQsNDI5LjI4LDQ0MS40NjcsNDM1LjgyNHoiLz4KPGc+Cgk8Y2lyY2xlIHN0eWxlPSJmaWxsOiNFREUyMUI7IiBjeD0iMzAyLjkyMiIgY3k9IjI2MC41MTIiIHI9IjExLjE3MSIvPgoJPGNpcmNsZSBzdHlsZT0iZmlsbDojRURFMjFCOyIgY3g9IjExLjE3MSIgY3k9IjM5NC42MzgiIHI9IjExLjE3MSIvPgoJPGNpcmNsZSBzdHlsZT0iZmlsbDojRURFMjFCOyIgY3g9IjM3NC41NTYiIGN5PSI4Ny44NjEiIHI9IjExLjE3MSIvPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=" /></div> ';
                   //echo '<i class="fa fa-moon-o fa-1x" aria-hidden="true"></i>   ';  
-                  echo '<div class="col-md-6" id="welcome-message">Good Night '. $name.'.';
+                  echo '<div class="col-md-6" id="welcome-message">Good Night '. $firstname.'.';
                 }
                 echo " You can scroll down to read!</div>";
             ?>
@@ -201,6 +210,13 @@ html, body {
                         <h3 class="title text-danger" text-align = "center"> <i class="now-ui-icons media-2_sound-wave"></i> Trending</h3><br>
                          <div class="divider"></div>
                         <div class="row">
+                            <?php 
+                            /* SCRIPT FOR TRENDING BLOGS*/
+                            require('connect.php');
+                            $query = "SELECT * FROM blog ORDER BY blog.date DESC, blog.readers DESC LIMIT 2";
+                            $result = mysqli_query($dbc, $query) or die ('Unable to query');
+                            while($row = mysqli_fetch_array($result)){
+                         ?>
                             <div class="col-md-6">
                                 <div class="card card-blog">
                                     <div class="card-image">
@@ -211,32 +227,18 @@ html, body {
                                             <i class="now-ui-icons business_bulb-63"></i> Focus
                                         </h6>
                                         <h5 class="card-title">
-                                            <a href="#nuk">Stay Focused: Train Your Brain</a>
+                                            <a href="../blogv1/blog.php?id=<?= $row['blog_id'] ?>"><?= $row['title']; ?></a>
                                         </h5>
                                         <p class="card-description">
-                                            Our brains are finely attuned to distraction, so today's digital environment makes it especially hard to focus...
+                                            <?= $row['description']; ?>
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="card card-blog">
-                                    <div class="card-image">
-                                        <img class="img rounded" src="assets/img/project13.jpg">
-                                    </div>
-                                    <div class="card-body">
-                                        <h6 class="category text-warning">
-                                            <i class="now-ui-icons business_bulb-63"></i> Focus
-                                        </h6>
-                                        <h5 class="card-title">
-                                            <a href="#nuk">Stay Focused: Train Your Brain</a>
-                                        </h5>
-                                        <p class="card-description">
-                                            Our brains are finely attuned to distraction, so today's digital environment makes it especially hard to focus...
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                          <?php 
+                              }
+                              mysqli_close($dbc); 
+                          ?>
                         </div>
                     </div>
 
@@ -245,7 +247,15 @@ html, body {
                     <div class="row">
                         <h3 class="title text-danger" text-align = "center"> <i class="fa fa-book" aria-hidden="true"></i> Continue Reading</h3><br>
                          <div class="divider"></div>
+                         
                         <div class="row">
+                            <?php 
+                            /* SCRIPT FOR TRENDING BLOGS*/
+                            require('connect.php');
+                            $query = "SELECT * FROM blog ORDER BY blog.date DESC, blog.readers DESC LIMIT 2";
+                            $result = mysqli_query($dbc, $query) or die ('Unable to query');
+                            while($row = mysqli_fetch_array($result)){
+                         ?>
                             <div class="col-md-6">
                                 <div class="card card-blog">
                                     <div class="card-image">
@@ -256,48 +266,42 @@ html, body {
                                             <i class="now-ui-icons business_bulb-63"></i> Focus
                                         </h6>
                                         <h5 class="card-title">
-                                            <a href="#nuk">Stay Focused: Train Your Brain</a>
+                                            <a href="#"><?= $row['title']; ?></a>
                                         </h5>
                                         <p class="card-description">
-                                            Our brains are finely attuned to distraction, so today's digital environment makes it especially hard to focus...
+                                            <?= $row['description']; ?>
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="card card-blog">
-                                    <div class="card-image">
-                                        <img class="img rounded" src="assets/img/project13.jpg">
-                                    </div>
-                                    <div class="card-body">
-                                        <h6 class="category text-warning">
-                                            <i class="now-ui-icons business_bulb-63"></i> Focus
-                                        </h6>
-                                        <h5 class="card-title">
-                                            <a href="#nuk">Stay Focused: Train Your Brain</a>
-                                        </h5>
-                                        <p class="card-description">
-                                            Our brains are finely attuned to distraction, so today's digital environment makes it especially hard to focus...
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                          <?php 
+                              }
+                              mysqli_close($dbc); 
+                          ?>
                         </div>
                     </div>
                 </div>
                 <div id="sidebar">
+                  <?php 
+                            /* SCRIPT FOR TRENDING BLOGS*/
+                    require('connect.php');
+                    $query = "SELECT * FROM project WHERE status = 'available' ORDER BY project.addedon DESC";
+                    $result = mysqli_query($dbc, $query) or die ('Unable to query project');
+                    while($row = mysqli_fetch_array($result)){
+                  ?>
                     <div class="card" data-background-color="blue">
                         <div class="card-body">
                             <h6 class="category-social">
-                                <i class="fa fa-twitter"></i> Twitter
+                                <i class="fa fa-twitter"></i> 
+                                <a href="project.php?id=<?= $row['project_id'] ?>"><?= $row['title']; ?></a>
                             </h6>
                             <p>
-                            "You Don't Have to Sacrifice Joy to Build a Fabulous Business and Life"
+                            </i> <?= $row['description']; ?>
                             </p>
                            <div class="card-footer">
                                 <div class="author">
                                    <!-- <img src="assets/img/james.jpg" alt="..." class="avatar img-raised"> -->
-                                    <span>Tania Andrew</span>
+                                    <span></i> <?= $row['offeredby']; ?></span>
                                 </div>
                                 <div class="stats stats-right">
                                     <i class="now-ui-icons ui-2_favourite-28"></i> 2.4K ·
@@ -306,28 +310,13 @@ html, body {
                             </div>
                         </div>
                     </div>
-                    <div class="card" data-background-color="blue">
-                        <div class="card-body">
-                            <h6 class="category-social">
-                                <i class="fa fa-twitter"></i> Twitter
-                            </h6>
-                            <p>
-                            "You Don't Have to Sacrifice Joy to Build a Fabulous Business and Life"
-                            </p>
-                           <div class="card-footer">
-                                <div class="author">
-                                  <!--  <img src="assets/img/james.jpg" alt="..." class="avatar img-raised"> -->
-                                    <span>Tania Andrew</span>
-                                </div>
-                                <div class="stats stats-right">
-                                    <i class="now-ui-icons ui-2_favourite-28"></i> 2.4K ·
-                                    <i class="now-ui-icons files_single-copy-04"></i> 45
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                      }
+                      mysqli_close($dbc);
+                    ?>
                 </div>
-            </div>      
+            </div> 
+        </div>         
 </body>
 <!--   Core JS Files   -->
 <script src="../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>

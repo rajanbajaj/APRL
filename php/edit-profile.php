@@ -20,7 +20,8 @@
 
         if(isset($_POST['submit'])){
             //echo "HELLo4";
-            $name = $_POST['Name'];
+            $firstname = $_POST['FirstName'];
+            $lastname = $_POST['LastName'];
             $credential = $_POST['Credential'];
             $description = $_POST['Description'];
             $email = $_POST['Email'];
@@ -31,10 +32,10 @@
                 mkdir(APRL_UPLOADPATH.$username); 
             }
             if($profession == 'student'){
-                $query = "UPDATE $var SET name = '$name', credential = '$credential',description = '$description', email = '$email', cgpa = '$cgpa' WHERE username = '$username' "; 
+                $query = "UPDATE $var SET firstname = '$firstname', lastname = '$lastname', credential = '$credential',description = '$description', email = '$email', cgpa = '$cgpa' WHERE username = '$username' "; 
             }
             elseif($profession=='faculty'){
-                $query = "UPDATE $var SET name = '$name', credential = '$credential',description = '$description', email = '$email' WHERE username = '$username' "; 
+                $query = "UPDATE $var SET firstname = '$firstname', lastname = '$lastname', credential = '$credential',description = '$description', email = '$email' WHERE username = '$username' "; 
             }
             
             mysqli_query($dbc, $query)
@@ -55,10 +56,6 @@
                 $target = APRL_UPLOADPATH.$username.'/'.$image;
                 move_uploaded_file($_FILES['Image']['tmp_name'], $target);
             }
-
-            $query = "UPDATE userlogin SET name = '$name' WHERE username = '$username'";
-            mysqli_query($dbc, $query)
-            or die('Unable to query');
             //echo 'Update successful!';
     
             echo 'Update successfull. You will be automatically redirected to the other page.';
@@ -71,7 +68,9 @@
         or die('Unable to query studentinfo' );
 
         $row = mysqli_fetch_array($result);
-        $name = $row['name'];
+        $firstname = $row['firstname'];
+        $lastname = $row['lastname'];
+        $name = $firstname.' '.$lastname; 
         $credential = $row['credential'];
         $image = $row['image_url'];
         $description = $row['description'];
@@ -191,20 +190,27 @@
                 <form enctype="multipart/form-data" method="post" action= "edit-profile.php" >
                     <div class="row">
                         <div class="col-md-6">
-                            <label>Name</label>
+                            <label>firstame</label>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Your Name" name="Name" value=<?php echo '"'.$name.'"' ?> />
+                                <input type="text" class="form-control" placeholder="Your firstname" name="FirstName" value=<?php echo '"'.$firstname.'"' ?> />
                             </div>
                             
                         </div>
+                        <div class="col-md-6">
+                            <label>lastname</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Your lastname" name="LastName" value=<?php echo '"'.$lastname.'"' ?> />
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Email</label>
                                 <input type="email" class="form-control" placeholder="Your email" name="Email" value=<?php echo '"'.$email.'"' ?> />
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Credential</label>
@@ -213,14 +219,16 @@
                             </div>
 
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Description</label>
                                 <input type="text" class="form-control" placeholder="Your Bio" name="Description" value=<?php echo '"'.$description.'"' ?>/>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+                    
+                    
                         <?php if($profession == 'student'){ ?>
                         <div class="col-md-6">
                             <div class="form-group">

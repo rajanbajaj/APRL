@@ -36,7 +36,9 @@
         or die('Unable to query studentinfo' );
 
         $row = mysqli_fetch_array($result);
-        $name = $row['name'];
+        $firstname = $row['firstname'];
+        $lastname = $row['lastname'];
+        $name = $firstname.' '.$lastname;
         $credential = $row['credential'];
         $image = $row['image_url'];
         $description = $row['description'];
