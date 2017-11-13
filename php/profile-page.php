@@ -43,6 +43,7 @@ if(isset($_GET['username'])){
     $row = mysqli_fetch_array($result);
     $profession = $row['profession'];
     $var=$profession."info";
+    
     $query = "SELECT * FROM $var WHERE username = '$username'";
     $result = mysqli_query($dbc, $query)
     or die('Unable to query studentinfo' );
