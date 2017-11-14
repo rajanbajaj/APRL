@@ -1,6 +1,6 @@
 # APRL
 
-A Portak for Researchers and Learners
+A Portal for Researchers and Learners
 
 ## Getting Started
 
@@ -39,8 +39,3 @@ Currently at Version 1
 
 
 
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
