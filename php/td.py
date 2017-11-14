@@ -3,11 +3,14 @@
 import nltk
 from rake_nltk import Rake
 import MySQLdb
-
+import re
 db=MySQLdb.connect(user="root",passwd="",db="aprl",unix_socket="/opt/lampp/var/mysql/mysql.sock")
 cursor = db.cursor()
 cursor.execute("SELECT description FROM blog ORDER BY date DESC LIMIT 1")
-text = cursor.fetchone()[0]
+raw_html = cursor.fetchone()[0]
+cleanr = re.compile('<.*?>')
+text = re.sub(cleanr, '', raw_html)
+
 r = Rake() 
 r.extract_keywords_from_text(text)
 l = r.get_ranked_phrases()

@@ -20,7 +20,7 @@
 	      		$query = "SELECT lastblog FROM $var WHERE username = '$username'";
 	      		$result = mysqli_query($dbc, $query);
 	      		$row = mysqli_fetch_array($result);
-	      		if ($row['lastblog'] == NULL || $row['lastblog'] == "") {
+	      		if ($row['lastblog'] == NULL || $row['lastblog'] == "" || empty($row['lastblog'])) {
 	        		if($_POST['id'] == 'one'){
 	        			$blogid1 = $blogid.'/';
 	      				$query = "UPDATE $var SET lastblog = '$blogid1' WHERE username = '$username'";

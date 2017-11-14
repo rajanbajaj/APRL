@@ -28,9 +28,10 @@
             if($profession == 'student')
              {  $cgpa = $_POST['CGPA'];}
             $image = $_FILES['Image']['name'];
-            if(!is_dir(APRL_UPLOADPATH.$username."/")) {
-                mkdir(APRL_UPLOADPATH.$username); 
+            if(!is_dir(APRL_UPLOADPATH."user"."/")) {
+                mkdir(APRL_UPLOADPATH."user"); 
             }
+            $var = $profession."info";
             if($profession == 'student'){
                 $query = "UPDATE $var SET firstname = '$firstname', lastname = '$lastname', credential = '$credential',description = '$description', email = '$email', cgpa = '$cgpa' WHERE username = '$username' "; 
             }
@@ -42,27 +43,43 @@
             or die('Unable to query');
 
             if($image!=''){
-                $query = "SELECT image_url FROM $var WHERE username = '$username'";
+                /*$query = "SELECT image_url FROM $var WHERE username = '$username'";
                 $result = mysqli_query($dbc, $query);
                 $row = mysqli_fetch_array($result);
                 $old_image = $row['image_url'];
                 if($old_image!='fb_avatar_male.jpg'){
                     $target = APRL_UPLOADPATH.$username.'/'.$old_image;
                     @unlink($target);
-                }
-                $query = "UPDATE $var SET image_url = '$image' WHERE username='$username'";
+                }*/
+                $image1 = $username.'.jpg';
+                $query = "UPDATE $var SET image_url = '$image1' WHERE username='$username'";
                 mysqli_query($dbc, $query)
                 or die('Unable to query1');
-                $target = APRL_UPLOADPATH.$username.'/'.$image;
+                $target = APRL_UPLOADPATH.'user/'.$image1;
                 move_uploaded_file($_FILES['Image']['tmp_name'], $target);
             }
             //echo 'Update successful!';
     
             echo 'Update successfull. You will be automatically redirected to the other page.';
             $url = "profile-page.php";
-
             header ("Refresh: 3;URL='$url'");
         }
+        $query = "SELECT * FROM $var WHERE username = '$username'";
+        $result = mysqli_query($dbc, $query)
+        or die('Unable to query studentinfo' );
+
+        $row = mysqli_fetch_array($result);
+        $firstname = $row['firstname'];
+        $lastname = $row['lastname'];
+        $name = $firstname.' '.$lastname; 
+        $credential = $row['credential'];
+        $image = $row['image_url'];
+        $description = $row['description'];
+        $email = $row['email'];
+        if($profession == 'student')
+            $cgpa = $row['cgpa'];
+        // if($image!='fb_avatar_male.jpg')
+        //     $image = $username.'/'.$image;
         mysqli_close($dbc);
     }
 ?>
@@ -114,41 +131,43 @@
     <meta property="og:image" content="http://s3.amazonaws.com/creativetim_bucket/products/62/original/opt_nukp_thumbnail.jpg" />
     <meta property="og:description" content="Start your development with a beautiful Bootstrap 4 UI kit." />
     <meta property="og:site_name" content="Creative Tim" />
+     <link href="../assets/css/daddy.css" rel="stylesheet" />
 </head>
 <body class="profile-page sidebar-collapse">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
         <div class="container">
+            <div class="navbar-translate">
+                <a class="navbar-brand" href="landing-page.php"  data-placement="bottom" target="_blank">
+                    <img src="../assets/favicon/invert.png" id="logo_id">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="../assets/img/blurred-image-1.jpg">
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="input-group form-group-no-border ">
+                    <span class="input-group-addon">
+                        <i class="now-ui-icons ui-1_zoom-bold"></i>
+                    </span>
+                    <input type="text" class="form-control" id="search_bar" placeholder="Search..." name="search_bar">
+                </div>
+            </div>
             <div class="dropdown button-dropdown">
                 <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
-                    <span class="button-bar"></span>
-                    <span class="button-bar"></span>
-                    <span class="button-bar"></span>
+                    <img class="photo-container" src= <?php echo '"../assets/img/user/'.$image.'"'?> alt="Profile Picture" id="daddy_image">
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-header">Dropdown header</a>
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <?php if($profession=='faculty') echo '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">New Project</a>'; ?>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" data-placement="left">
+                  
+                    <a class="dropdown-item" href="blog.php">Blog</a>
+                    <a class="dropdown-item" href="project.php">Project</a>
+                    <?php if($profession=='faculty') echo '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">New Peoject</a>'; ?>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#pablo" data-toggle="modal" data-target="#myModal" >Edit Profile</a>
+                    <a class="dropdown-item" href="edit-profile.php" >Edit Profile</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="logout.php">Logout</a>
                 </div>
             </div>
-            <div class="navbar-translate">
-                <a class="navbar-brand" href="http://demos.creative-tim.com/now-ui-kit/index.html" rel="tooltip" title="Designed by Invision. Coded by Creative Tim" data-placement="bottom" target="_blank">
-                    APRL
-                </a>
-                <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-bar bar1"></span>
-                    <span class="navbar-toggler-bar bar2"></span>
-                    <span class="navbar-toggler-bar bar3"></span>
-                </button>
-            </div>
-            <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="../assets/img/blurred-image-1.jpg">
-                
-            </div>
+            
         </div>
     </nav>
     <!-- End Navbar -->
@@ -160,7 +179,7 @@
                 
                     <div class="content-center">
                         <div class="photo-container">
-                <img class="photo-container" src= <?php echo '"../assets/img/'.$image.'"'?> alt="">
+                <img class="photo-container" src= <?php echo '"../assets/img/user/'.$image.'"'?> alt="">
                         </div>
                         <h3 class="title"><?php echo "$firstname $lastname";?></h3>
                         <p class="category"><?php echo $credential?></p>
@@ -174,14 +193,14 @@
                 <form enctype="multipart/form-data" method="post" action= "edit-profile.php" >
                     <div class="row">
                         <div class="col-md-6">
-                            <label>firstame</label>
+                            <label>Firstame</label>
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Your firstname" name="FirstName" value=<?php echo '"'.$firstname.'"' ?> />
                             </div>
                             
                         </div>
                         <div class="col-md-6">
-                            <label>lastname</label>
+                            <label>Lastname</label>
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Your lastname" name="LastName" value=<?php echo '"'.$lastname.'"' ?> />
                             </div>
@@ -224,7 +243,7 @@
                         <?php } ?>
                         <div class="col-md-6">
                             <label>Profile picture</label>
-                            <div class="input-group form-group-no-border input-lg form-group">
+                            <div class="input-group form-group-no-border input-lg">
                                 <input type="file" class="form-control" id="Image" name="Image" accept="image/*|.jpg|.png|.jpeg|.gif">
                             </div>
                         </div>
@@ -284,6 +303,20 @@
     });
 </script>
 
+<script type="text/javascript">
 
+    $(document).ready(function() {
+        $('#search_bar').keyup(function(e) {
+            if(e.which==13){
+                var parameter_search=$('#search_bar').val();
+                window.open("search.php?id="+parameter_search);
+
+            }
+        });
+        
+
+    });
+    
+</script>
 <!-- Mirrored from demos.creative-tim.com/now-ui-kit-pro/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 30 Oct 2017 16:46:49 GMT -->
 </html>

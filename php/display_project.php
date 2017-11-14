@@ -36,20 +36,21 @@
     						or die('Unable to query project' );
 						while($tag = mysqli_fetch_assoc($result_tag)){
                     echo    "<span >
-                            <button class='btn btn-primary btn-simple btn-round btn-sm' type='button'>$tag[tagname]</button>
+                        <a href='search.php?id=\"$tag[tagname]\"' class='btn btn-primary btn-round btn-sm' >$tag[tagname]</a>
                         </span>";
                     }
                    echo
                     " </span>
-                   <!--     end extras --> 
-                   <div class='col text-center'> 
-                        <a onclick='showPage(\"$row[project_id]\")' class='btn btn-primary btn-round btn-lg'>Detail Description</a> 
-                        <button onclick='apply(\"$status\",\"apply$row[project_id]\")' class='btn btn-primary btn-round btn-lg' type='button'>
-                            <i class='now-ui-icons ui-2_favourite-28'></i> Apply
-                        </button>
-                   </div>
-                        <span id='apply$row[project_id]'></span>
-              </div>
+                   <!--     end extras --> ";
+
+                //    <div class='col text-center'> 
+                //         <a onclick='showPage(\"$row[project_id]\")' class='btn btn-primary btn-round btn-lg'>Detail Description</a> 
+                //         <button onclick='apply(\"$status\",\"apply$row[project_id]\")' class='btn btn-primary btn-round btn-lg' type='button'>
+                //             <i class='now-ui-icons ui-2_favourite-28'></i> Apply
+                //         </button>
+                //    </div>
+                //         <span id='apply$row[project_id]'></span>
+              echo "</div>
               ";
     }
     mysqli_close($dbc);
@@ -60,9 +61,9 @@ function display_project($status){
     or die("Unable to connect to database");
 
     if($status=="all")
-    $query = "SELECT * FROM project";
+    $query = "SELECT * FROM project ORDER BY addedon DESC";
     else
-    $query = "SELECT * FROM project where status='$status'";
+    $query = "SELECT * FROM project where status='$status' ORDER BY addedon DESC";
     $result = mysqli_query($dbc, $query)
     or die('Unable to query project' );
 
@@ -82,20 +83,23 @@ function display_project($status){
                 or die('Unable to query project' );
             while($tag = mysqli_fetch_assoc($result_tag)){
                     echo    "<span >
-                            <button class='btn btn-primary btn-simple btn-round btn-sm' type='button'>$tag[tagname]</button>
+                    <a href='search.php?id=\"$tag[tagname]\"' class='btn btn-primary btn-round btn-sm' >$tag[tagname]</a>
                         </span>";
                     }
                    echo
                     " </span>
                    <!--     end extras --> 
+
                    <div class='col text-center'> 
                         <a onclick='showPage(\"$row[project_id]\")' class='btn btn-primary btn-round btn-lg'>Detail Description</a> 
-                        <button onclick='apply(\"$status\",\"apply$row[project_id]\")' class='btn btn-primary btn-round btn-lg' type='button'>
-                            <i class='now-ui-icons ui-2_favourite-28'></i> Apply
-                        </button>
-                   </div>
-                        <span id='apply$row[project_id]'></span>
-              </div>
+                        ";
+                        // <button onclick='apply(\"$status\",\"apply$row[project_id]\")' class='btn btn-primary btn-round btn-lg' type='button'>
+                        //     <i class='now-ui-icons ui-2_favourite-28'></i> Apply
+                        // </button>
+                echo"   </div>";
+                        // <span id='apply$row[project_id]'></span>
+              
+                        echo "</div>
               ";
     }
     mysqli_close($dbc);

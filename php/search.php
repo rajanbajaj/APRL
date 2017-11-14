@@ -4,19 +4,60 @@ if(!isset($_SESSION['username'])){
     $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/login-page.php';
     header('Location:'.$url);
 }
-$username = $_COOKIE['username'];
+// else{
+//     if(!empty($_POST['Title']) && !empty($_POST['Description']) && !empty($_POST['LastDate']) && !empty($_POST['Incentive'])){
+//         require('connect.php');
+//         $title = $_POST['Title'];
+//         $description = $_POST['Description'];
+//         $lastdate = $_POST['LastDate'];
+//         $incentive = $_POST['Incentive'];
+//         $username = $_SESSION['username'];
+
+//         $query = "INSERT INTO applyproject(title, description, lastdate, incentive, status, username, adddate) VALUES ('$title', '$description', '$lastdate', '$incentive', 'available', '$username', now())";
+//         mysqli_query($dbc, $query)
+//         or die('unable to query applyprojects');
+//         echo 'Added successfully!';
+//         $row = mysqli_fetch_array($result);
+//         $firstname = $row['firstname'];
+//         $lastname = $row['lastname'];
+//         $name = $firstname.' '.$lastname;
+//         $credential = $row['credential'];
+//         $image = $row['image_url'];
+//         $description = $row['description'];
+//         $email = $row['email'];
+//         if($image!='fb_avatar_male.jpg')
+//             $image = $username.'/'.$image;
+//         mysqli_close($dbc);
+
+//     }
+// }
+$username = $_SESSION['username'];
 if(isset($_GET['username'])){
-            $username = $_GET['username'];
-        }
-    // echo("$username");
+    $username = $_GET['username'];
+}
+    // echo $username;
+    require('connect.php');
 
-$dbc = mysqli_connect("localhost", "root", NULL, "aprl")
-or die("Unable to connect to database");
+    $query = "SELECT profession FROM userlogin WHERE username = '$username'";
+    $result = mysqli_query($dbc, $query);
+    $row = mysqli_fetch_array($result);
+    $profession = $row['profession'];
+    $var=$profession."info";
+    $query = "SELECT * FROM $var WHERE username = '$username'";
+    $result = mysqli_query($dbc, $query)
+    or die('Unable to query studentinfo' );
 
-$query = "SELECT profession FROM userlogin WHERE username = '$username'";
-$result = mysqli_query($dbc, $query);
-$row = mysqli_fetch_array($result);
-$profession = $row['profession'];
+    $row = mysqli_fetch_array($result);
+    $firstname = $row['firstname'];
+    $lastname = $row['lastname'];
+    $credential = $row['credential'];
+    $image = $row['image_url'];
+    $description = $row['description'];
+    $email = $row['email'];
+    // if($image!='fb_avatar_male.jpg')
+    //     $image = $username.'/'.$image;
+    mysqli_close($dbc);
+
 ?>
 
 
@@ -68,10 +109,10 @@ html, body {
             </div>
             <div class="dropdown button-dropdown">
                 <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
-                    <img src="../assets/img/eva.jpg" alt="..." id="daddy_image">
+                    <img class="photo-container" src= <?php echo '"../assets/img/user/'.$image.'"'?> alt="Profile Picture" id="daddy_image">
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown" data-placement="left">
-                  
+                    <a class="dropdown-item" href="profile-page.php">Profile</a>
                     <a class="dropdown-item" href="blog.php">Blog</a>
                     <a class="dropdown-item" href="project.php">Project</a>
                     <?php if($profession=='faculty') echo '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">New Peoject</a>'; ?>
@@ -419,8 +460,6 @@ html, body {
 
         
         $("#radio1").on('change', function() {
-
-            
             
             search();
             

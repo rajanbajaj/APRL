@@ -8,15 +8,6 @@ $username = $_COOKIE['username'];
 if(isset($_GET['username'])){
             $username = $_GET['username'];
         }
-    // echo("$username");
-
-$dbc = mysqli_connect("localhost", "root", NULL, "aprl")
-or die("Unable to connect to database");
-
-$query = "SELECT profession FROM userlogin WHERE username = '$username'";
-$result = mysqli_query($dbc, $query);
-$row = mysqli_fetch_array($result);
-$profession = $row['profession'];
 ?>
 
 
@@ -36,8 +27,9 @@ $profession = $row['profession'];
 	<link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="../assets/css/now-ui-kit.css?v=1.1.0" rel="stylesheet" />
 	<!-- CSS Just for demo purpose, don't include it in your project -->
-	<!-- jquery library -->
-	<link href="../assets/css/daddy.css" rel="stylesheet" />
+	<link href="../assets/css/demo.css" rel="stylesheet" />
+    <link href="../assets/css/daddy.css" rel="stylesheet" />
+    <!-- jquery library -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script>
 
@@ -55,85 +47,53 @@ function applicant(id,username){
 		}
 	});
 }	
- $(document).ready(function(){
-            $(document).on('click','input[type="button"]',function(){
-            	// alert($(this).val());
-                console.log('HELLO');
-                // var interest = $('#interested').val();
-                var pid = $('#id14').val();
-                console.log(pid);
-                // $.ajax({
-                //     type : 'POST',
-                //     url : 'apply.php',
-                //     data :{
-                //         'id' : pid,
-                //         'interested' : interest
-                //     },
-                //     success : function(data){
-                //         $('#apply'+pid).html(data);
-                //     }
-                // });
-            });
-        });
 
 </script>
 </head>
 <body class="profile-page sidebar-collapse" >
-	<nav class="navbar navbar-expand-lg bg-primary">
-        <div class="container">
-            <div class="navbar-translate">
-                <a class="navbar-brand" href="landing-page.php"  data-placement="bottom" target="_blank">
-                    <img src="../assets/favicon/invert.png" id="logo_id">
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar-primary" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-bar bar1"></span>
-                    <span class="navbar-toggler-bar bar2"></span>
-                    <span class="navbar-toggler-bar bar3"></span>
-                </button>
-            </div>
-            <div class="dropdown button-dropdown">
-                <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
-                    <img src="../assets/img/eva.jpg" alt="..." id="daddy_image">
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown" data-placement="left">
-                  
-                    <a class="dropdown-item" href="blog.php">Blog</a>
-                    <a class="dropdown-item" href="project.php">Project</a>
-                    <?php if($profession=='faculty') echo '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">New Peoject</a>'; ?>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="edit-profile.php" >Edit Profile</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="logout.php">Logout</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-	<div class="wrapper">
-	<div class="page-header-city">
-            <!-- <div class="page-header-image" data-parallax="true" style="background-image: url('../assets/img/bg3.jpg');">
+	<!-- Navbar -->
+    <?php $nav_bar = include_once ("nav.php"); echo $nav_bar; ?>
+    <!-- End Navbar -->
+	 <div class="wrapper">
+        <div class="page-header page-header-small" filter-color="orange">
+            <div class="page-header-image" data-parallax="true" style="background-image: url('../assets/img/bg4.jpg');">
             </div>
             <div class="container">
                 <div class="content-center">
+                    <div class="photo-container">
+                        <img class="photo-container" src= <?php echo '"../assets/img/user/'.$image.'"'?> alt="Profile Picture">
+                    </div>
+                    <h1 class="title">
+                    	<?php if($profession=='faculty') echo 'Projects Offered by'; if($profession=='student') echo 'Projects Done by'; ?>
+                </h1>
 
-                    <h2 class="title">Project/Intern Opportunities</h2>
-                    <p class="category">For Researchers and learners</p>
+                    <h3 class="title"><?php echo ("$firstname $lastname");?></h3>
+                    
+                    
                 </div>
-            </div> -->
+            </div>
         </div>
 
         <div class="section">
             <div class="container">
-                <div class="button-container">
+                <!-- <div class="button-container">
 
-                    <!-- <div class="photo-container">
+                    <div class="photo-container">
                         <img src="../assets/img/ryan.jpg" alt="">
-                    </div> -->
-                </div>
-	<div class="container tim-container" style="max-width:800px; padding-top:100px">
+                    </div>
+                </div> -->
+				<div class="container tim-container" style="max-width:800px; padding-top:100px">
 
-                   <!-- <h1 class="text-center">Project/Intern Opportunities </h1> -->
+                   <!-- <h1 class="text-center">My Projects </h1> -->
                </div>	
 	<?php
+	$dbc = mysqli_connect("localhost", "root", NULL, "aprl")
+or die("Unable to connect to database");
+
+$query = "SELECT profession FROM userlogin WHERE username = '$username'";
+$result = mysqli_query($dbc, $query);
+$row = mysqli_fetch_array($result);
+$profession = $row['profession'];
 if($row['profession']=='student'){
 	// echo $profession;
 		echo "<div id = \"applicant_table\"></div>";
@@ -162,7 +122,7 @@ if($row['profession']=='faculty'){
 		or die('Unable to query project' );
 		while($tag = mysqli_fetch_assoc($result_tag)){
 			echo    "<span >
-			<button class='btn btn-primary btn-simple btn-round btn-sm' type='button'>$tag[tagname]</button>
+			<a href='search.php?id=\"$tag[tagname]\"' class='btn btn-primary btn-round btn-sm' >$tag[tagname]</a>
 			</span>";
 		}
 		echo
@@ -216,5 +176,20 @@ mysqli_close($dbc);
 	<script src="../assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
 	<!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
 	<script src="../assets/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
+	<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('#search_bar').keyup(function(e) {
+            if(e.which==13){
+                var parameter_search=$('#search_bar').val();
+                window.open("search.php?id="+parameter_search);
+
+            }
+        });
+        
+
+    });
+    
+</script>
 </body>
 </html>

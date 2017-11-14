@@ -36,11 +36,11 @@ $profession = $row['profession'];
    echo " <div class='container tim-container' style='max-width:800px; padding-top:10px'>
 
    <h1 class='text-center'>$row[title]</h1>
-   <h6 class='col text-right'>Offered By - $row[offeredby]
+   <h6 class='col text-right'>Offered By - <a href='profile-page.php?username=$row[offeredby]'>$row[offeredby]</a>
    <br> Posted on - $row[addedon]
    </h6>";
    if($row['status'] == "available" and $profession!='faculty'){
-            echo"
+            echo" 
                 <!--collapse -->
                             <div id='collapse'>
                                 <div class='row'>
@@ -49,9 +49,10 @@ $profession = $row['profession'];
                                             <div class='card card-plain'>
                                                 <div class='card-header' role='tab' id='headingOne'>
                                                     <a data-toggle='collapse' data-parent='#accordion' href='#collapseOne' aria-expanded='true' aria-controls='collapseOne'>
-                                                        Apply for project
+                                                        Apply for project       
                                                         <i class='now-ui-icons arrows-1_minimal-down'></i>
                                                     </a>
+                                                    <a >Last Date To Apply : $row[lastdate]</a>
                                                 </div>
                                                 <div id='collapseOne' class='collapse ' role='tabpanel' aria-labelledby='headingOne'>
                                                     <div class='card-body'>
@@ -83,7 +84,7 @@ $profession = $row['profession'];
   or die('Unable to query tagname' );
   while($tag = mysqli_fetch_assoc($result_tag)){
     echo    "<span >
-    <button class='btn btn-primary btn-simple btn-round btn-sm' type='button'>$tag[tagname]</button>
+    <a href='search.php?id=\"$tag[tagname]\"' class='btn btn-primary btn-round btn-sm' >$tag[tagname]</a>
     </span>";
   }
   $current_id = $row["project_id"];

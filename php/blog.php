@@ -4,11 +4,26 @@
 session_start();
 if(isset($_SESSION['username'])){
 
+    $username = $_SESSION['username'];
     require_once('connect.php');
+    $query = "SELECT profession FROM userlogin WHERE username = '$username'";
+    $result = mysqli_query($dbc, $query);
+    $row = mysqli_fetch_array($result);
+    $profession = $row['profession'];
+    $var=$profession."info";
+    $query = "SELECT * FROM $var WHERE username = '$username'";
+    $result = mysqli_query($dbc, $query)
+    or die('Unable to query studentinfo' );
+
+    $row = mysqli_fetch_array($result);
+   
+    $image = $row['image_url'];
+    
     // require_once('likesIncr');
     // $blogId = 1;
     $blogId= $_GET['hidden_name'];
     $uname = $_SESSION['username'];
+
     // echo $blogId;
     // $blogId = $_POST['blog_id'];
 
@@ -21,7 +36,7 @@ if(isset($_SESSION['username'])){
     $description = $rowBlog['description'];
     // echo $description;
     $date = $rowBlog['date'];
-    $url = $rowBlog['url'];
+    // $url = $rowBlog['url'];
     $spam = $rowBlog['spam'];
     //likes,reads row added in database blog table
     $likes = $rowBlog['likes']; 
@@ -29,29 +44,14 @@ if(isset($_SESSION['username'])){
     // echo "error yahn hai ";
     // echo $blogId;
     echo "<input type='hidden' id='hidden_input_blog' name='hidden_input' value='$blogId'></input>";
-    // echo "error yah to ni hai ";
-    // echo $blogId;
-    // echo $reads;
-    // $readr = $reads + 1;
-    // echo $readr;
-
-    // $queryr2 = "UPDATE blog SET reads = '$readr' WHERE blog_id = '$blogId'"; 
-    // if(mysqli_query($dbc,$queryr2)){}
-    // else{
-    //     echo "Unable to update read data";
-    // }
-    //comments table still to be added
-
-    // $query2 = "SELECT studentinfo.image_url FROM studentinfo INNER JOIN userblog ON userblog.user_id = studentinfo.username WHERE userblog.blog_id = '$blogId'";
-    // $result2 = mysqli_query($dbc,$query2)
-    // or die("Unable to request image url from database");
-    // $imageUrl = $result2;
+    
         
     $query3 = "SELECT blog.offeredby FROM blog WHERE blog_id = '$blogId'";
     $result3 = mysqli_query($dbc,$query3)
     or die("Unable to request image url from database");
     $offer = mysqli_fetch_assoc($result3);
     $offeredby = $offer['offeredby'];
+    // echo $offeredby;
 }
 
 else{
@@ -91,6 +91,7 @@ function suggestTag(){
 
     $query3 = "SELECT tagname FROM tag INNER JOIN blogtag ON blogtag.tag_id = tag.tag_id WHERE blogtag.blog_id = 
     '$blogId' ";
+
         $result3 = mysqli_query($dbc,$query3)
         or die("Unable to request tags from database");
         // $rowTag = mysqli_fetch_assoc($result3);
@@ -197,7 +198,7 @@ function spamCount(){
     $(document).ready(function(){
     $("#titlekiid").click(function(){
         console.log("i have clicked");
-        window.location = "http://localhost:1234/gitAPRL/blogv1/profile-page.php?username=" + <?php echo $offeredby ?>;
+        window.location = "profile-page.php?username=" + "<?php echo $offeredby ?>";
         // <?php
         // session_start();
         // $url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/profile-page.php?username='.$title;
@@ -211,7 +212,7 @@ function spamCount(){
 
 function clicksuggest(titleki){
 console.log("im inside suggest");
-    window.location = "http://localhost:1234/gitAPRL/php/blog.php?hidden_name=" + titleki;
+    window.location = "blog.php?hidden_name=" + titleki;
 }
 
 // function getTags(){
@@ -238,10 +239,9 @@ console.log("im inside suggest");
 
 <!-- //newly added  -->
 <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="../assets/favicon/favicon-16x16.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title> Blog Posts - Now UI Kit Pro by Creative Tim | Premium Bootstrap 4 UI Kit </title>
+    
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -251,15 +251,9 @@ console.log("im inside suggest");
     <link href="../assets/css/now-ui-kit3.css" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="../assets/css/demo.css" rel="stylesheet" />
+    <link href="../assets/css/daddy.css" rel="stylesheet" />
     <!-- Canonical SEO -->
-    <link rel="canonical" href="https://www.creative-tim.com/product/now-ui-kit-pro" />
-    <!--  Social tags      -->
-    <meta name="keywords" content="bootstrap 4, bootstrap 4 uit kit, bootstrap 4 kit, now ui, now ui kit pro, creative tim, html kit, html css template, web template, bootstrap, bootstrap 4, css3 template, frontend, responsive bootstrap template, bootstrap ui kit, responsive ui kit">
-    <meta name="description" content="Start your development with a beautiful Bootstrap 4 UI kit.">
-    <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="Now UI Kit Pro by Creative Tim">
-    <meta itemprop="description" content="Start your development with a beautiful Bootstrap 4 UI kit.">
-    <meta itemprop="image" content="http://s3.amazonaws.com/creativetim_bucket/products/62/original/opt_nukp_thumbnail.jpg">
+    
 
 
     
@@ -268,40 +262,40 @@ console.log("im inside suggest");
 <body class="profile-page sidebar-collapse" >
 
 
-    <!-- <script src="blogScript.js" ></script> -->
+	<!-- <script src="blogScript.js" ></script> -->
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
         <div class="container">
-            <div class="dropdown button-dropdown">
-                <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
-                    <span class="button-bar"></span>
-                    <span class="button-bar"></span>
-                    <span class="button-bar"></span>
+            <div class="navbar-translate">
+                <a class="navbar-brand" href="landing-page.php"  data-placement="bottom" target="_blank">
+                    <img src="../assets/favicon/invert.png" id="logo_id">
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-header">Dropdown header</a>
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">One more separated link</a>
+            </div>
+            
+            <div class="col-sm-6 col-lg-3">
+                <div class="input-group form-group-no-border ">
+                    <span class="input-group-addon">
+                        <i class="now-ui-icons ui-1_zoom-bold"></i>
+                    </span>
+                    <input type="text" class="form-control" id="search_bar" placeholder="Search..." name="search_bar">
                 </div>
             </div>
-            <div class="navbar-translate">
-                <a class="navbar-brand" href="http://demos.creative-tim.com/now-ui-kit/index.html" rel="tooltip" title="Designed by Invision. Coded by Creative Tim" data-placement="bottom" target="_blank">
-                    APRL
+            <div class="dropdown button-dropdown">
+                <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
+                    <img class="photo-container" src= <?php echo '"../assets/img/user/'.$image.'"'?> alt="Profile Picture" id="daddy_image">
                 </a>
-                <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-bar bar1"></span>
-                    <span class="navbar-toggler-bar bar2"></span>
-                    <span class="navbar-toggler-bar bar3"></span>
-                </button>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" data-placement="left">
+                    <a class="dropdown-item" href="profile-page.php">Profile</a>
+                    <a class="dropdown-item" href="blog.php">Blog</a>
+                    <a class="dropdown-item" href="project.php">Project</a>
+                    <?php if($profession=='faculty') echo '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">New Peoject</a>'; ?>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="edit-profile.php" >Edit Profile</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="logout.php">Logout</a>
+                </div>
             </div>
-            <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="../assets/img/blurr.jpg">
-        
-            </div>
+            
         </div>
     </nav>
     <!-- End Navbar -->
@@ -363,6 +357,8 @@ console.log("im inside suggest");
                     </span>
                     <br>
                     <br>
+                    
+
                    <p><?php echo $description ?></p>
                    <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->      
                    <!--     end extras --> 
@@ -433,7 +429,7 @@ console.log("im inside suggest");
         if($rowDataq!=NULL){
            // while($rowData = mysqli_fetch_assoc($resulta)){
                         // $x++;
-
+                        
                        echo' <div class="col-md-4" onclick="clicksuggest('.$rowDataq['blog_id'].')">
                             <div class="card card-plain card-blog">
                                 <div class="card-image">
@@ -520,6 +516,7 @@ console.log("im inside suggest");
         }
 
         if($rowDatas==NULL && $rowDatar==NULL && $rowDataq==NULL){
+            // echo "i'm here";
 
         $querya1 = "SELECT DISTINCT blog.blog_id,blog.title, blog.description FROM blog WHERE 
         (NOT blog.blog_id = '$blogId') ORDER BY blog.reads DESC";
@@ -532,7 +529,7 @@ console.log("im inside suggest");
 
         // or die("Unable to request tags from database");
         // $x = 0;
-        $rowDataq1 = mysqli_fetch_assoc($resulta);
+        $rowDataq1 = mysqli_fetch_assoc($resulta1);
         if($rowDataq1!=NULL){
            // while($rowData = mysqli_fetch_assoc($resulta)){
                         // $x++;
@@ -562,7 +559,7 @@ console.log("im inside suggest");
         }
         
 
-        $rowDatar1 = mysqli_fetch_assoc($resulta);
+        $rowDatar1 = mysqli_fetch_assoc($resulta1);
         if($rowDatar1!=NULL){
             // while($rowData = mysqli_fetch_assoc($resulta)){
                         // $x++;
@@ -592,7 +589,7 @@ console.log("im inside suggest");
         }
         
 
-        $rowDatas1 = mysqli_fetch_assoc($resulta);
+        $rowDatas1 = mysqli_fetch_assoc($resulta1);
         if($rowDatas1!=NULL){
 // while($rowData = mysqli_fetch_assoc($resulta)){
                         // $x++;
@@ -710,6 +707,21 @@ var count1 = 0,
     }
     }
 });
+</script>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('#search_bar').keyup(function(e) {
+            if(e.which==13){
+                var parameter_search=$('#search_bar').val();
+                window.open("search.php?id="+parameter_search);
+
+            }
+        });
+        
+
+    });
+    
 </script>
 
         </html>

@@ -246,8 +246,11 @@ function test_input($data) {
 <br>
 <br>
 
-<form name="form" id="form_id" action="blog.php" method="get">
+<form enctype="multipart/form-data" name="form" id="form_id" action="blog1.php" method="post">
 <input type="hidden" id="hidden_input" name="hidden_name" value="mera_16_ka_dola">
+<input type="file" id="Image" name="Image" accept="image/*|.jpg|.png|.jpeg|.gif">
+<input type="file" id="Video" name="Video" accept="video/*">
+
 
 </form>
 

@@ -57,7 +57,7 @@ if(isset($_POST['submit'])){
     echo '<h1>Added Project successfully.</p1><br><h3>You will be automatically redirected to the other page.</h3>';
     $url = "myproject.php";
 
-    header ("Refresh: 3;URL='$url'");
+   header ("Refresh: 3;URL='$url'");
 }
 $query = "SELECT * FROM $var WHERE username = '$username'";
 $result = mysqli_query($dbc, $query)
@@ -84,7 +84,7 @@ mysqli_close($dbc);
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Edit Profile</title>
+    <title>Add Project</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -122,6 +122,16 @@ mysqli_close($dbc);
     <meta property="og:image" content="http://s3.amazonaws.com/creativetim_bucket/products/62/original/opt_nukp_thumbnail.jpg" />
     <meta property="og:description" content="Start your development with a beautiful Bootstrap 4 UI kit." />
     <meta property="og:site_name" content="Creative Tim" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+   $(".row .tag badge badge-danger").each(function() {
+        alert($(this).val());
+    });
+});
+    </script>
+
 </head>
 
 <body class="profile-page sidebar-collapse">
@@ -175,12 +185,23 @@ mysqli_close($dbc);
                             <div class="form-group">
                                 <textarea type="text" class="form-control" placeholder="Description" name="description"></textarea>
                             </div>
+                            <div id="textareaTags">
+                        <div id="tag" class="row">
+                            <div  class="col-md-6">
+                                <div class="title">
+                                    <h4>Tags</h4>
+                                </div>
+                                <input type="text" value="Amsterdam" class="tagsinput" data-role="tagsinput" data-color="success" />
+                                <!-- You can change data-color="rose" with one of our colors primary | warning | info | danger | success -->
+                            </div>
+                        </div>
+                    </div>
                         </div>
                         <div class="col-md-6">
                             <label>Project picture</label>
-                            <div class="input-group form-group-no-border input-lg form-group">
-                                <input type="file" class="form-control" id="Image" name="Image" accept="image/*|.jpg|.png|.jpeg|.gif">
-                            </div>
+                            <div class="input-group form-group-no-border input-lg">
+                            <input type="file" class="form-control" id="Image" name="Image" accept="image/*|.jpg|.png|.jpeg|.gif">
+                        </div>  
                         </div>
                     </div>
                     <div class="media-footer">

@@ -23,9 +23,12 @@
         $firstname = $row['firstname'];
         $lastname = $row['lastname'];
         $name = $firstname.' '.$lastname;
+        $image = $row['image_url'];
         mysqli_close($dbc);
     }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,10 +36,9 @@
 <!-- Mirrored from demos.creative-tim.com/now-ui-kit-pro/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 30 Oct 2017 16:36:29 GMT -->
 <head>
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="../assets/favicon/favicon-16x16.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Now UI Kit Pro by Creative Tim | Premium Bootstrap 4 UI Kit</title>
+    <title>Welcome Page</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -51,12 +53,13 @@
     <!-- <link rel="stylesheet" type="text/css" href="..assets/css/weather-icons.css"> -->
     <!--  Social tags      -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
+    <link rel="stylesheet" type="text/css" href="../assets/css/daddy.css">
 
 </head>
 
 <style type="text/css">
-body{background:#f88f18; color: #fff; font-family: 'Roboto', sans-serif; margin:0; transition:all 400ms; will-change:background;}
+body{background:#f88f18; color: #fff; font-family: 'Roboto', sans-serif; margin:0; transition:all 400ms; will-change:background;
+overflow-x: hidden;}
 /* *{
     border: solid;
     border-width: .3px;
@@ -89,6 +92,7 @@ body{background:#f88f18; color: #fff; font-family: 'Roboto', sans-serif; margin:
 html, body {
     max-width: 100%;
     overflow-x: hidden;
+    color: #000;
 }
 #sidebar{
     float: right;
@@ -129,42 +133,48 @@ html, body {
 
 <body class="index-page">
 <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
-<nav class="navbar navbar-expand-lg bg-info">
-    <div class="container">
-        <a class="navbar-brand" href="#">APRL</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#example-navbar-icons" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-bar bar1"></span>
-            <span class="navbar-toggler-bar bar2"></span>
-            <span class="navbar-toggler-bar bar3"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="example-navbar-icons">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#pablo"><i class="now-ui-icons ui-1_zoom-bold" aria-hidden="true"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="profile-page.php"><i class="now-ui-icons users_single-02" aria-hidden="true"></i></a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown">
-                        <i class="now-ui-icons ui-1_settings-gear-63" aria-hidden="true"></i>
-                    </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-header">Dropdown header</a>
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <?php if($profession=='faculty') echo '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">New Project</a>'; ?>
+<nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
+        <div class="container">
+            <div class="navbar-translate">
+                <a class="navbar-brand" href="landing-page.php"  data-placement="bottom" target="_blank">
+                    <img src="../assets/favicon/invert.png" id="logo_id">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="../assets/img/blurred-image-1.jpg">
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="input-group form-group-no-border ">
+                    <span class="input-group-addon">
+                        <i class="now-ui-icons ui-1_zoom-bold"></i>
+                    </span>
+                    <input type="text" class="form-control" id="search_bar" placeholder="Search..." name="search_bar">
+                </div>
+            </div>
+            <div class="dropdown button-dropdown">
+                <a href="#pablo" class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">
+                    <img class="photo-container" src= <?php echo '"../assets/img/user/'.$image.'"'?> alt="Profile Picture" id="daddy_image">
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" data-placement="left">
+                    <a class="dropdown-item" href="profile-page.php">Profile</a>
+                    <a class="dropdown-item" href="blog.php">Blog</a>
+                    <a class="dropdown-item" href="project.php">Project</a>
+                    <?php if($profession=='faculty') echo '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">New Peoject</a>'; ?>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#pablo" data-toggle="modal" data-target="#myModal" >Edit Profile</a>
+                    <a class="dropdown-item" href="edit-profile.php" >Edit Profile</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="logout.php">Logout</a>
                 </div>
-                </li>
-            </ul>
+            </div>
+            
         </div>
-    </div>
-</nav>
+    </nav>
 <!-- Welcome message based on time -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <div class="container" style="font-size: 3em;" id="one" data-color="#f88f18">
         <div class="row">
         <?php
@@ -290,6 +300,7 @@ html, body {
                     </div>
                 </div>
                 <div id="sidebar">
+                  <h3 class="title text-danger" text-align = "center"> <i class="fa fa-bolt" aria-hidden="true"></i> Latest Projects</h3><br>
                   <?php 
                             /* SCRIPT FOR TRENDING BLOGS*/
                     require('connect.php');
@@ -299,10 +310,10 @@ html, body {
                   ?>
                     <div class="card" data-background-color="blue">
                         <div class="card-body">
-                            <h6 class="category-social">
-                                <i class="fa fa-twitter"></i> 
+                            <h5 class="category-social">
+                                <i class="fa fa-mortar-board"></i> 
                                 <a href="project.php?id=<?= $row['project_id'] ?>"><?= $row['title']; ?></a>
-                            </h6>
+                            </h5>
                             <p>
                             </i> 
                             <?php $short_desc = substr($row["description"], 0,350)." ...."; echo $short_desc ?>                            
@@ -314,10 +325,7 @@ html, body {
                                     <a href="profile-page.php?username=<?= $row['offeredby'] ?>"><?= $row['offeredby']; ?></a>
                                      </span>
                                 </div>
-                                <div class="stats stats-right">
-                                    <i class="now-ui-icons ui-2_favourite-28"></i> 2.4K ·
-                                    <i class="now-ui-icons files_single-copy-04"></i> 45
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -391,6 +399,22 @@ function topFunction() {
     document.documentElement.scrollTop = 0;
     $('body').css("background-color", "#f88f18");
 }
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('#search_bar').keyup(function(e) {
+            if(e.which==13){
+                var parameter_search=$('#search_bar').val();
+                window.open("search.php?id="+parameter_search);
+
+            }
+        });
+        
+
+    });
+    
 </script>
 
 

@@ -324,6 +324,54 @@
             </div>';
         }
 
+        $wow = "
+          SELECT * 
+          FROM facultyinfo
+          WHERE SOUNDEX(firstname) = SOUNDEX('$value_search')
+          UNION
+          SELECT * 
+          FROM facultyinfo
+          WHERE SOUNDEX(lastname) = SOUNDEX('$value_search')
+        ";
+        
+        $query = mysqli_query($conn,$wow);
+    
+        while ($data = mysqli_fetch_array($query)) {
+
+
+          echo '<div class="col-md-4">'; 
+            
+            echo '<div class="card card-blog">
+                        <div class="card-image">
+                            <a href="profile-page.php?username=';
+                            echo $data["username"];
+                                echo '"><img class="img rounded" src="../assets/img/bg3.jpg">
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="category text-info">USER</h6>
+                            <h5 class="card-title" >';
+            echo $data["firstname"]." ".$data["lastname"];
+            echo '</h5>
+                    <p class="card-description">';
+
+            echo substr($data["description"],0,150)."...";
+                        
+            echo '</p>
+                    <div class="card-footer">
+                        <div class="author">
+                            
+                            <span>';
+                       
+            echo '</span>
+                        </div>
+                        
+                    </div>
+                </div>
+                </div>
+            </div>';
+        }
+
     }
 
     

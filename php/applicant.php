@@ -160,7 +160,7 @@ if($row['profession']=='faculty' and isset($_POST['id'])){
 
 }
 if($row['profession']=='student'){
-	$query = "SELECT id,project.project_id,offeredby,title,description,project.addedon,incentive,interest FROM `applicant` JOIN `project` on applicant.project_id=project.project_id where applicant.username ='$username'";
+	$query = "SELECT id,project.project_id,offeredby,title,description,project.addedon,incentive,interest,approval FROM `applicant` JOIN `project` on applicant.project_id=project.project_id where applicant.username ='$username'";
 	// echo $query;
 	$result = mysqli_query($dbc, $query)
 	or die('Unable to query applicant student' );
@@ -204,17 +204,28 @@ if($row['profession']=='student'){
 		<td class='text-right'>
 		$row[incentive]
 		</td>
-		<td class='text-right'>
+		<td class='text-right'>";
+			if($row['approval'] == ''){
+			echo"
 		<button type='button' rel='tooltip' class='btn btn-info btn-icon btn-sm '>
-		<i class='now-ui-icons users_single-02'></i>
+		<i class='now-ui-icons arrows-1_refresh-69'></i>
 		</button>
-		<button type='button' rel='tooltip' class='btn btn-success btn-icon btn-sm '>
-		<i class='now-ui-icons ui-2_settings-90'></i>
+		";
+	}
+	if($row['approval'] == 'yes'){
+			echo"
+		<button type='button' rel='tooltip' class=' btn-sm '>
+		Approved
 		</button>
-		<button type='button' rel='tooltip' class='btn btn-danger btn-icon btn-sm '>
-		<i class='now-ui-icons ui-1_simple-remove'></i>
-		</button>
-		</td>
+		";
+	}
+	if($row['approval'] == 'no'){
+			echo"
+		<button type='button' rel='tooltip' class=' btn-sm '>
+		Rejected
+		</button>";
+	}	
+		echo "</td>
 		</tr> ";
 	}
 	echo
