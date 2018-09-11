@@ -33,8 +33,8 @@ Currently at Version 1
 
 * **Chirag Vashist** -  - [SerChirag](https://github.com/SerChirag)
 * **Priyanshu Khandelwal** -  - [Masquerade0097](https://github.com/Masquerade0097)
-* **Prabhakar Prasad** -  - [rajanbajaj](https://github.com/rajanbajaj)
-* **Rajan Bajaj** -  - [prabhakarpd7284](https://github.com/prabhakarpd7284)
+* **Prabhakar Prasad** -  - [prabhakarpd7284](https://github.com/prabhakarpd7284)
+* **Rajan Bajaj** -  - [rajanbajaj](https://github.com/rajanbajaj)
 
 
 
