@@ -1,6 +1,10 @@
 # APRL
 
-A Portal for Researchers and Learners
+A Portal for Researchers and Learners.
+The project is aimed at university level students and faculty members. We have aimed to make the process of hiring for projects a lot easier for both the parties. The professors can post projects on various topics, making them available to students to apply. Students can browse through various projects provided and apply for them through a proposal. The professor can view the profiles of the individuals who have applied for his/her project and can accept/reject the proposal. 
+The platform also provides the student community to share their experience during a particular job, project or internship through blogs. Additionally the blogs can also be used to share an expertise in any field. This collection of blogs can be used as an archive where a user can anytime view all the available blogs whenever he wants to. One of our tasks was to simplify the mechanism of searching through the huge number of blogs easily and efficiently, for which we optimized our queries and use good searching algorithms. 
+The platform also features a full-site search that has been optimized using Machine Learning Algorithms.
+
 
 ## Getting Started
 
